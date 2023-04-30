@@ -9,10 +9,4 @@ public class BusSetup : MonoBehaviour
 
     [SerializeField] private BusMover _mover;
 
-    private Bus _model;
-
-    private void Awake()
-    {
-        _model = new Bus(_config.StartCapacity);
-    }
 }
