@@ -21,6 +21,7 @@ public class BusCompositeRoot : CompositeRoot
     {
         _mover = new BusMover(_config.IdleSpeed, _config.GasSpeed, _rigidbody);
         _inputSetUp = new BusInputSetUp(_mover);
+        Debug.Log(_inputSetUp == null);
     }
 
     private void Awake()
