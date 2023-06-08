@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: PlayerBusConfig
   m_EditorClassIdentifier: 
   _startCapacity: 5
-  _idleSpeed: 50
+  _idleSpeed: 0
   _gasSpeed: 100

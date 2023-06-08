@@ -11,17 +11,19 @@ public class BusCompositeRoot : CompositeRoot
     private BusMover _mover;
     private Bus _bus;
     private BusInputSetUp _inputSetUp;
+    private RigidbodyMoveHandler _moveHandler;
 
     public BusMover Mover => _mover;
     public Bus Bus => _bus;
     public BusInputSetUp InputSetUp => _inputSetUp;
     public PassengerZone PassengerZone => _passengerZone;
+    public RigidbodyMoveHandler MoveHandler => _moveHandler;
 
     public override void Compose()
     {
-        _mover = new BusMover(_config.IdleSpeed, _config.GasSpeed, _rigidbody);
+        _moveHandler = new RigidbodyMoveHandler(_rigidbody);
+        _mover = new BusMover(_config.IdleSpeed, _config.GasSpeed, _moveHandler);
         _inputSetUp = new BusInputSetUp(_mover);
-        Debug.Log(_inputSetUp == null);
     }
 
     private void Awake()
@@ -31,7 +33,7 @@ public class BusCompositeRoot : CompositeRoot
 
     private void Start()
     {
-        _mover.Start();
+        _mover.SetIdleSpeed();
     }
 
     private void OnEnable()
@@ -51,6 +53,6 @@ public class BusCompositeRoot : CompositeRoot
 
     private void FixedUpdate()
     {
-        _mover.FixedUpdate();
+        _mover.Move();
     }
 }

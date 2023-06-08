@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BusMover
@@ -9,25 +7,15 @@ public class BusMover
     private float _idleSpeed;
     private float _gasSpeed;
 
-    private Rigidbody _rigidbody;
+    private IMoveHandler _moveHandler;
 
     private Vector3 _direction = new Vector3(1, 0, 0);
 
-    public BusMover(float idleSpeed, float gasSpeed, Rigidbody rigidbody)
+    public BusMover(float idleSpeed, float gasSpeed, IMoveHandler moveHandler)
     {
         _idleSpeed = idleSpeed;
         _gasSpeed = gasSpeed;
-        _rigidbody = rigidbody;
-    }
-
-    public void Start()
-    {
-        SetIdleSpeed();
-    }
-
-    public void FixedUpdate()
-    {
-        Move();
+        _moveHandler = moveHandler;
     }
 
     public void SetGasSpeed()
@@ -40,8 +28,10 @@ public class BusMover
         _currentSpeed = _idleSpeed;
     }
 
-    private void Move()
+    public void Move()
     {
-        _rigidbody.velocity = _direction * _currentSpeed * Time.fixedDeltaTime;
+        Vector3 moveVector = _direction * _currentSpeed;
+
+        _moveHandler.Move(moveVector, Time.fixedDeltaTime);
     }
 }
