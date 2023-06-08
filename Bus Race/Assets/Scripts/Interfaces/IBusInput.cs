@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public interface IPlayerInput
+public interface IBusInput
 {
     public event UnityAction Pressed;
     public event UnityAction Unpressed;

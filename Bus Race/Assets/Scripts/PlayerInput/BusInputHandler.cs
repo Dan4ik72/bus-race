@@ -2,19 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerInputHandler 
+public class BusInputHandler 
 {
-    private IPlayerInput _playerInput;
+    private IBusInput _playerInput;
 
     private BusMover _busMover;
 
-    public PlayerInputHandler(IPlayerInput playerInput, BusMover busMover)
+    public BusInputHandler(IBusInput playerInput, BusMover busMover)
     {
         _playerInput = playerInput;
         _busMover = busMover;
     }
 
-    public void SetNewInput(IPlayerInput newInput)
+    public void SetNewInput(IBusInput newInput)
     {
         if (newInput == null)
             return;
