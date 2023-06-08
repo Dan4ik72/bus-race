@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class DesktopInput : IPlayerInput
+public class DesktopBusInput : IBusInput
 {
     public event UnityAction Pressed;
     public event UnityAction Unpressed;
@@ -11,7 +11,7 @@ public class DesktopInput : IPlayerInput
     public void Update()
     {
         if (Input.GetKeyDown(KeyCode.W))
-            Pressed();
+            Pressed?.Invoke();
 
         if (Input.GetKeyUp(KeyCode.W))
             Unpressed?.Invoke();
