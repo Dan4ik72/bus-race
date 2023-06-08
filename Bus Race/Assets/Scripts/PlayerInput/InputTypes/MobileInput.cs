@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
-public class MobileBusInput : IBusInput, IPointerDownHandler, IPointerUpHandler
+public class MobileInput : IPlayerInput, IPointerDownHandler, IPointerUpHandler
 {
     public event UnityAction Pressed;
     public event UnityAction Unpressed;

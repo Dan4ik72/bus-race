@@ -2,42 +2,45 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BusMover
+[RequireComponent(typeof(Rigidbody))]
+public class BusMover : MonoBehaviour
 {
     private float _currentSpeed;
 
-    private float _idleSpeed;
-    private float _gasSpeed;
+    [SerializeField] private float _idleSpeed;
+    [SerializeField] private float _gasSpeed;
 
     private Rigidbody _rigidbody;
 
     private Vector3 _direction = new Vector3(1, 0, 0);
 
-    public BusMover(float idleSpeed, float gasSpeed, Rigidbody rigidbody)
+    private void Start()
     {
-        _idleSpeed = idleSpeed;
-        _gasSpeed = gasSpeed;
-        _rigidbody = rigidbody;
-    }
-
-    public void Start()
-    {
+        _rigidbody = GetComponent<Rigidbody>();
         SetIdleSpeed();
     }
 
-    public void FixedUpdate()
+    private void FixedUpdate()
     {
         Move();
+    }
+
+    public void Init(float gasSpeed, float idleSpeed)
+    {
+        //_idleSpeed = idleSpeed;
+        //_gasSpeed = gasSpeed;
     }
 
     public void SetGasSpeed()
     {
         _currentSpeed = _gasSpeed;
+        Debug.Log("Gas");
     }
 
     public void SetIdleSpeed()
     {
         _currentSpeed = _idleSpeed;
+        Debug.Log("Idle");
     }
 
     private void Move()
