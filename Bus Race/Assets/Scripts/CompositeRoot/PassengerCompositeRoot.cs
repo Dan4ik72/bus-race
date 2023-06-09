@@ -16,4 +16,9 @@ public class PassengerCompositeRoot : CompositeRoot
     {
         _spawner = new PassengersSpawner(_busCompositeRoot.EntryPointTrigger, _passengerPrefab);
     }
+
+    private void Start()
+    {
+        _spawner.Spawn();
+    }
 }

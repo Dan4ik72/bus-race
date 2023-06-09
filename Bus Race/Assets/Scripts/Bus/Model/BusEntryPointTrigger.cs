@@ -11,16 +11,8 @@ public class BusEntryPointTrigger : MonoBehaviour
         _passengerZone = passengerZone;
     }
 
-    private void OnTriggerEnter(Collider other)
+    public Cell GetAvailableCell()
     {
-        if(other.TryGetComponent<Passegner>(out Passegner passenger))
-        {
-
-        }
-    }
-
-    private void OnPassegnerEntered()
-    {
-        Cell freeCell = _passengerZone.GetAvailableCell();
+        return _passengerZone.GetAvailableCell();
     }
 }

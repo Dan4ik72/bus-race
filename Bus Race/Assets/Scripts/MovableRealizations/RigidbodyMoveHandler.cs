@@ -12,8 +12,8 @@ public class RigidbodyMoveHandler : IMoveHandler
         _rigidbody = rigidbody;
     }
 
-    public void Move(Vector3 direction, float deltaTime)
+    public void Move(Vector3 direction)
     {
-        _rigidbody.velocity = direction * deltaTime;
+        _rigidbody.velocity = direction * Time.fixedDeltaTime;
     }
 }

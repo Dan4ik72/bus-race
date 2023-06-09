@@ -13,4 +13,10 @@ public class PassengersSpawner
         _busEntryPointTrigger = busEntryPointTrigger;
         _passengerTemplate = passegnerTemplate;
     }
+
+    public void Spawn()
+    {
+        var created = Object.Instantiate(_passengerTemplate, new Vector3(-18.32f, 0.30f, -4.6f), Quaternion.identity);
+        created.Init(_busEntryPointTrigger);
+    }
 }

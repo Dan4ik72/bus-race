@@ -18,10 +18,17 @@ public class StateMachine
     {
         var type = typeof(T);
 
+        if(_currentState == null && _states.TryGetValue(type, out State state))
+        {
+            _currentState = state;
+            _currentState.Enter();
+            return;
+        }
+
         if (_currentState.GetType() == type)
             return;
 
-        if(_states.TryGetValue(type, out State newState))
+        if (_states.TryGetValue(type, out State newState))
         {
             _currentState.Exit();
 

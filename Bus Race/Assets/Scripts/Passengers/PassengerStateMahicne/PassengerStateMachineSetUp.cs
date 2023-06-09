@@ -20,11 +20,19 @@ public class PassengerStateMachineSetUp : MonoBehaviour
 
     private void SetStateMachineUp()
     {
-        _moveHandler = new RigidbodyMoveHandler(GetComponent<Rigidbody>());
+        _moveHandler = new TransformMoveHandler(transform);
 
         _stateMachine = new StateMachine();
 
         _stateMachine.AddState(new WaitingForBusState(_stateMachine, _busEntryPointTrigger, transform));
-        _stateMachine.AddState(new EnteringBusState(_stateMachine, _busEntryPointTrigger, transform, _moveHandler));
+        _stateMachine.AddState(new GoingToBusState(_stateMachine, _busEntryPointTrigger, transform, _moveHandler));
+        _stateMachine.AddState(new TakeEmptyBusCellState(_stateMachine, _busEntryPointTrigger, transform, _moveHandler));
+
+        _stateMachine.SetState<WaitingForBusState>();
+    }
+
+    private void Update()
+    {
+        _stateMachine.Update();
     }
 }

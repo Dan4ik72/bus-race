@@ -9,6 +9,6 @@ public class WaitingForBusState : BusInteractionState
     public override void Update()
     {
         if (Vector3.Distance(PassengerTransform.position, BusEntryPointTrigger.transform.position) < MaxDistanceToBusTigger)
-            StateMachine.SetState<EnteringBusState>();
+            StateMachine.SetState<GoingToBusState>();
     }
 }
