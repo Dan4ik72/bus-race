@@ -6,7 +6,7 @@ using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class PassengerZone : MonoBehaviour
+public class BusPassengerZone : MonoBehaviour
 {
     [SerializeField] private Transform _gridParent;
 
