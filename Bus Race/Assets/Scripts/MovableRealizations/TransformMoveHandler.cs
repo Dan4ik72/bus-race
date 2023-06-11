@@ -13,6 +13,6 @@ public class TransformMoveHandler : IMoveHandler
 
     public void Move(Vector3 direction)
     {
-        _transform.position = Vector3.MoveTowards(_transform.position, direction, Time.deltaTime);
+        _transform.Translate(direction * Time.deltaTime);
     }
 }

@@ -6,27 +6,38 @@ public class TakeEmptyBusCellState : BusInteractionState
 {
     private Cell _targetCell;
 
-    private float _targetReachedDistance = 0.2f;
+    private float _targetReachedDistance = 1f;
+    private float _speed = 5f;
 
-    public TakeEmptyBusCellState(StateMachine stateMachine, BusEntryPointTrigger busEntryPointTrigger, Transform passengerTransform, IMoveHandler moveHandler) : base(stateMachine, busEntryPointTrigger, passengerTransform) { }
+    private IMoveHandler _moveHandler;
+    private PassengerStateMachineSetUp _passenger;
+
+    public TakeEmptyBusCellState(StateMachine stateMachine, BusEntryPointTrigger busEntryPointTrigger, Transform passengerTransform, IMoveHandler moveHandler, PassengerStateMachineSetUp passenger) : base(stateMachine, busEntryPointTrigger, passengerTransform) 
+    {
+        _moveHandler = moveHandler;
+        _passenger = passenger;
+    }
 
     public override void Enter()
     {
-        _targetCell = BusEntryPointTrigger.GetAvailableCell();
+        _targetCell = BusEntryPointTrigger.GetAvailableCell(_passenger);
     }
 
     public override void Update()
     {
         MoveToTargetCell(_targetCell);
 
-        if (Vector3.Distance(PassengerTransform.position, _targetCell.Position) < _targetReachedDistance)
+        if (Vector3.Distance(PassengerTransform.position, _targetCell.transform.position) < _targetReachedDistance)
         {
-            //StateMachine.SetState<WaitingForBusState>();
+            StateMachine.SetState<RidingOnBusState>();
         }
     }
 
     private void MoveToTargetCell(Cell targetCell)
     {
+        Vector3 direction = targetCell.transform.position - PassengerTransform.position;
+        direction.Normalize();
 
+        _moveHandler.Move(direction * _speed);
     }
 }

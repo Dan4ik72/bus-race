@@ -7,16 +7,18 @@ using UnityEngine;
 [System.Serializable]
 public class Grid
 {
+    private Cell _cellPrefab;
     private Transform _parent;
 
     private Vector2Int _capacity = new Vector2Int(2,4);
 
-    [SerializeField] private List<Cell> _cells;
+    private List<Cell> _cells;
 
     private float _cellPositionRandomness;
 
-    public Grid(Transform cellParent, Vector2Int gridCapacity, float cellPositionRandomness = 0)
+    public Grid(Transform cellParent, Cell cellPrefab, Vector2Int gridCapacity, float cellPositionRandomness = 0)
     {
+        _cellPrefab = cellPrefab;
         _parent = cellParent;
         _capacity = gridCapacity;
 
@@ -28,7 +30,7 @@ public class Grid
 
     public IReadOnlyList<Cell> Cells => _cells;
         
-    public void Create()
+    public Grid Create()
     {
         for(float currentXPosition = _parent.position.x; currentXPosition <= _capacity.x + _parent.position.x;)
         {
@@ -45,17 +47,23 @@ public class Grid
 
             currentXPosition += Cell.Width;
         }
+
+        return this;
     }
     
     public void Reset()
     {
+        foreach(Cell cell in _cells)
+            Object.Destroy(cell);
+
         _cells.Clear();
     }
 
     private Cell CreateCell(Vector3 position)
     {
         var cellPosition = new Vector3(position.x, position.y, position.z);
-        var newCell = new Cell(cellPosition);
+
+        Cell newCell = Object.Instantiate(_cellPrefab, cellPosition, Quaternion.identity, _parent);
 
         _cells.Add(newCell);
 

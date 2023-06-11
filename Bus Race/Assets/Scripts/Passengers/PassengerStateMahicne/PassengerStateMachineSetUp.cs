@@ -11,11 +11,13 @@ public class PassengerStateMachineSetUp : MonoBehaviour
 
     private IMoveHandler _moveHandler;
 
-    public void Init(BusEntryPointTrigger busEntryPointTrigger)
+    public PassengerStateMachineSetUp Init(BusEntryPointTrigger busEntryPointTrigger)
     {
         _busEntryPointTrigger = busEntryPointTrigger;
 
         SetStateMachineUp();
+
+        return this;
     }
 
     private void SetStateMachineUp()
@@ -26,7 +28,8 @@ public class PassengerStateMachineSetUp : MonoBehaviour
 
         _stateMachine.AddState(new WaitingForBusState(_stateMachine, _busEntryPointTrigger, transform));
         _stateMachine.AddState(new GoingToBusState(_stateMachine, _busEntryPointTrigger, transform, _moveHandler));
-        _stateMachine.AddState(new TakeEmptyBusCellState(_stateMachine, _busEntryPointTrigger, transform, _moveHandler));
+        _stateMachine.AddState(new TakeEmptyBusCellState(_stateMachine, _busEntryPointTrigger, transform, _moveHandler, this));
+        _stateMachine.AddState(new RidingOnBusState(_stateMachine, _busEntryPointTrigger, transform));
 
         _stateMachine.SetState<WaitingForBusState>();
     }

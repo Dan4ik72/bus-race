@@ -13,6 +13,7 @@ public class BusCompositeRoot : CompositeRoot
     private Bus _bus;
     private BusInputSetUp _inputSetUp;
     private RigidbodyMoveHandler _moveHandler;
+    private BusPassengers _passegners;
 
     public BusMover Mover => _mover;
     public Bus Bus => _bus;
@@ -20,10 +21,12 @@ public class BusCompositeRoot : CompositeRoot
     public BusPassengerZone PassengerZone => _passengerZone;
     public BusEntryPointTrigger EntryPointTrigger => _entryPointTrigger;
     public RigidbodyMoveHandler MoveHandler => _moveHandler;
+    public BusPassengers Passengers => _passegners;
 
     public override void Compose()
     {
-        _entryPointTrigger.Init(_passengerZone);
+        _passegners = new BusPassengers(_passengerZone.transform);
+        _entryPointTrigger.Init(_passengerZone, _passegners);
         _moveHandler = new RigidbodyMoveHandler(_rigidbody);
         _mover = new BusMover(_config.IdleSpeed, _config.GasSpeed, _moveHandler);
         _inputSetUp = new BusInputSetUp(_mover);

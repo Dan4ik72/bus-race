@@ -5,11 +5,13 @@ using Unity.VisualScripting;
 using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Rendering;
+using UnityEngine.Scripting;
 
 public class BusPassengerZone : MonoBehaviour
 {
     [SerializeField] private Transform _gridParent;
-
+    [SerializeField] private Cell _cellPrefab;
     [SerializeField] private Vector2Int _expandValue;
 
     private Grid _grid;
@@ -45,9 +47,7 @@ public class BusPassengerZone : MonoBehaviour
 
     private void CreateGrid()
     {
-        _grid = new Grid(_gridParent, new Vector2Int((int)transform.localScale.x, (int)transform.localScale.z));
-
-        _grid.Create();
+        _grid = new Grid(_gridParent,_cellPrefab, new Vector2Int((int)transform.localScale.x, (int)transform.localScale.z)).Create();
 
         _availableCells = _grid.Cells.ToList();
         _busyCells.Clear();
