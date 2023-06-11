@@ -5,7 +5,7 @@ using UnityEngine;
 public class PassengerCompositeRoot : CompositeRoot
 {
     [SerializeField] private BusCompositeRoot _busCompositeRoot;
-
+    [SerializeField] private List<SpawnZone> _spawnZones;
     [SerializeField] private PassengerStateMachineSetUp _passengerPrefab;
 
     private PassengersSpawner _spawner;
@@ -14,11 +14,11 @@ public class PassengerCompositeRoot : CompositeRoot
 
     public override void Compose()
     {
-        _spawner = new PassengersSpawner(_busCompositeRoot.EntryPointTrigger, _passengerPrefab);
+        _spawner = new PassengersSpawner(_busCompositeRoot.EntryPointTrigger, _passengerPrefab, _spawnZones);
     }
 
     private void Start()
     {
-        _spawner.Spawn();
+        _spawner.FillLevel();
     }
 }

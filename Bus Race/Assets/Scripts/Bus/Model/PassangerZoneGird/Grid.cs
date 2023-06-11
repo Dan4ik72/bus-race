@@ -25,7 +25,6 @@ public class Grid
         _cells = new List<Cell>();
 
         _capacity = _capacity.x < 0 || _capacity.y < 0 ? _capacity = Vector2Int.zero : gridCapacity;
-        _cellPositionRandomness = cellPositionRandomness >= 0 ? cellPositionRandomness : 0;
     }
 
     public IReadOnlyList<Cell> Cells => _cells;

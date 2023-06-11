@@ -8,14 +8,31 @@ public class PassengersSpawner
 
     private PassengerStateMachineSetUp _passengerTemplate;
     
-    public PassengersSpawner(BusEntryPointTrigger busEntryPointTrigger, PassengerStateMachineSetUp passegnerTemplate)
+    private IReadOnlyList<SpawnZone> _spawnZones;
+
+    public PassengersSpawner(BusEntryPointTrigger busEntryPointTrigger, PassengerStateMachineSetUp passegnerTemplate, IReadOnlyList<SpawnZone> spawnZones)
     {
         _busEntryPointTrigger = busEntryPointTrigger;
         _passengerTemplate = passegnerTemplate;
+        _spawnZones = spawnZones;
     }
 
-    public void Spawn()
+    public void SpawnAndInitPassegner(Cell cell)
     {
-        Object.Instantiate(_passengerTemplate, new Vector3(-18.32f, 0.30f, -4.6f), Quaternion.identity).Init(_busEntryPointTrigger);
+        Object.Instantiate(_passengerTemplate, cell.transform.position, Quaternion.identity).Init(_busEntryPointTrigger);
+    }
+
+    public void FillLevel()
+    {
+        foreach (var spawnZone in _spawnZones)
+            FillSpawnZone(spawnZone);
+    }
+    
+    private void FillSpawnZone(SpawnZone spawnZone)
+    {
+        Debug.Log(spawnZone.GetSpawnPlaces().Count);
+
+        foreach (var spawnPlace in spawnZone.GetSpawnPlaces())
+            SpawnAndInitPassegner(spawnPlace);
     }
 }
