@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Events;
 using UnityEngine;
-using System.Threading.Tasks;
 
 public class BusPassengers
 {
@@ -34,7 +33,7 @@ public class BusPassengers
         PassegnerAdded?.Invoke();
     }
 
-    private async void OnPassegnerZoneExpanded()
+    private void OnPassegnerZoneExpanded()
     {
         _passengers.ForEach(passenger => passenger.SetTakeEmptyBusCellState(_passengerZone.GetAvailableCell()));
     }

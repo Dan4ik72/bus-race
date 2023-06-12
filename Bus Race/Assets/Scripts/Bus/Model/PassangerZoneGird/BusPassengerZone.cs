@@ -44,7 +44,7 @@ public class BusPassengerZone : MonoBehaviour
     private void Expand()
     {
         transform.localScale = new Vector3(transform.localScale.x + _expandValue.x, transform.localScale.y, transform.localScale.z + _expandValue.y);
-
+        _grid.Reset();
         CreateGrid();
 
         GridExpanded?.Invoke();

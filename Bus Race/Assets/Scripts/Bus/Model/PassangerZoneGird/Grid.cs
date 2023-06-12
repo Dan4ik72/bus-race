@@ -57,7 +57,7 @@ public class Grid
     public void Reset()
     {
         foreach(Cell cell in _cells)
-            Object.Destroy(cell);
+            Object.Destroy(cell.gameObject);
 
         _cells.Clear();
     }
