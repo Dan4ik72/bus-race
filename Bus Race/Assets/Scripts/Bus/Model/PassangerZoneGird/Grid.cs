@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Xml;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [System.Serializable]
@@ -14,7 +16,7 @@ public class Grid
 
     private List<Cell> _cells;
 
-    private float _cellPositionRandomness;
+    private float _cellPositionRandomness = 0;
 
     public Grid(Transform cellParent, Cell cellPrefab, Vector2Int gridCapacity, float cellPositionRandomness = 0)
     {
@@ -25,6 +27,8 @@ public class Grid
         _cells = new List<Cell>();
 
         _capacity = _capacity.x < 0 || _capacity.y < 0 ? _capacity = Vector2Int.zero : gridCapacity;
+
+        _cellPositionRandomness = Mathf.Clamp(cellPositionRandomness, 0, 2);
     }
 
     public IReadOnlyList<Cell> Cells => _cells;

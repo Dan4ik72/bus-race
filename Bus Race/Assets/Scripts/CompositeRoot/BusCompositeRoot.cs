@@ -25,8 +25,8 @@ public class BusCompositeRoot : CompositeRoot
 
     public override void Compose()
     {
-        _passegners = new BusPassengers(_passengerZone.transform);
-        _entryPointTrigger.Init(_passengerZone, _passegners);
+        _passegners = new BusPassengers(_passengerZone.transform, _passengerZone);
+        _entryPointTrigger.Init(_passegners);
         _moveHandler = new RigidbodyMoveHandler(_rigidbody);
         _mover = new BusMover(_config.IdleSpeed, _config.GasSpeed, _moveHandler);
         _inputSetUp = new BusInputSetUp(_mover);

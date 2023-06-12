@@ -7,7 +7,7 @@ public class PassengersSpawner
     private BusEntryPointTrigger _busEntryPointTrigger;
 
     private PassengerStateMachineSetUp _passengerTemplate;
-    
+
     private IReadOnlyList<SpawnZone> _spawnZones;
 
     public PassengersSpawner(BusEntryPointTrigger busEntryPointTrigger, PassengerStateMachineSetUp passegnerTemplate, IReadOnlyList<SpawnZone> spawnZones)
@@ -27,11 +27,9 @@ public class PassengersSpawner
         foreach (var spawnZone in _spawnZones)
             FillSpawnZone(spawnZone);
     }
-    
-    private void FillSpawnZone(SpawnZone spawnZone)
-    {
-        Debug.Log(spawnZone.GetSpawnPlaces().Count);
 
+    private void FillSpawnZone(SpawnZone spawnZone)
+    { 
         foreach (var spawnPlace in spawnZone.GetSpawnPlaces())
             SpawnAndInitPassegner(spawnPlace);
     }

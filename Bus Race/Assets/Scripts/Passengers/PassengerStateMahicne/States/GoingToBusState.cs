@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class GoingToBusState : BusInteractionState
 {
+    private PassengerStateMachineSetUp _passenger;
+
     private IMoveHandler _moveHandler;
     private float _moveSpeed = 50;
 
     private float _minDistanceToBusTrigger = 0.5f;
 
-    public GoingToBusState(StateMachine stateMachine, BusEntryPointTrigger busEntryPointTrigger, Transform passengerTransform, IMoveHandler moveHandler) : base(stateMachine, busEntryPointTrigger, passengerTransform) 
+    public GoingToBusState(StateMachine stateMachine, BusEntryPointTrigger busEntryPointTrigger, PassengerStateMachineSetUp passenger, IMoveHandler moveHandler) : base(stateMachine, busEntryPointTrigger, passenger.transform) 
     {
         _moveHandler = moveHandler;
+        _passenger = passenger;
     }
 
     public override void Update()
@@ -22,7 +25,7 @@ public class GoingToBusState : BusInteractionState
             StateMachine.SetState<WaitingForBusState>();
 
         if (GetDistanceToBusTrigger() <= _minDistanceToBusTrigger)
-            StateMachine.SetState<TakeEmptyBusCellState>();
+            BusEntryPointTrigger.OnPassengerEntered(_passenger);
     }
 
     private void MoveToBusTigger()

@@ -4,20 +4,15 @@ using UnityEngine;
 
 public class BusEntryPointTrigger : MonoBehaviour
 {
-    private BusPassengerZone _passengerZone;
     private BusPassengers _busPassengers;
 
-    public void Init(BusPassengerZone passengerZone, BusPassengers passengersList)
+    public void Init(BusPassengers passengersList)
     {
-        _passengerZone = passengerZone;
         _busPassengers = passengersList;
     }
 
-    public Cell GetAvailableCell(PassengerStateMachineSetUp passegner)
+    public void OnPassengerEntered(PassengerStateMachineSetUp passegner)
     {
-        Cell availableCell = _passengerZone.GetAvailableCell();
-        _busPassengers.AddPassegner(passegner, availableCell);
-
-        return availableCell;
+        _busPassengers.AddPassegner(passegner);
     }
 }

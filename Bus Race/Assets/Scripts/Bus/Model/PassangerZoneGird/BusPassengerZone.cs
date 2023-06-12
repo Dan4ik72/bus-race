@@ -1,12 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
-using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Rendering;
-using UnityEngine.Scripting;
 
 public class BusPassengerZone : MonoBehaviour
 {
@@ -19,6 +14,10 @@ public class BusPassengerZone : MonoBehaviour
     private List<Cell> _availableCells = new List<Cell>();
     private List<Cell> _busyCells = new List<Cell>();
 
+    private float _gridRandomness = 0.1f;
+
+    public event UnityAction GridExpanded;
+
     private void Start()
     {
         CreateGrid();
@@ -27,9 +26,14 @@ public class BusPassengerZone : MonoBehaviour
     public Cell GetAvailableCell()
     {
         if (_availableCells.Count <= 0)
+        {
             Expand();
+        }
 
-        Cell requestedCell = _availableCells.FirstOrDefault();
+        Cell requestedCell = _availableCells.First();
+
+        if (requestedCell == null)
+            throw new System.Exception("There is no availableCell");
 
         _availableCells.Remove(requestedCell);
         _busyCells.Add(requestedCell);
@@ -39,15 +43,16 @@ public class BusPassengerZone : MonoBehaviour
 
     private void Expand()
     {
-        transform.localScale = new Vector3(transform.localScale.x + _expandValue.x,
-            transform.localScale.y, transform.localScale.z + _expandValue.y);
+        transform.localScale = new Vector3(transform.localScale.x + _expandValue.x, transform.localScale.y, transform.localScale.z + _expandValue.y);
 
         CreateGrid();
+
+        GridExpanded?.Invoke();
     }
 
     private void CreateGrid()
     {
-        _grid = new Grid(_gridParent,_cellPrefab, new Vector2Int((int)transform.localScale.x, (int)transform.localScale.z)).Create();
+        _grid = new Grid(_gridParent,_cellPrefab, new Vector2Int((int)transform.localScale.x, (int)transform.localScale.z), _gridRandomness).Create();
 
         _availableCells = _grid.Cells.ToList();
         _busyCells.Clear();

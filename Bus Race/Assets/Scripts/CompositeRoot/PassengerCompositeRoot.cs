@@ -9,6 +9,7 @@ public class PassengerCompositeRoot : CompositeRoot
     [SerializeField] private PassengerStateMachineSetUp _passengerPrefab;
 
     private PassengersSpawner _spawner;
+    private BusPassengers _busPassegners;
 
     public PassengersSpawner Spawner => _spawner;
 

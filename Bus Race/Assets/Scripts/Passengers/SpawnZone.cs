@@ -23,7 +23,7 @@ public class SpawnZone : MonoBehaviour
 
     private void CreateGrid()
     {
-        _grid = new Grid(transform, _cellPrefab, new Vector2Int((int)transform.localScale.x, (int)transform.localScale.z)).Create();
+        _grid = new Grid(transform, _cellPrefab, new Vector2Int((int)transform.localScale.x * 20, (int)transform.localScale.z * 10)).Create();
 
         _passengerSpawnPlaces = _grid.Cells.ToList();
     }

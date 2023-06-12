@@ -6,25 +6,28 @@ public class TakeEmptyBusCellState : BusInteractionState
 {
     private Cell _targetCell;
 
-    private float _targetReachedDistance = 1f;
+    private float _targetReachedDistance = 0.2f;
     private float _speed = 5f;
 
     private IMoveHandler _moveHandler;
     private PassengerStateMachineSetUp _passenger;
 
-    public TakeEmptyBusCellState(StateMachine stateMachine, BusEntryPointTrigger busEntryPointTrigger, Transform passengerTransform, IMoveHandler moveHandler, PassengerStateMachineSetUp passenger) : base(stateMachine, busEntryPointTrigger, passengerTransform) 
+    public TakeEmptyBusCellState(StateMachine stateMachine, BusEntryPointTrigger busEntryPointTrigger , Transform passengerTransform, IMoveHandler moveHandler, PassengerStateMachineSetUp passenger) : base(stateMachine, busEntryPointTrigger, passengerTransform) 
     {
         _moveHandler = moveHandler;
         _passenger = passenger;
     }
 
-    public override void Enter()
+    public void SetTargetCell(Cell targetCell)
     {
-        _targetCell = BusEntryPointTrigger.GetAvailableCell(_passenger);
+        _targetCell = targetCell;
     }
 
     public override void Update()
     {
+        if (_targetCell == null)
+            return;
+
         MoveToTargetCell(_targetCell);
 
         if (Vector3.Distance(PassengerTransform.position, _targetCell.transform.position) < _targetReachedDistance)

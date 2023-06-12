@@ -3,27 +3,39 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Events;
 using UnityEngine;
+using System.Threading.Tasks;
 
 public class BusPassengers
 {
-    private Dictionary<PassengerStateMachineSetUp, Cell> _passegners = new Dictionary<PassengerStateMachineSetUp, Cell>();
+    private List<PassengerStateMachineSetUp> _passengers = new List<PassengerStateMachineSetUp>();
 
     private Transform _passengersParent;
+    private BusPassengerZone _passengerZone;
 
     public event UnityAction PassegnerAdded;
 
-    public BusPassengers(Transform passengersParent) => _passengersParent = passengersParent;
-
-    public void AddPassegner(PassengerStateMachineSetUp passenger, Cell takenCell)
+    public BusPassengers(Transform passengersParent, BusPassengerZone passegnerZone)
     {
-        if (_passegners.ContainsKey(passenger))
-            return;
+        _passengersParent = passengersParent;
+        _passengerZone = passegnerZone;
 
-        _passegners.Add(passenger, takenCell);
+        _passengerZone.GridExpanded += OnPassegnerZoneExpanded;
+    } 
+
+    public void AddPassegner(PassengerStateMachineSetUp passenger)
+    {
+        Cell availableCell = _passengerZone.GetAvailableCell();
 
         passenger.transform.parent = _passengersParent;
-        takenCell.SetBusy(true);
+        passenger.SetTakeEmptyBusCellState(availableCell);
+
+        _passengers.Add(passenger);
 
         PassegnerAdded?.Invoke();
+    }
+
+    private async void OnPassegnerZoneExpanded()
+    {
+        _passengers.ForEach(passenger => passenger.SetTakeEmptyBusCellState(_passengerZone.GetAvailableCell()));
     }
 }
