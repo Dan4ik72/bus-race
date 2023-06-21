@@ -7,7 +7,7 @@ public class BusPassengerZone : MonoBehaviour
 {
     [SerializeField] private Transform _gridParent;
     [SerializeField] private Cell _cellPrefab;
-    [SerializeField] private Vector2Int _expandValue;
+    [SerializeField] private Vector2 _expandValue;
 
     private Grid _grid;
 
@@ -18,11 +18,8 @@ public class BusPassengerZone : MonoBehaviour
 
     public event UnityAction GridExpanded;
 
-    private void Start()
-    {
-        CreateGrid();
-    }
-
+    private void Start() => CreateGrid();
+    
     public Cell GetAvailableCell()
     {
         if (_availableCells.Count <= 0)
