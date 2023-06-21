@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class GoingToBusState : BusInteractionState
 {
-    private PassengerStateMachineSetUp _passenger;
+    private DefaultPassengerSetUp _passenger;
 
     private IMoveHandler _moveHandler;
     private float _moveSpeed = 50;
 
     private float _minDistanceToBusTrigger = 0.5f;
 
-    public GoingToBusState(StateMachine stateMachine, BusEntryPointTrigger busEntryPointTrigger, PassengerStateMachineSetUp passenger, IMoveHandler moveHandler) : base(stateMachine, busEntryPointTrigger, passenger.transform) 
+    public GoingToBusState(StateMachine stateMachine, BusEntryPointTrigger busEntryPointTrigger, DefaultPassengerSetUp passenger, IMoveHandler moveHandler) : base(stateMachine, busEntryPointTrigger, passenger.transform) 
     {
         _moveHandler = moveHandler;
         _passenger = passenger;

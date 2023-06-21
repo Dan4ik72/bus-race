@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class BusPassengers
 {
-    private List<PassengerStateMachineSetUp> _passengers = new List<PassengerStateMachineSetUp>();
+    private List<IPassengerSetUp> _passengers = new List<IPassengerSetUp>();
 
     private Transform _passengersParent;
     private BusPassengerZone _passengerZone;
@@ -21,12 +21,12 @@ public class BusPassengers
         _passengerZone.GridExpanded += OnPassegnerZoneExpanded;
     } 
 
-    public void AddPassegner(PassengerStateMachineSetUp passenger)
+    public void AddPassegner(IPassengerSetUp passenger)
     {
         Cell availableCell = _passengerZone.GetAvailableCell();
 
-        passenger.transform.parent = _passengersParent;
-        passenger.SetTakeEmptyBusCellState(availableCell);
+        passenger.GetTransform().parent = _passengersParent;
+        passenger.TakeEmptyBusCell(availableCell);
 
         _passengers.Add(passenger);
 
@@ -35,6 +35,6 @@ public class BusPassengers
 
     private void OnPassegnerZoneExpanded()
     {
-        _passengers.ForEach(passenger => passenger.SetTakeEmptyBusCellState(_passengerZone.GetAvailableCell()));
+        _passengers.ForEach(passenger => passenger.TakeEmptyBusCell(_passengerZone.GetAvailableCell()));
     }
 }

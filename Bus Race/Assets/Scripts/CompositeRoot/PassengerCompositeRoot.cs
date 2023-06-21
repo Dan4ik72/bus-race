@@ -6,7 +6,7 @@ public class PassengerCompositeRoot : CompositeRoot
 {
     [SerializeField] private BusCompositeRoot _busCompositeRoot;
     [SerializeField] private List<SpawnZone> _spawnZones;
-    [SerializeField] private PassengerStateMachineSetUp _passengerPrefab;
+    [SerializeField] private DefaultPassengerSetUp _passengerPrefab;
 
     private PassengersSpawner _spawner;
     private BusPassengers _busPassegners;

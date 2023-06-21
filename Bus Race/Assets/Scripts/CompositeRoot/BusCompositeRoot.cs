@@ -8,6 +8,7 @@ public class BusCompositeRoot : CompositeRoot
     [SerializeField] private BusConfig _config;
     [SerializeField] private BusPassengerZone _passengerZone;
     [SerializeField] private BusEntryPointTrigger _entryPointTrigger;
+    [SerializeField] private Transform _passengerParent;
 
     private BusMover _mover;
     private Bus _bus;
@@ -25,7 +26,7 @@ public class BusCompositeRoot : CompositeRoot
 
     public override void Compose()
     {
-        _passegners = new BusPassengers(_passengerZone.transform, _passengerZone);
+        _passegners = new BusPassengers(_passengerParent, _passengerZone);
         _entryPointTrigger.Init(_passegners);
         _moveHandler = new RigidbodyMoveHandler(_rigidbody);
         _mover = new BusMover(_config.IdleSpeed, _config.GasSpeed, _moveHandler);

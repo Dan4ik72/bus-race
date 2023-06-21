@@ -19,7 +19,7 @@ public class BusPassengerZone : MonoBehaviour
     public event UnityAction GridExpanded;
 
     private void Start() => CreateGrid();
-    
+
     public Cell GetAvailableCell()
     {
         if (_availableCells.Count <= 0)
@@ -27,10 +27,7 @@ public class BusPassengerZone : MonoBehaviour
             Expand();
         }
 
-        Cell requestedCell = _availableCells.First();
-
-        if (requestedCell == null)
-            throw new System.Exception("There is no availableCell");
+        Cell requestedCell = _availableCells.FirstOrDefault();
 
         _availableCells.Remove(requestedCell);
         _busyCells.Add(requestedCell);
@@ -50,7 +47,7 @@ public class BusPassengerZone : MonoBehaviour
 
     private void CreateGrid()
     {
-        _grid = new Grid(_gridParent,_cellPrefab, new Vector2Int((int)transform.localScale.x, (int)transform.localScale.z), _gridRandomness).Create();
+        _grid = new Grid(_gridParent,_cellPrefab, new Vector2(transform.localScale.x, transform.localScale.z), _gridRandomness).Create();
 
         _availableCells = _grid.Cells.ToList();
         _busyCells.Clear();

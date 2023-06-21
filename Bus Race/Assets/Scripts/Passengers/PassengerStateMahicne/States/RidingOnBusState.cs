@@ -8,6 +8,6 @@ public class RidingOnBusState : BusInteractionState
 
     public override void Enter()
     {
-        Debug.Log("Entered");
+        //Debug.Log("Entered");
     }
 }

@@ -1,10 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Security.Cryptography;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 
-public class PassengerStateMachineSetUp : MonoBehaviour
+public class DefaultPassengerSetUp : MonoBehaviour, IPassengerSetUp
 {
     private StateMachine _stateMachine;
     private BusEntryPointTrigger _busEntryPointTrigger;
@@ -16,7 +12,9 @@ public class PassengerStateMachineSetUp : MonoBehaviour
     private TakeEmptyBusCellState _takeEmptyBusCellState;
     private RidingOnBusState _ridingOnBusState;
 
-    public PassengerStateMachineSetUp Init(BusEntryPointTrigger busEntryPointTrigger)
+    public Transform GetTransform() => transform;
+
+    public IPassengerSetUp Init(BusEntryPointTrigger busEntryPointTrigger)
     {
         _busEntryPointTrigger = busEntryPointTrigger;
 
@@ -25,9 +23,9 @@ public class PassengerStateMachineSetUp : MonoBehaviour
         return this;
     }
 
-    public void SetTakeEmptyBusCellState(Cell targetCell)
+    public void TakeEmptyBusCell(Cell cell)
     {
-        _takeEmptyBusCellState.SetTargetCell(targetCell);
+        _takeEmptyBusCellState.SetTargetCell(cell);
         _stateMachine.SetState<TakeEmptyBusCellState>();
     }
 

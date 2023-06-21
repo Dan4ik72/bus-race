@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BusEntryPointTrigger : MonoBehaviour
@@ -11,7 +9,7 @@ public class BusEntryPointTrigger : MonoBehaviour
         _busPassengers = passengersList;
     }
 
-    public void OnPassengerEntered(PassengerStateMachineSetUp passegner)
+    public void OnPassengerEntered(IPassengerSetUp passegner)
     {
         _busPassengers.AddPassegner(passegner);
     }

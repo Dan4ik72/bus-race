@@ -10,9 +10,9 @@ public class TakeEmptyBusCellState : BusInteractionState
     private float _speed = 5f;
 
     private IMoveHandler _moveHandler;
-    private PassengerStateMachineSetUp _passenger;
+    private DefaultPassengerSetUp _passenger;
 
-    public TakeEmptyBusCellState(StateMachine stateMachine, BusEntryPointTrigger busEntryPointTrigger , Transform passengerTransform, IMoveHandler moveHandler, PassengerStateMachineSetUp passenger) : base(stateMachine, busEntryPointTrigger, passengerTransform) 
+    public TakeEmptyBusCellState(StateMachine stateMachine, BusEntryPointTrigger busEntryPointTrigger , Transform passengerTransform, IMoveHandler moveHandler, DefaultPassengerSetUp passenger) : base(stateMachine, busEntryPointTrigger, passengerTransform) 
     {
         _moveHandler = moveHandler;
         _passenger = passenger;

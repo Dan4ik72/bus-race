@@ -12,13 +12,13 @@ public class Grid
     private Cell _cellPrefab;
     private Transform _parent;
 
-    private Vector2Int _capacity = new Vector2Int(2,4);
+    private Vector2 _capacity = new Vector2Int(2,4);
 
     private List<Cell> _cells;
 
     private float _cellPositionRandomness = 0;
 
-    public Grid(Transform cellParent, Cell cellPrefab, Vector2Int gridCapacity, float cellPositionRandomness = 0)
+    public Grid(Transform cellParent, Cell cellPrefab, Vector2 gridCapacity, float cellPositionRandomness = 0)
     {
         _cellPrefab = cellPrefab;
         _parent = cellParent;
@@ -26,12 +26,13 @@ public class Grid
 
         _cells = new List<Cell>();
 
-        _capacity = _capacity.x < 0 || _capacity.y < 0 ? _capacity = Vector2Int.zero : gridCapacity;
+        _capacity = _capacity.x < 0 || _capacity.y < 0 ? _capacity = Vector2.zero : gridCapacity;
 
         _cellPositionRandomness = Mathf.Clamp(cellPositionRandomness, 0, 2);
     }
 
     public IReadOnlyList<Cell> Cells => _cells;
+    public Vector2 Capacity => _capacity;
         
     public Grid Create()
     {

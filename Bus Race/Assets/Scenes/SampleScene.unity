@@ -152,7 +152,7 @@ Transform:
   m_GameObject: {fileID: 146426008}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.57, z: 0}
-  m_LocalScale: {x: 5, y: 0.14, z: 4}
+  m_LocalScale: {x: 5, y: 0.14, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 456970889}
@@ -243,7 +243,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gridParent: {fileID: 1778657938}
   _cellPrefab: {fileID: 8512011707380638836, guid: af02f9a7db45b2346a550f3efc9e900d, type: 3}
-  _expandValue: {x: 0.5, y: 1}
+  _expandValue: {x: 1, y: 0.5}
 --- !u!1 &456970883
 GameObject:
   m_ObjectHideFlags: 0
@@ -370,15 +370,47 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 456970883}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -27.345, y: 0.63, z: -1.45}
+  m_LocalPosition: {x: -27.345, y: 0.63, z: -2.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 146426009}
   - {fileID: 1778657938}
   - {fileID: 1868267950}
+  - {fileID: 461305801}
   m_Father: {fileID: 0}
   m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &461305800
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 461305801}
+  m_Layer: 7
+  m_Name: Passengers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &461305801
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 461305800}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 456970889}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &705507993
 GameObject:
@@ -736,6 +768,7 @@ MonoBehaviour:
   _config: {fileID: 11400000, guid: bded2a366963a6f4794eaeaa0396d856, type: 2}
   _passengerZone: {fileID: 146426013}
   _entryPointTrigger: {fileID: 1868267951}
+  _passengerParent: {fileID: 461305801}
 --- !u!114 &1127384028
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -791,7 +824,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1778657937}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.5, y: 0.6400001, z: -1.996}
+  m_LocalPosition: {x: -2.5000007, y: 0.6400001, z: -1.0000001}
   m_LocalScale: {x: 5, y: 0.14, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -824,7 +857,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1868267949}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.011, y: 0.64, z: -2}
+  m_LocalPosition: {x: -0.011, y: 0.64, z: -0.189}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
