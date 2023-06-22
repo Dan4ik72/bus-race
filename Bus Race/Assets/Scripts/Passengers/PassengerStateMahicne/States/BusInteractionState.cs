@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public abstract class BusInteractionState : State
 {
-    protected readonly float MaxDistanceToBusTigger  = 2f;
-
     private BusEntryPointTrigger _busEntryPointTrigger;
     private Transform _passengerTransform;
 

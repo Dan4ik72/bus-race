@@ -10,17 +10,19 @@ public class GoingToBusState : BusInteractionState
     private float _moveSpeed;
 
     private float _minDistanceToBusTrigger = 0.5f;
+    private float _maxDistanceToBusTrigger;
 
-    public GoingToBusState(StateMachine stateMachine, BusEntryPointTrigger busEntryPointTrigger, DefaultPassengerSetUp passenger, IMoveHandler moveHandler, float moveSpeed) : base(stateMachine, busEntryPointTrigger, passenger.transform) 
+    public GoingToBusState(StateMachine stateMachine, BusEntryPointTrigger busEntryPointTrigger, DefaultPassengerSetUp passenger, IMoveHandler moveHandler, float moveSpeed, float maxDistanceToBusTrigger) : base(stateMachine, busEntryPointTrigger, passenger.transform) 
     {
         _moveHandler = moveHandler;
         _passenger = passenger;
         _moveSpeed = moveSpeed;
+        _maxDistanceToBusTrigger = maxDistanceToBusTrigger;
     }
 
     public override void Update()
     {
-        if (GetDistanceToBusTrigger() < MaxDistanceToBusTigger)
+        if (GetDistanceToBusTrigger() < _maxDistanceToBusTrigger)
             MoveToBusTigger();
         else
             StateMachine.SetState<WaitingForBusState>();

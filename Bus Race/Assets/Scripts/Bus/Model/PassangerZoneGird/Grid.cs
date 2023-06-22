@@ -6,7 +6,7 @@ public class Grid
     private ICell _cellPrefab;
     private Transform _parent;
 
-    private Vector2 _capacity = new Vector2Int(2,4);
+    private Vector2 _capacity = new Vector2(2,4);
 
     private List<Transform> _cells;
 

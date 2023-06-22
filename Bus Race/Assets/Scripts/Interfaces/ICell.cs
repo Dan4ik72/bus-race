@@ -2,8 +2,8 @@
 
 public interface ICell
 {
-    public int Heigh { get; }
-    public int Width { get; }
+    public float Heigh { get; }
+    public float Width { get; }
 
     public Transform GetTransform();
 }

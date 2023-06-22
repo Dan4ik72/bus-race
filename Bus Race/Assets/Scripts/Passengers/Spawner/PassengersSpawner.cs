@@ -20,9 +20,9 @@ public class PassengersSpawner
         _spawnZones = spawnZones;
     }
 
-    public IPassengerSetUp SpawnAndInitDefaultPassegner(Transform spawnPlace)
+    public IPassengerSetUp SpawnAndInitDefaultPassegner(Transform spawnPlace, Transform parent = null)
     {
-        return Object.Instantiate(_DefaultPassengerTemplate, spawnPlace.position, Quaternion.identity).Init(_busEntryPointTrigger, _defaultPassengerConfig);
+        return Object.Instantiate(_DefaultPassengerTemplate, spawnPlace.position, Quaternion.identity, parent).Init(_busEntryPointTrigger, _defaultPassengerConfig);
     }
 
     public void FillLevel()
@@ -34,6 +34,6 @@ public class PassengersSpawner
     private void FillSpawnZone(SpawnZone spawnZone)
     { 
         foreach (var spawnPlace in spawnZone.GetSpawnPlaces())
-            SpawnAndInitDefaultPassegner(spawnPlace);
+            SpawnAndInitDefaultPassegner(spawnPlace, spawnZone.CellsParent);
     }
 }

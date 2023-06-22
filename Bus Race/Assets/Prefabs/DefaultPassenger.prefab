@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7871514911475662535}
   - component: {fileID: 7871514911475662531}
   m_Layer: 6
-  m_Name: Passenger
+  m_Name: DefaultPassenger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

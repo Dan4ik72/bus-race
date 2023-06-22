@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6db20e06da2dd674e96d19d0a7ac715e, type: 3}
   m_Name: DefaultPassengerConfig
   m_EditorClassIdentifier: 
-  _speedToBus: 0
-  _speedInBus: 0
-  _busFareAmount: 0
+  _speedToBus: 10
+  _speedInBus: 5
+  _busFareAmount: 30
