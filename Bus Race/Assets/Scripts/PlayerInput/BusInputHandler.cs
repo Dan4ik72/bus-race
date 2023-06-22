@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class BusInputHandler 
 {
-    private IBusInput _playerInput;
+    private IBusInput _busInput;
 
     private BusMover _busMover;
 
-    public BusInputHandler(IBusInput playerInput, BusMover busMover)
+    public BusInputHandler(IBusInput busInput, BusMover busMover)
     {
-        _playerInput = playerInput;
+        _busInput = busInput;
         _busMover = busMover;
     }
 
@@ -19,27 +19,31 @@ public class BusInputHandler
         if (newInput == null)
             return;
 
-        _playerInput = newInput;
+        Disable();
+
+        _busInput = newInput;
+
+        Enable();
     }
 
     public void Enable()
     {
-        _playerInput.Pressed += OnPressed;
-        _playerInput.Unpressed += OnUnpressed;
+        _busInput.GasPressed += OnGas;
+        _busInput.IdlePressed += OnIdle;
     }
 
     public void Disable()
     {
-        _playerInput.Pressed -= OnPressed;
-        _playerInput.Unpressed -= OnUnpressed;
+        _busInput.GasPressed -= OnGas;
+        _busInput.IdlePressed -= OnIdle;
     }
 
-    private void OnPressed()
+    private void OnGas()
     {
         _busMover.SetGasSpeed();
     }
 
-    private void OnUnpressed()
+    private void OnIdle()
     {
         _busMover.SetIdleSpeed();
     }

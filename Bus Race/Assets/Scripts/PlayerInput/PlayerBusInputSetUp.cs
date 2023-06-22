@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BusInputSetUp
+public class PlayerBusInputSetUp
 {
     private BusMover _busMover;
 
@@ -12,7 +12,7 @@ public class BusInputSetUp
 
     private IBusInput _currentInput;
 
-    public BusInputSetUp(BusMover busMover)
+    public PlayerBusInputSetUp(BusMover busMover)
     {
         _busMover = busMover;
     }

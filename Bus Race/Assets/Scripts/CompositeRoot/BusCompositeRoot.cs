@@ -12,13 +12,13 @@ public class BusCompositeRoot : CompositeRoot
 
     private BusMover _mover;
     private Bus _bus;
-    private BusInputSetUp _inputSetUp;
+    private PlayerBusInputSetUp _inputSetUp;
     private RigidbodyMoveHandler _moveHandler;
     private BusPassengers _passegners;
 
     public BusMover Mover => _mover;
     public Bus Bus => _bus;
-    public BusInputSetUp InputSetUp => _inputSetUp;
+    public PlayerBusInputSetUp InputSetUp => _inputSetUp;
     public BusPassengerZone PassengerZone => _passengerZone;
     public BusEntryPointTrigger EntryPointTrigger => _entryPointTrigger;
     public RigidbodyMoveHandler MoveHandler => _moveHandler;
@@ -30,7 +30,7 @@ public class BusCompositeRoot : CompositeRoot
         _entryPointTrigger.Init(_passegners);
         _moveHandler = new RigidbodyMoveHandler(_rigidbody);
         _mover = new BusMover(_config.IdleSpeed, _config.GasSpeed, _moveHandler);
-        _inputSetUp = new BusInputSetUp(_mover);
+        _inputSetUp = new PlayerBusInputSetUp(_mover);
     }
 
     private void Awake()

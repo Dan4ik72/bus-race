@@ -6,16 +6,16 @@ using UnityEngine.EventSystems;
 
 public class MobileBusInput : IBusInput, IPointerDownHandler, IPointerUpHandler
 {
-    public event UnityAction Pressed;
-    public event UnityAction Unpressed;
+    public event UnityAction GasPressed;
+    public event UnityAction IdlePressed;
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        Pressed?.Invoke();
+        GasPressed?.Invoke();
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        Unpressed?.Invoke();
+        IdlePressed?.Invoke();
     }
 }

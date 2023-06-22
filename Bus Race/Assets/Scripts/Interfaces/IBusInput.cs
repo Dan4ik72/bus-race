@@ -5,6 +5,6 @@ using UnityEngine.Events;
 
 public interface IBusInput
 {
-    public event UnityAction Pressed;
-    public event UnityAction Unpressed;
+    public event UnityAction GasPressed;
+    public event UnityAction IdlePressed;
 }

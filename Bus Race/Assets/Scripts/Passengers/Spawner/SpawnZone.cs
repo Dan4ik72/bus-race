@@ -7,7 +7,7 @@ public class SpawnZone : MonoBehaviour
     [SerializeField] private SpawnPlaceCell _cellPrefab;
     [SerializeField] private Transform _cellsParent;
 
-    [SerializeField] private Vector2 _gridCapacity;
+    [SerializeField] private Vector2 _gridSize;
     
     private Grid _grid;
 
@@ -23,7 +23,7 @@ public class SpawnZone : MonoBehaviour
     
     private void CreateGrid()
     {
-        _grid = new Grid(_cellsParent, _cellPrefab, _gridCapacity, 0.2f).Create();
+        _grid = new Grid(_cellsParent, _cellPrefab, _gridSize, 0.25f).Create();
         _passengerSpawnPlaces = _grid.Cells.ToList();
     }
 }
