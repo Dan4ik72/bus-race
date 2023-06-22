@@ -8,18 +8,21 @@ public class PassengersSpawner
 
     private DefaultPassengerSetUp _DefaultPassengerTemplate;
 
+    private PassengerConfig _defaultPassengerConfig;
+
     private IReadOnlyList<SpawnZone> _spawnZones;
 
-    public PassengersSpawner(BusEntryPointTrigger busEntryPointTrigger, DefaultPassengerSetUp defaultPassegnerTemplate, IReadOnlyList<SpawnZone> spawnZones)
+    public PassengersSpawner(BusEntryPointTrigger busEntryPointTrigger, DefaultPassengerSetUp defaultPassegnerTemplate, PassengerConfig defaultPassengerConfing, IReadOnlyList<SpawnZone> spawnZones)
     {
         _busEntryPointTrigger = busEntryPointTrigger;
         _DefaultPassengerTemplate = defaultPassegnerTemplate;
+        _defaultPassengerConfig = defaultPassengerConfing;
         _spawnZones = spawnZones;
     }
 
-    public IPassengerSetUp SpawnAndInitDefaultPassegner(Cell cell)
+    public IPassengerSetUp SpawnAndInitDefaultPassegner(Transform spawnPlace)
     {
-        return Object.Instantiate(_DefaultPassengerTemplate, cell.transform.position, Quaternion.identity).Init(_busEntryPointTrigger);
+        return Object.Instantiate(_DefaultPassengerTemplate, spawnPlace.position, Quaternion.identity).Init(_busEntryPointTrigger, _defaultPassengerConfig);
     }
 
     public void FillLevel()

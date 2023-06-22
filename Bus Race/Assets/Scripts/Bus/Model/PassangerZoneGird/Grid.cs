@@ -1,37 +1,31 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Xml;
-using Unity.VisualScripting;
 using UnityEngine;
 
-[System.Serializable]
 public class Grid
 {
-    private Cell _cellPrefab;
+    private ICell _cellPrefab;
     private Transform _parent;
 
     private Vector2 _capacity = new Vector2Int(2,4);
 
-    private List<Cell> _cells;
+    private List<Transform> _cells;
 
     private float _cellPositionRandomness = 0;
 
-    public Grid(Transform cellParent, Cell cellPrefab, Vector2 gridCapacity, float cellPositionRandomness = 0)
+    public Grid(Transform cellParent, ICell cellPrefab, Vector2 gridCapacity, float cellPositionRandomness = 0)
     {
         _cellPrefab = cellPrefab;
         _parent = cellParent;
         _capacity = gridCapacity;
 
-        _cells = new List<Cell>();
+        _cells = new List<Transform>();
 
         _capacity = _capacity.x < 0 || _capacity.y < 0 ? _capacity = Vector2.zero : gridCapacity;
 
-        _cellPositionRandomness = Mathf.Clamp(cellPositionRandomness, 0, 2);
+        _cellPositionRandomness = Mathf.Clamp(cellPositionRandomness, 0, 1);
     }
 
-    public IReadOnlyList<Cell> Cells => _cells;
+    public IReadOnlyList<Transform> Cells => _cells;
     public Vector2 Capacity => _capacity;
         
     public Grid Create()
@@ -44,12 +38,12 @@ public class Grid
                     , _parent.position.y,
                     currentYPosition + Random.Range(-_cellPositionRandomness, _cellPositionRandomness));
 
-                CreateCell(cellPosition);
+                CreateCellTransform(cellPosition);
 
-                currentYPosition += Cell.Height;
+                currentYPosition += _cellPrefab.Heigh;
             }
 
-            currentXPosition += Cell.Width;
+            currentXPosition += _cellPrefab.Width;
         }
 
         return this;
@@ -57,17 +51,17 @@ public class Grid
     
     public void Reset()
     {
-        foreach(Cell cell in _cells)
+        foreach(Transform cell in _cells)
             Object.Destroy(cell.gameObject);
 
         _cells.Clear();
     }
 
-    private Cell CreateCell(Vector3 position)
+    private Transform CreateCellTransform(Vector3 position)
     {
         var cellPosition = new Vector3(position.x, position.y, position.z);
 
-        Cell newCell = Object.Instantiate(_cellPrefab, cellPosition, Quaternion.identity, _parent);
+        Transform newCell = Object.Instantiate(_cellPrefab.GetTransform(), cellPosition, Quaternion.identity, _parent);
 
         _cells.Add(newCell);
 

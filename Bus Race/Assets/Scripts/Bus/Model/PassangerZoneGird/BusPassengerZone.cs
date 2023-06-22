@@ -6,13 +6,13 @@ using UnityEngine.Events;
 public class BusPassengerZone : MonoBehaviour
 {
     [SerializeField] private Transform _gridParent;
-    [SerializeField] private Cell _cellPrefab;
+    [SerializeField] private BusPlaceCell _cellPrefab;
     [SerializeField] private Vector2 _expandValue;
 
     private Grid _grid;
 
-    private List<Cell> _availableCells = new List<Cell>();
-    private List<Cell> _busyCells = new List<Cell>();
+    private List<Transform> _availablePlaces = new List<Transform>();
+    private List<Transform> _busyPlaces = new List<Transform>();
 
     private float _gridRandomness = 0.1f;
 
@@ -20,19 +20,19 @@ public class BusPassengerZone : MonoBehaviour
 
     private void Start() => CreateGrid();
 
-    public Cell GetAvailableCell()
+    public Transform GetAvailablePlace()
     {
-        if (_availableCells.Count <= 0)
+        if (_availablePlaces.Count <= 0)
         {
             Expand();
         }
 
-        Cell requestedCell = _availableCells.FirstOrDefault();
+        Transform requestedPlace = _availablePlaces.FirstOrDefault();
 
-        _availableCells.Remove(requestedCell);
-        _busyCells.Add(requestedCell);
+        _availablePlaces.Remove(requestedPlace);
+        _busyPlaces.Add(requestedPlace);
 
-        return requestedCell;
+        return requestedPlace;
     }
 
     private void Expand()
@@ -49,7 +49,7 @@ public class BusPassengerZone : MonoBehaviour
     {
         _grid = new Grid(_gridParent,_cellPrefab, new Vector2(transform.localScale.x, transform.localScale.z), _gridRandomness).Create();
 
-        _availableCells = _grid.Cells.ToList();
-        _busyCells.Clear();
+        _availablePlaces = _grid.Cells.ToList();
+        _busyPlaces.Clear();
     }
 }

@@ -7,14 +7,15 @@ public class GoingToBusState : BusInteractionState
     private DefaultPassengerSetUp _passenger;
 
     private IMoveHandler _moveHandler;
-    private float _moveSpeed = 50;
+    private float _moveSpeed;
 
     private float _minDistanceToBusTrigger = 0.5f;
 
-    public GoingToBusState(StateMachine stateMachine, BusEntryPointTrigger busEntryPointTrigger, DefaultPassengerSetUp passenger, IMoveHandler moveHandler) : base(stateMachine, busEntryPointTrigger, passenger.transform) 
+    public GoingToBusState(StateMachine stateMachine, BusEntryPointTrigger busEntryPointTrigger, DefaultPassengerSetUp passenger, IMoveHandler moveHandler, float moveSpeed) : base(stateMachine, busEntryPointTrigger, passenger.transform) 
     {
         _moveHandler = moveHandler;
         _passenger = passenger;
+        _moveSpeed = moveSpeed;
     }
 
     public override void Update()
@@ -25,7 +26,7 @@ public class GoingToBusState : BusInteractionState
             StateMachine.SetState<WaitingForBusState>();
 
         if (GetDistanceToBusTrigger() <= _minDistanceToBusTrigger)
-            BusEntryPointTrigger.OnPassengerEntered(_passenger);
+            BusEntryPointTrigger.EnterBus(_passenger);
     }
 
     private void MoveToBusTigger()

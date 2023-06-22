@@ -7,16 +7,16 @@ public class SpawnZone : MonoBehaviour
 {
     private Grid _grid;
 
-    [SerializeField] private Cell _cellPrefab;
+    [SerializeField] private BusPlaceCell _cellPrefab;
 
-    private List<Cell> _passengerSpawnPlaces = new List<Cell>();
+    private List<Transform> _passengerSpawnPlaces = new List<Transform>();
 
     private void Awake()
     {
         CreateGrid();
     }
 
-    public IReadOnlyList<Cell> GetSpawnPlaces()
+    public IReadOnlyList<Transform> GetSpawnPlaces()
     {
         return _passengerSpawnPlaces;
     }

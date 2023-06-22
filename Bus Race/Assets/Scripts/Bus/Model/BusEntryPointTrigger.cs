@@ -9,7 +9,7 @@ public class BusEntryPointTrigger : MonoBehaviour
         _busPassengers = passengersList;
     }
 
-    public void OnPassengerEntered(IPassengerSetUp passegner)
+    public void EnterBus(IPassengerSetUp passegner)
     {
         _busPassengers.AddPassegner(passegner);
     }

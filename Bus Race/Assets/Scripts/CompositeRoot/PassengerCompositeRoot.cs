@@ -7,6 +7,7 @@ public class PassengerCompositeRoot : CompositeRoot
     [SerializeField] private BusCompositeRoot _busCompositeRoot;
     [SerializeField] private List<SpawnZone> _spawnZones;
     [SerializeField] private DefaultPassengerSetUp _passengerPrefab;
+    [SerializeField] private PassengerConfig _defaultPassengerConfig;
 
     private PassengersSpawner _spawner;
     private BusPassengers _busPassegners;
@@ -15,7 +16,7 @@ public class PassengerCompositeRoot : CompositeRoot
 
     public override void Compose()
     {
-        _spawner = new PassengersSpawner(_busCompositeRoot.EntryPointTrigger, _passengerPrefab, _spawnZones);
+        _spawner = new PassengersSpawner(_busCompositeRoot.EntryPointTrigger, _passengerPrefab, _defaultPassengerConfig ,_spawnZones);
     }
 
     private void Start()

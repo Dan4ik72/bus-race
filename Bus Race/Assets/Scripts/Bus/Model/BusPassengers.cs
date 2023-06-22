@@ -23,10 +23,10 @@ public class BusPassengers
 
     public void AddPassegner(IPassengerSetUp passenger)
     {
-        Cell availableCell = _passengerZone.GetAvailableCell();
+        Transform availablePlace = _passengerZone.GetAvailablePlace();
 
         passenger.GetTransform().parent = _passengersParent;
-        passenger.TakeEmptyBusCell(availableCell);
+        passenger.TakeEmptyBusCell(availablePlace);
 
         _passengers.Add(passenger);
 
@@ -35,6 +35,6 @@ public class BusPassengers
 
     private void OnPassegnerZoneExpanded()
     {
-        _passengers.ForEach(passenger => passenger.TakeEmptyBusCell(_passengerZone.GetAvailableCell()));
+        _passengers.ForEach(passenger => passenger.TakeEmptyBusCell(_passengerZone.GetAvailablePlace()));
     }
 }

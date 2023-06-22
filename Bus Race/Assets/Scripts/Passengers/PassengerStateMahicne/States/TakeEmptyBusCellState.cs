@@ -4,41 +4,42 @@ using UnityEngine;
 
 public class TakeEmptyBusCellState : BusInteractionState
 {
-    private Cell _targetCell;
+    private Transform _targetPlace;
 
     private float _targetReachedDistance = 0.2f;
-    private float _speed = 5f;
+    private float _speed;
 
     private IMoveHandler _moveHandler;
     private DefaultPassengerSetUp _passenger;
 
-    public TakeEmptyBusCellState(StateMachine stateMachine, BusEntryPointTrigger busEntryPointTrigger , Transform passengerTransform, IMoveHandler moveHandler, DefaultPassengerSetUp passenger) : base(stateMachine, busEntryPointTrigger, passengerTransform) 
+    public TakeEmptyBusCellState(StateMachine stateMachine, BusEntryPointTrigger busEntryPointTrigger , Transform passengerTransform, IMoveHandler moveHandler, float speed,DefaultPassengerSetUp passenger) : base(stateMachine, busEntryPointTrigger, passengerTransform) 
     {
         _moveHandler = moveHandler;
         _passenger = passenger;
+        _speed = speed;
     }
 
-    public void SetTargetCell(Cell targetCell)
+    public void SetTargetCell(Transform targetCell)
     {
-        _targetCell = targetCell;
+        _targetPlace = targetCell;
     }
 
     public override void Update()
     {
-        if (_targetCell == null)
+        if (_targetPlace == null)
             return;
 
-        MoveToTargetCell(_targetCell);
+        MoveToTargetCell(_targetPlace);
 
-        if (Vector3.Distance(PassengerTransform.position, _targetCell.transform.position) < _targetReachedDistance)
+        if (Vector3.Distance(PassengerTransform.position, _targetPlace.transform.position) < _targetReachedDistance)
         {
             StateMachine.SetState<RidingOnBusState>();
         }
     }
 
-    private void MoveToTargetCell(Cell targetCell)
+    private void MoveToTargetCell(Transform targetPlace)
     {
-        Vector3 direction = targetCell.transform.position - PassengerTransform.position;
+        Vector3 direction = targetPlace.position - PassengerTransform.position;
         direction.Normalize();
 
         _moveHandler.Move(direction * _speed);
