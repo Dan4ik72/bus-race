@@ -9,7 +9,7 @@ public class EnemyBusInputSetUp
     private RaycastEnemyBusInput _input;
 
     private Transform _raycastPoint;
-    private LayerMask _obstacleLayerMask;
+    private int _obstacleLayer = 8;
 
     public EnemyBusInputSetUp(BusMover busMover, Transform raycastPoint)
     {
@@ -19,7 +19,7 @@ public class EnemyBusInputSetUp
 
     public void Awake()
     {
-        _input = new RaycastEnemyBusInput(_raycastPoint, _obstacleLayerMask.value);
+        _input = new RaycastEnemyBusInput(_raycastPoint, _obstacleLayer);
         _inputHandler = new BusInputHandler(_input, _busMover);
     }
 
@@ -37,4 +37,5 @@ public class EnemyBusInputSetUp
     {
         _input.RaycastForward();
     }
+
 }

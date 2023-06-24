@@ -5,20 +5,22 @@ public class EnemyBusCompositeRoot : CompositeRoot
     [SerializeField] private Rigidbody _rigidbody;
     [SerializeField] private BusConfig _busConfig;
     [SerializeField] private Transform _raycastPoint;
+    [SerializeField] private Transform _passengersParent;
+    [SerializeField] private BusPassengerZone _passengersZone;
+    [SerializeField] private BusEntryPointTrigger _entryPointTrigger;
 
-    private BusMover _busMover;
+    private BusMover _mover;
     private EnemyBusInputSetUp _enemyBusInputSetUp;
     private RigidbodyMoveHandler _rigidbodyMoveHandler;
-
-
-    //set other requiered dependencies
+    private BusPassengers _passengersCollector;
 
     public override void Compose()
     {
         _rigidbodyMoveHandler = new RigidbodyMoveHandler(_rigidbody);
-        
-        _busMover = new BusMover(_busConfig.IdleSpeed, _busConfig.GasSpeed, _rigidbodyMoveHandler);
-        _enemyBusInputSetUp = new EnemyBusInputSetUp(_busMover, _raycastPoint);
+        _passengersCollector = new BusPassengers(_passengersParent, _passengersZone);
+        _entryPointTrigger.Init(_passengersCollector);
+        _mover = new BusMover(_busConfig.IdleSpeed, _busConfig.GasSpeed, _rigidbodyMoveHandler);
+        _enemyBusInputSetUp = new EnemyBusInputSetUp(_mover, _raycastPoint);
     }
 
     private void Awake()
@@ -39,6 +41,11 @@ public class EnemyBusCompositeRoot : CompositeRoot
     private void Update()
     {
         _enemyBusInputSetUp.Update();
+    }
+
+    private void FixedUpdate()
+    {
+        _mover.Move();
     }
 }
 

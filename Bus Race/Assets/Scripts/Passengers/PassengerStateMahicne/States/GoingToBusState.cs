@@ -12,7 +12,7 @@ public class GoingToBusState : BusInteractionState
     private float _minDistanceToBusTrigger = 0.5f;
     private float _maxDistanceToBusTrigger;
 
-    public GoingToBusState(StateMachine stateMachine, BusEntryPointTrigger busEntryPointTrigger, DefaultPassengerSetUp passenger, IMoveHandler moveHandler, float moveSpeed, float maxDistanceToBusTrigger) : base(stateMachine, busEntryPointTrigger, passenger.transform) 
+    public GoingToBusState(StateMachine stateMachine, DefaultPassengerSetUp passenger, IMoveHandler moveHandler, float moveSpeed, float maxDistanceToBusTrigger) : base(stateMachine, passenger.transform) 
     {
         _moveHandler = moveHandler;
         _passenger = passenger;
@@ -28,18 +28,18 @@ public class GoingToBusState : BusInteractionState
             StateMachine.SetState<WaitingForBusState>();
 
         if (GetDistanceToBusTrigger() <= _minDistanceToBusTrigger)
-            BusEntryPointTrigger.EnterBus(_passenger);
+            _passenger.BusEntryPointTrigger.EnterBus(_passenger);
     }
 
     private void MoveToBusTigger()
     {
-        Vector3 direction = (BusEntryPointTrigger.transform.position - PassengerTransform.position).normalized;
+        Vector3 direction = (_passenger.BusEntryPointTrigger.transform.position - PassengerTransform.position).normalized;
 
         _moveHandler.Move(direction * _moveSpeed);
     }
 
     private float GetDistanceToBusTrigger()
     {
-        return Vector3.Distance(BusEntryPointTrigger.transform.position, PassengerTransform.position);
+        return Vector3.Distance(_passenger.BusEntryPointTrigger.transform.position, PassengerTransform.position);
     }
 }

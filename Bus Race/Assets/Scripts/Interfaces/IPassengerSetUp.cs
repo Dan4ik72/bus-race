@@ -2,7 +2,7 @@
 
 public interface IPassengerSetUp
 {
-    public IPassengerSetUp Init(BusEntryPointTrigger butEntryPointTrigger, PassengerConfig passengerConfig);
+    public void Init(PassengerConfig passengerConfig);
 
     public void TakeEmptyBusCell(Transform place);
 

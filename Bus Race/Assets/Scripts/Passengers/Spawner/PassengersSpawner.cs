@@ -4,36 +4,15 @@ using UnityEngine;
 
 public class PassengersSpawner
 {
-    private BusEntryPointTrigger _busEntryPointTrigger;
+    private DefaultPassengerSetUp _defaultPassengerTemplate;
 
-    private DefaultPassengerSetUp _DefaultPassengerTemplate;
-
-    private PassengerConfig _defaultPassengerConfig;
-
-    private IReadOnlyList<SpawnZone> _spawnZones;
-
-    public PassengersSpawner(BusEntryPointTrigger busEntryPointTrigger, DefaultPassengerSetUp defaultPassegnerTemplate, PassengerConfig defaultPassengerConfing, IReadOnlyList<SpawnZone> spawnZones)
+    public PassengersSpawner(DefaultPassengerSetUp defaultPassegnerTemplate)
     {
-        _busEntryPointTrigger = busEntryPointTrigger;
-        _DefaultPassengerTemplate = defaultPassegnerTemplate;
-        _defaultPassengerConfig = defaultPassengerConfing;
-        _spawnZones = spawnZones;
+        _defaultPassengerTemplate = defaultPassegnerTemplate;
     }
 
-    public IPassengerSetUp SpawnAndInitDefaultPassegner(Transform spawnPlace, Transform parent = null)
+    public DefaultPassengerSetUp SpawnDefaultPassenger(Transform spawnPlace, Transform parent = null)
     {
-        return Object.Instantiate(_DefaultPassengerTemplate, spawnPlace.position, Quaternion.identity, parent).Init(_busEntryPointTrigger, _defaultPassengerConfig);
-    }
-
-    public void FillLevel()
-    {
-        foreach (var spawnZone in _spawnZones)
-            FillSpawnZone(spawnZone);
-    }
-
-    private void FillSpawnZone(SpawnZone spawnZone)
-    { 
-        foreach (var spawnPlace in spawnZone.GetSpawnPlaces())
-            SpawnAndInitDefaultPassegner(spawnPlace, spawnZone.CellsParent);
+        return Object.Instantiate(_defaultPassengerTemplate, spawnPlace.position, Quaternion.identity, parent);
     }
 }

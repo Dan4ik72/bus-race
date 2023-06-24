@@ -14,22 +14,27 @@ public class DefaultPassengerSetUp : MonoBehaviour, IPassengerSetUp
     private TakeEmptyBusCellState _takeEmptyBusCellState;
     private RidingOnBusState _ridingOnBusState;
 
-    public Transform GetTransform() => transform;
-
-    public IPassengerSetUp Init(BusEntryPointTrigger busEntryPointTrigger, PassengerConfig defaultPassengerConfig)
+    public void Init(PassengerConfig defaultPassengerConfig)
     {
-        _busEntryPointTrigger = busEntryPointTrigger;
         _defaultPassengerConfig = defaultPassengerConfig;
 
         SetStateMachineUp();
-
-        return this;
     }
+
+    public BusEntryPointTrigger BusEntryPointTrigger => _busEntryPointTrigger;
+
+    public Transform GetTransform() => transform;
 
     public void TakeEmptyBusCell(Transform cell)
     {
         _takeEmptyBusCellState.SetTargetCell(cell);
         _stateMachine.SetState<TakeEmptyBusCellState>();
+    }
+
+    public void SetBusEmptyPointTrigger(BusEntryPointTrigger busEntryPointTrigger)
+    {
+        _busEntryPointTrigger = busEntryPointTrigger;
+        _stateMachine.SetState<GoingToBusState>();
     }
 
     private void SetStateMachineUp()
@@ -38,10 +43,10 @@ public class DefaultPassengerSetUp : MonoBehaviour, IPassengerSetUp
 
         _stateMachine = new StateMachine();
 
-        _waitingForBusState = new WaitingForBusState(_stateMachine, _busEntryPointTrigger, transform, _defaultPassengerConfig.MaxDistanceToBusTrigger);
-        _goingToBusState = new GoingToBusState(_stateMachine, _busEntryPointTrigger, this, _moveHandler, _defaultPassengerConfig.SpeedToBus, _defaultPassengerConfig.MaxDistanceToBusTrigger);
-        _ridingOnBusState = new RidingOnBusState(_stateMachine, _busEntryPointTrigger, transform);
-        _takeEmptyBusCellState = new TakeEmptyBusCellState(_stateMachine, _busEntryPointTrigger, transform, _moveHandler, _defaultPassengerConfig.SpeedInBus, this);
+        _waitingForBusState = new WaitingForBusState(_stateMachine, this, _defaultPassengerConfig.MaxDistanceToBusTrigger);
+        _goingToBusState = new GoingToBusState(_stateMachine, this, _moveHandler, _defaultPassengerConfig.SpeedToBus, _defaultPassengerConfig.MaxDistanceToBusTrigger);
+        _ridingOnBusState = new RidingOnBusState(_stateMachine, transform);
+        _takeEmptyBusCellState = new TakeEmptyBusCellState(_stateMachine, transform, _moveHandler, _defaultPassengerConfig.SpeedInBus, this);
 
         _stateMachine.AddState(_waitingForBusState);
         _stateMachine.AddState(_goingToBusState);

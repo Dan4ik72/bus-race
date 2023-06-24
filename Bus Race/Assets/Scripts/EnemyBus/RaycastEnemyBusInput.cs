@@ -5,7 +5,7 @@ public class RaycastEnemyBusInput : IBusInput
 {
     private Transform _raycastPoint;
 
-    private float _raycastDistance;
+    private float _raycastDistance = 2f;
 
     private int _obstacleLayerMask;
 
@@ -15,19 +15,19 @@ public class RaycastEnemyBusInput : IBusInput
     public RaycastEnemyBusInput(Transform raycastPoint, int obstacleLayerMask)
     {
         _raycastPoint = raycastPoint;
-        _raycastDistance = obstacleLayerMask;
+        _obstacleLayerMask = obstacleLayerMask;
     }
 
     public void RaycastForward()
     {
-        RaycastHit hit;
+        Ray ray = new Ray(_raycastPoint.position, new Vector3(1, 0, 0));
 
-        if(Physics.Raycast(_raycastPoint.position, _raycastPoint.TransformDirection(Vector3.forward), out hit, _raycastDistance, _obstacleLayerMask))
+        if (Physics.Raycast(ray, _raycastDistance, 1<<_obstacleLayerMask))
         {
             IdlePressed?.Invoke();
             return;
         }
-
+        
         GasPressed?.Invoke();
     }
 }
