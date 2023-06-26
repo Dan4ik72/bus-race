@@ -1,21 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
-public class MobileBusInput : IBusInput, IPointerDownHandler, IPointerUpHandler
+public class MobileBusInput : PlayerBusInput, IPointerDownHandler, IPointerUpHandler
 {
-    public event UnityAction GasPressed;
-    public event UnityAction IdlePressed;
+    public MobileBusInput(Transform raycastPoint, float busStationIdleTime) : base(raycastPoint, busStationIdleTime) { }
+    
+    public void Update() => RaycastBusStation();
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        GasPressed?.Invoke();
+        if (IsStayingOnBusStation)
+            return;
+
+        OnGasPressed();
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        IdlePressed?.Invoke();
+        OnIdlePressed();
     }
 }

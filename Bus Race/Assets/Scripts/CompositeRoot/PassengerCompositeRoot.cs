@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PassengerCompositeRoot : CompositeRoot
 {
-    [SerializeField] private BusCompositeRoot _busCompositeRoot;
+    [SerializeField] private PlayerBusCompositeRoot _busCompositeRoot;
     [SerializeField] private DefaultPassengerSetUp _passengerPrefab;
     [SerializeField] private PassengerConfig _defaultPassengerConfig;
 

@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using UnityEngine.UIElements;
+﻿using System.Linq;
+using UnityEngine;
 
 public class BusStationSetUp : MonoBehaviour
 { 
@@ -10,12 +10,15 @@ public class BusStationSetUp : MonoBehaviour
     [SerializeField] private DefaultPassengerSetUp _defaultPassengerTemplate;
 
     private PassengersSpawner _spawner;
+    private BusStationPassengers _passengers;
 
     private void Awake()
     {
         _spawner = new PassengersSpawner(_defaultPassengerTemplate);
-
         _passengerSpawnZone.Init(_spawner, _passengerConfig);
-        _busCatcher.Init(_passengerSpawnZone);
+
+        _passengers = new BusStationPassengers(_passengerSpawnZone.Passengers.ToList());
+
+        _busCatcher.Init(_passengers);
     }
 }

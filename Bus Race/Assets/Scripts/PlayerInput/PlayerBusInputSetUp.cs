@@ -12,21 +12,23 @@ public class PlayerBusInputSetUp
 
     private IBusInput _currentInput;
 
-    public PlayerBusInputSetUp(BusMover busMover)
+    public PlayerBusInputSetUp(BusMover busMover, Transform raycastPoint, BusConfig config)
     {
         _busMover = busMover;
+
+        _mobileInput = new MobileBusInput(raycastPoint, config.BusStationIdleTime);
+        _desktopInput = new DesktopBusInput(raycastPoint, config.BusStationIdleTime);
+
+        _currentInput = SelectInputType();
+
+        _inputHandler = new BusInputHandler(_currentInput, _busMover);
     }
 
     public IBusInput CurrentInput => _currentInput;
 
     public void Awake()
     {
-        _mobileInput = new MobileBusInput();
-        _desktopInput = new DesktopBusInput();
-
-        _currentInput = SelectInputType();
-
-        _inputHandler = new BusInputHandler(_currentInput, _busMover);
+        
     }
 
     public void OnEnable()

@@ -2,9 +2,10 @@
 using System.Security.Cryptography;
 using UnityEngine;
 
-public class BusCompositeRoot : CompositeRoot
+public class PlayerBusCompositeRoot : CompositeRoot
 {
     [SerializeField] private Rigidbody _rigidbody;
+    [SerializeField] private Transform _raycastPoint;
     [SerializeField] private BusConfig _config;
     [SerializeField] private BusPassengerZone _passengerZone;
     [SerializeField] private BusEntryPointTrigger _entryPointTrigger;
@@ -30,7 +31,7 @@ public class BusCompositeRoot : CompositeRoot
         _entryPointTrigger.Init(_passegners);
         _moveHandler = new RigidbodyMoveHandler(_rigidbody);
         _mover = new BusMover(_config.IdleSpeed, _config.GasSpeed, _moveHandler);
-        _inputSetUp = new PlayerBusInputSetUp(_mover);
+        _inputSetUp = new PlayerBusInputSetUp(_mover, _raycastPoint, _config);
     }
 
     private void Awake()

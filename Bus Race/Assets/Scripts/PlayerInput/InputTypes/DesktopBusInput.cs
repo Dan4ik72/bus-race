@@ -3,17 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class DesktopBusInput : IBusInput
+public class DesktopBusInput : PlayerBusInput, IBusInput
 {
-    public event UnityAction GasPressed;
-    public event UnityAction IdlePressed;
-
+    public DesktopBusInput(Transform raycastPoint, float busStationIdleTime) : base(raycastPoint, busStationIdleTime) { }
+    
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.W))
-            GasPressed?.Invoke();
+        RaycastBusStation();
 
+        if (IsStayingOnBusStation)
+            return;
+
+        if (Input.GetKeyDown(KeyCode.W))
+            OnGasPressed();
         if (Input.GetKeyUp(KeyCode.W))
-            IdlePressed?.Invoke();
+            OnIdlePressed();
     }
 }

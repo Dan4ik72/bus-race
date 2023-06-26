@@ -20,7 +20,7 @@ public class EnemyBusCompositeRoot : CompositeRoot
         _passengersCollector = new BusPassengers(_passengersParent, _passengersZone);
         _entryPointTrigger.Init(_passengersCollector);
         _mover = new BusMover(_busConfig.IdleSpeed, _busConfig.GasSpeed, _rigidbodyMoveHandler);
-        _enemyBusInputSetUp = new EnemyBusInputSetUp(_mover, _raycastPoint);
+        _enemyBusInputSetUp = new EnemyBusInputSetUp(_mover, _raycastPoint, _busConfig);
     }
 
     private void Awake()

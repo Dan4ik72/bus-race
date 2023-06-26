@@ -14,6 +14,8 @@ public class DefaultPassengerSetUp : MonoBehaviour, IPassengerSetUp
     private TakeEmptyBusCellState _takeEmptyBusCellState;
     private RidingOnBusState _ridingOnBusState;
 
+    private bool _isInBus = false;
+
     public void Init(PassengerConfig defaultPassengerConfig)
     {
         _defaultPassengerConfig = defaultPassengerConfig;
@@ -22,6 +24,7 @@ public class DefaultPassengerSetUp : MonoBehaviour, IPassengerSetUp
     }
 
     public BusEntryPointTrigger BusEntryPointTrigger => _busEntryPointTrigger;
+    public bool IsInBus => _isInBus;
 
     public Transform GetTransform() => transform;
 
@@ -29,6 +32,7 @@ public class DefaultPassengerSetUp : MonoBehaviour, IPassengerSetUp
     {
         _takeEmptyBusCellState.SetTargetCell(cell);
         _stateMachine.SetState<TakeEmptyBusCellState>();
+        _isInBus = true;
     }
 
     public void SetBusEmptyPointTrigger(BusEntryPointTrigger busEntryPointTrigger)

@@ -13,8 +13,12 @@ public class BusConfig : ScriptableObject
     [SerializeField] private float _idleSpeed;
     [SerializeField] private float _gasSpeed;
 
+    [Header("Bus Station Interactions")]
+    [SerializeField] private float _busStationIdleTime = 1f;
+
     public int StartCapacity => _startCapacity;
 
     public float GasSpeed => _gasSpeed;
     public float IdleSpeed => _idleSpeed;
+    public float BusStationIdleTime => _busStationIdleTime;
 }

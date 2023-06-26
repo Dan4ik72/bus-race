@@ -20,16 +20,13 @@ public class PassengerSpawnZone : MonoBehaviour
     {
         _spawner = spawner;
         _passengerConfig = passengerConfig;
+
+        CreateGrid();
+        SpawnPassengers();
     }
 
     public IReadOnlyList<DefaultPassengerSetUp> Passengers => _passengers;
 
-    private void Start()
-    {
-        CreateGrid();
-        SpawnPassengers();
-    }
-    
     private void CreateGrid()
     {
         _grid = new Grid(_cellsParent, _cellPrefab, _gridSize, 0.25f).Create();
