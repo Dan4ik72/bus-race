@@ -26,11 +26,6 @@ public class PlayerBusInputSetUp
 
     public IBusInput CurrentInput => _currentInput;
 
-    public void Awake()
-    {
-        
-    }
-
     public void OnEnable()
     {
         _inputHandler.Enable();
@@ -44,6 +39,7 @@ public class PlayerBusInputSetUp
     public void Update()
     {
         _desktopInput.Update();
+        _mobileInput.Update();
     }
 
     private IBusInput SelectInputType()

@@ -34,11 +34,6 @@ public class PlayerBusCompositeRoot : CompositeRoot
         _inputSetUp = new PlayerBusInputSetUp(_mover, _raycastPoint, _config);
     }
 
-    private void Awake()
-    {
-        _inputSetUp.Awake();      
-    }
-
     private void Start()
     {
         _mover.SetIdleSpeed();
