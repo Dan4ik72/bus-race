@@ -1,5 +1,111 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2875798204832139585
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 780000334871059844}
+  - component: {fileID: 7222954741939841302}
+  - component: {fileID: 3800019410905651819}
+  - component: {fileID: 6527908518661721323}
+  m_Layer: 9
+  m_Name: SpawnZone (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &780000334871059844
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2875798204832139585}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -11.53, y: 9.005739, z: 6.07}
+  m_LocalScale: {x: 0.11, y: 1, z: 1.04}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5979852000778474782}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &7222954741939841302
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2875798204832139585}
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &3800019410905651819
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2875798204832139585}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &6527908518661721323
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2875798204832139585}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &4234104727424477097
 GameObject:
   m_ObjectHideFlags: 0
@@ -13,7 +119,7 @@ GameObject:
   - component: {fileID: 2664214322790679646}
   - component: {fileID: 8578178688410044482}
   - component: {fileID: 7905977266632229444}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SpawnZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121,7 +227,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cellPrefab: {fileID: 5499880034616317657, guid: 44943f6429716d44a8e40ab7d2ca5972, type: 3}
   _cellsParent: {fileID: 8165685113167957448}
-  _gridSize: {x: 4, y: 1}
+  _gridSize: {x: 3, y: 1}
 --- !u!1 &5303159467257300577
 GameObject:
   m_ObjectHideFlags: 0
@@ -132,7 +238,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4915077844082307397}
   - component: {fileID: 5352204195955360851}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BusCatcher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -167,6 +273,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _busEntryPointTriggerLayer: 3
+  _busStationStopTrigger: {fileID: 780000334871059844}
 --- !u!1 &5489696352329322122
 GameObject:
   m_ObjectHideFlags: 0
@@ -176,7 +283,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8165685113167957448}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CellsParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -208,7 +315,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5979852000778474782}
   - component: {fileID: 1090961448286531221}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SpawnZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -230,8 +337,9 @@ Transform:
   - {fileID: 3890407246890108537}
   - {fileID: 8165685113167957448}
   - {fileID: 4915077844082307397}
+  - {fileID: 780000334871059844}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1090961448286531221
 MonoBehaviour:
