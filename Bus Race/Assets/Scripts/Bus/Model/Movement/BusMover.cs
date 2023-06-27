@@ -30,7 +30,7 @@ public class BusMover
 
     public void Move()
     {
-        Vector3 moveVector = _direction * _currentSpeed;
-        _moveHandler.Move(moveVector);
+        Vector3 moveVector = _direction;
+        _moveHandler.Move(moveVector, _currentSpeed);
     }
 }

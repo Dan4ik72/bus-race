@@ -49,7 +49,7 @@ public class DefaultPassengerSetUp : MonoBehaviour, IPassengerSetUp
 
         _waitingForBusState = new WaitingForBusState(_stateMachine, this, _defaultPassengerConfig.MaxDistanceToBusTrigger);
         _goingToBusState = new GoingToBusState(_stateMachine, this, _moveHandler, _defaultPassengerConfig.SpeedToBus, _defaultPassengerConfig.MaxDistanceToBusTrigger);
-        _ridingOnBusState = new RidingOnBusState(_stateMachine, transform);
+        _ridingOnBusState = new RidingOnBusState(_stateMachine, transform, _moveHandler);
         _takeEmptyBusCellState = new TakeEmptyBusCellState(_stateMachine, transform, _moveHandler, _defaultPassengerConfig.SpeedInBus, this);
 
         _stateMachine.AddState(_waitingForBusState);

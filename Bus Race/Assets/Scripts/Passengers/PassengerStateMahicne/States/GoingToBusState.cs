@@ -35,8 +35,8 @@ public class GoingToBusState : BusInteractionState
     {
         Vector3 direction = (_passenger.BusEntryPointTrigger.transform.position - PassengerTransform.position).normalized;
         
-        _moveHandler.Move(direction * _moveSpeed);
-        _moveHandler.Rotate(_passenger.BusEntryPointTrigger.transform.position, 400);
+        _moveHandler.Move(direction, _moveSpeed);
+        _moveHandler.Rotate(direction, 50);
     }
 
     private float GetDistanceToBusTrigger()

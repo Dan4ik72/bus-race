@@ -8,7 +8,9 @@ public class PassengerSpawnZone : MonoBehaviour
     [SerializeField] private Transform _cellsParent;
 
     [SerializeField] private Vector2 _gridSize;
-    
+
+    private float _passengerDefaultYRotation = -90;
+
     private Grid _grid;
 
     private PassengersSpawner _spawner;
@@ -38,6 +40,7 @@ public class PassengerSpawnZone : MonoBehaviour
         {
             DefaultPassengerSetUp createdPassenger = _spawner.SpawnDefaultPassenger(spawnPlace,_cellsParent);
             createdPassenger.Init(_passengerConfig);
+            createdPassenger.transform.rotation = Quaternion.Euler(createdPassenger.transform.rotation.x, _passengerDefaultYRotation, createdPassenger.transform.rotation.z);
             _passengers.Add(createdPassenger);
         }
     }

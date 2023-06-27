@@ -42,6 +42,6 @@ public class TakeEmptyBusCellState : BusInteractionState
         Vector3 direction = targetPlace.position - PassengerTransform.position;
         direction.Normalize();
 
-        _moveHandler.Move(direction * _speed);
+        _moveHandler.Move(direction , _speed);
     }
 }

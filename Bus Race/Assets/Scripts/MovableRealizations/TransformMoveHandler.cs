@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 public class TransformMoveHandler : IMoveHandler
@@ -12,15 +13,13 @@ public class TransformMoveHandler : IMoveHandler
         _transform = transform;
     }
 
-    public void Move(Vector3 direction)
+    public void Move(Vector3 direction, float speed)
     {
-        _transform.Translate(direction * Time.deltaTime);
+        _transform.position += direction * speed * Time.deltaTime;
     }
 
     public void Rotate(Vector3 rotation, float speed)
     {
-        Quaternion toRotation = Quaternion.LookRotation(rotation);
-
-        _transform.rotation = Quaternion.Lerp(_transform.rotation , toRotation, speed * Time.deltaTime);
+        _transform.rotation = new Quaternion(_transform.rotation.x, Quaternion.Slerp(_transform.rotation, Quaternion.LookRotation(rotation), speed * Time.deltaTime).y, _transform.rotation.z, _transform.rotation.w);
     }
 }
