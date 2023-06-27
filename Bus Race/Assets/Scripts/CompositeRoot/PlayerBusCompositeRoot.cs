@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Security.Cryptography;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerBusCompositeRoot : CompositeRoot
 {
@@ -10,6 +8,7 @@ public class PlayerBusCompositeRoot : CompositeRoot
     [SerializeField] private BusPassengerZone _passengerZone;
     [SerializeField] private BusEntryPointTrigger _entryPointTrigger;
     [SerializeField] private Transform _passengerParent;
+    [SerializeField] private GameCompositeRoot _gameCompositeRoot;
 
     private BusMover _mover;
     private Bus _bus;
@@ -41,12 +40,12 @@ public class PlayerBusCompositeRoot : CompositeRoot
 
     private void OnEnable()
     {
-        _inputSetUp.OnEnable();
+        _gameCompositeRoot.GameLoopSetUp.MainGameCycleStarted += _inputSetUp.Enable;
     }
 
     private void OnDisable()
     {
-        _inputSetUp.OnDisable();
+        _gameCompositeRoot.GameLoopSetUp.MainGameCycleStarted  -= _inputSetUp.Enable;
     }
 
     private void Update()

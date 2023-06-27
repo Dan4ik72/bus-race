@@ -26,12 +26,12 @@ public class PlayerBusInputSetUp
 
     public IBusInput CurrentInput => _currentInput;
 
-    public void OnEnable()
+    public void Enable()
     {
         _inputHandler.Enable();
     }
 
-    public void OnDisable()
+    public void Disable()
     {
         _inputHandler.Disable();
     }

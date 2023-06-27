@@ -7,7 +7,7 @@ public class BusCatcher : MonoBehaviour
     [SerializeField] private Transform _busStationStopTrigger;
 
     private float _maxDistanceToBus = 5f;
-    private float _cooldownToArrivedBus = 0.8f;
+    private float _cooldownToArrivedBus = 0.7f;
 
     private Collider[] _overlapHitColliders;
 

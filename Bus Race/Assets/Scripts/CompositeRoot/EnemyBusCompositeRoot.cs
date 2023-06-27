@@ -8,6 +8,7 @@ public class EnemyBusCompositeRoot : CompositeRoot
     [SerializeField] private Transform _passengersParent;
     [SerializeField] private BusPassengerZone _passengersZone;
     [SerializeField] private BusEntryPointTrigger _entryPointTrigger;
+    [SerializeField] private GameCompositeRoot _gameCopmositeRoot;
 
     private BusMover _mover;
     private EnemyBusInputSetUp _enemyBusInputSetUp;
@@ -23,18 +24,14 @@ public class EnemyBusCompositeRoot : CompositeRoot
         _enemyBusInputSetUp = new EnemyBusInputSetUp(_mover, _raycastPoint, _busConfig);
     }
 
-    private void Awake()
-    {
-        _enemyBusInputSetUp.Awake();
-    }
-
     private void OnEnable()
     {
-        _enemyBusInputSetUp.OnEnable();        
+        _gameCopmositeRoot.GameLoopSetUp.MainGameCycleStarted += _enemyBusInputSetUp.Enable;
     }
 
     private void OnDisable()
     {
+        _gameCopmositeRoot.GameLoopSetUp.MainGameCycleStarted -= _enemyBusInputSetUp.Enable;
         _enemyBusInputSetUp.OnDisable();
     }
 

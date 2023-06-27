@@ -16,18 +16,16 @@ public class EnemyBusInputSetUp
         _busMover = busMover;
         _raycastPoint = raycastPoint;
         _busConfig = busConfig;
-    }
 
-    public void Awake()
-    {
         _input = new RaycastEnemyBusInput(_raycastPoint, _busConfig.BusStationIdleTime, _obstacleLayer);
         _inputHandler = new BusInputHandler(_input, _busMover);
     }
 
-    public void OnEnable()
+    public void Enable()
     {
         _inputHandler.Enable();
     }
+
 
     public void OnDisable()
     {
