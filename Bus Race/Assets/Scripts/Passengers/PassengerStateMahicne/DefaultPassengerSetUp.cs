@@ -2,7 +2,11 @@ using UnityEngine;
 
 public class DefaultPassengerSetUp : MonoBehaviour, IPassengerSetUp
 {
+    [SerializeField] private Animator _animator;
+
     private PassengerConfig _defaultPassengerConfig;
+
+    private PassengerAnimationsPresenter _animationPresenter;
 
     private StateMachine _stateMachine;
     private BusEntryPointTrigger _busEntryPointTrigger;
@@ -20,7 +24,7 @@ public class DefaultPassengerSetUp : MonoBehaviour, IPassengerSetUp
     {
         _defaultPassengerConfig = defaultPassengerConfig;
 
-        SetStateMachineUp();
+        SetUpServcies();
     }
 
     public BusEntryPointTrigger BusEntryPointTrigger => _busEntryPointTrigger;
@@ -41,7 +45,16 @@ public class DefaultPassengerSetUp : MonoBehaviour, IPassengerSetUp
         _stateMachine.SetState<GoingToBusState>();
     }
 
-    private void SetStateMachineUp()
+    private void SetUpServcies()
+    {
+        SetUpStateMachine();
+
+        var animationHandler = new PassengerAnimationsHandler(_animator);
+
+        _animationPresenter = new PassengerAnimationsPresenter(animationHandler, _waitingForBusState, _goingToBusState, _takeEmptyBusCellState, _ridingOnBusState);
+    }
+
+    private void SetUpStateMachine()
     {
         _moveHandler = new TransformMoveHandler(transform);
 
@@ -51,6 +64,8 @@ public class DefaultPassengerSetUp : MonoBehaviour, IPassengerSetUp
         _goingToBusState = new GoingToBusState(_stateMachine, this, _moveHandler, _defaultPassengerConfig.SpeedToBus, _defaultPassengerConfig.MaxDistanceToBusTrigger);
         _ridingOnBusState = new RidingOnBusState(_stateMachine, transform, _moveHandler);
         _takeEmptyBusCellState = new TakeEmptyBusCellState(_stateMachine, transform, _moveHandler, _defaultPassengerConfig.SpeedInBus, this);
+
+
 
         _stateMachine.AddState(_waitingForBusState);
         _stateMachine.AddState(_goingToBusState);

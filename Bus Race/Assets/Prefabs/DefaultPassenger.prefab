@@ -999,13 +999,18 @@ Animator:
   m_GameObject: {fileID: 6242720404934332770}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 4bf76148838cc484cacc30fdcc22121c, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: eea4ccc3341a0974299bf194700093c5, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_WarningMessage: 
+  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
+    are already bound by a Humanoid avatar. These transforms can only be changed
+    by Humanoid clips.\n\tTransform 'spine_02'\n\tTransform 'thigh_l'\n\tTransform
+    'calf_l'\n\tTransform 'spine_01'\n\tTransform 'pelvis'\n\tTransform 'root'\n\tTransform
+    'clavicle_r'\n\tTransform 'hand_l'\n\tTransform 'lowerarm_l'\n\tTransform 'lowerarm_r'\n\tand
+    more ...\n\tFrom animation clip 'Waving'"
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
@@ -1755,6 +1760,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ff94d70783799d44a29179dd771d662, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animator: {fileID: 6242720404941628106}
 --- !u!136 &3996493222479257849
 CapsuleCollider:
   m_ObjectHideFlags: 0

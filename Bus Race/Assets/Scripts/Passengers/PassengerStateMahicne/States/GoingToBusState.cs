@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GoingToBusState : BusInteractionState
 {
@@ -12,12 +13,19 @@ public class GoingToBusState : BusInteractionState
     private float _minDistanceToBusTrigger = 0.5f;
     private float _maxDistanceToBusTrigger;
 
+    public event UnityAction GoingToBusStateEntered;
+
     public GoingToBusState(StateMachine stateMachine, DefaultPassengerSetUp passenger, IMoveHandler moveHandler, float moveSpeed, float maxDistanceToBusTrigger) : base(stateMachine, passenger.transform) 
     {
         _moveHandler = moveHandler;
         _passenger = passenger;
         _moveSpeed = moveSpeed;
         _maxDistanceToBusTrigger = maxDistanceToBusTrigger;
+    }
+
+    public override void Enter()
+    {
+        GoingToBusStateEntered?.Invoke();
     }
 
     public override void Update()

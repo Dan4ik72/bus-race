@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class RidingOnBusState : BusInteractionState
 {
     private float _yPassengerRotation = 90;
 
     private IMoveHandler _moveHandler;
+
+    public event UnityAction RidingOnBusStateEntered;
 
     public RidingOnBusState(StateMachine stateMachine, Transform passengerTransform, IMoveHandler moveHandler) : base(stateMachine, passengerTransform) 
     {
@@ -15,18 +18,8 @@ public class RidingOnBusState : BusInteractionState
 
     public override void Enter()
     {
-        Coroutines.StartRoutine(SetPassengerBusRotation());
-    }
+        RidingOnBusStateEntered?.Invoke();
 
-    private IEnumerator SetPassengerBusRotation()
-    {
-        var targetLocalEulerAngules = new Vector3(PassengerTransform.localEulerAngles.x, _yPassengerRotation, PassengerTransform.localEulerAngles.z);
-
-        while (PassengerTransform.localEulerAngles.y - targetLocalEulerAngules.y > Mathf.Abs(5))
-        {
-            _moveHandler.Rotate((targetLocalEulerAngules), 40);
-
-            yield return null;
-        }
+        PassengerTransform.transform.rotation = Quaternion.Euler(PassengerTransform.rotation.x, _yPassengerRotation, PassengerTransform.rotation.z);
     }
 }

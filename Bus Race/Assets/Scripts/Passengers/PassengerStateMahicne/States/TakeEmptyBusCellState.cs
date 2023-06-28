@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class TakeEmptyBusCellState : BusInteractionState
 {
@@ -12,6 +11,8 @@ public class TakeEmptyBusCellState : BusInteractionState
     private IMoveHandler _moveHandler;
     private DefaultPassengerSetUp _passenger;
 
+    public event UnityAction TakeEmptyBusCellStateEntered;
+
     public TakeEmptyBusCellState(StateMachine stateMachine, Transform passengerTransform, IMoveHandler moveHandler, float speed,DefaultPassengerSetUp passenger) : base(stateMachine, passengerTransform) 
     {
         _moveHandler = moveHandler;
@@ -22,6 +23,11 @@ public class TakeEmptyBusCellState : BusInteractionState
     public void SetTargetCell(Transform targetCell)
     {
         _targetPlace = targetCell;
+    }
+
+    public override void Enter()
+    {
+        TakeEmptyBusCellStateEntered?.Invoke();
     }
 
     public override void Update()
