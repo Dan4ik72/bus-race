@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class BusPassengerZone : MonoBehaviour
 {
     [SerializeField] private Transform _gridParent;
+    [SerializeField] private Transform _rightWall;
     [SerializeField] private BusPlaceCell _cellPrefab;
     [SerializeField] private Vector2 _expandValue;
 
@@ -17,6 +19,7 @@ public class BusPassengerZone : MonoBehaviour
     private float _gridRandomness = 0.1f;
 
     public event UnityAction GridExpanded;
+    public event UnityAction<Vector2> GridExpandedWithValue;
 
     private void Start() => CreateGrid();
 
@@ -38,16 +41,17 @@ public class BusPassengerZone : MonoBehaviour
     private void Expand()
     {
         transform.localScale = new Vector3(transform.localScale.x + _expandValue.x, transform.localScale.y, transform.localScale.z + _expandValue.y);
-        _gridParent.transform.position = new Vector3(_gridParent.transform.position.x - _expandValue.x / 2, _gridParent.transform.position.y, _gridParent.transform.position.z - _expandValue.y / 2);
+        _gridParent.position = new Vector3(_gridParent.transform.position.x - _expandValue.x / 2, _gridParent.transform.position.y, _gridParent.transform.position.z - _expandValue.y / 2);
         _grid.Reset();
         CreateGrid();
 
         GridExpanded?.Invoke();
+        GridExpandedWithValue?.Invoke(_expandValue);
     }
 
     private void CreateGrid()
     {
-        _grid = new Grid(_gridParent,_cellPrefab, new Vector2(transform.localScale.x, transform.localScale.z), _gridRandomness).Create();
+        _grid = new Grid(_gridParent,_cellPrefab, new Vector2(transform.localScale.x - 1, transform.localScale.z), _gridRandomness).Create();
 
         _availablePlaces = _grid.Cells.ToList();
         _busyPlaces.Clear();

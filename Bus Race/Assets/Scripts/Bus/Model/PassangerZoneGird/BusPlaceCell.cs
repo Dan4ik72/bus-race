@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class BusPlaceCell : MonoBehaviour, ICell
 {
-    public float Width { get; } = 1;
-    public float Heigh { get; } = 1;
+    public float Width { get; } = 0.7f;
+    public float Heigh { get; } = 0.7f;
 
     public Transform GetTransform() => transform;
 }

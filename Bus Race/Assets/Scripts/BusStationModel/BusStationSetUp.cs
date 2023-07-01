@@ -19,6 +19,6 @@ public class BusStationSetUp : MonoBehaviour
 
         _passengers = new BusStationPassengers(_passengerSpawnZone.Passengers.ToList());
 
-        _busCatcher.Init(_passengers);
+        _busCatcher.Init(_passengers, _passengerConfig.GoingToBusDelay);
     }
 }

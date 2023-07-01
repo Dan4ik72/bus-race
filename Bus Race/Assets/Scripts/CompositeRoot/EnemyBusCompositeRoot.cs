@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Runtime.CompilerServices;
+using UnityEngine;
 
 public class EnemyBusCompositeRoot : CompositeRoot
 {
@@ -9,10 +10,18 @@ public class EnemyBusCompositeRoot : CompositeRoot
     [SerializeField] private BusPassengerZone _passengersZone;
     [SerializeField] private BusEntryPointTrigger _entryPointTrigger;
     [SerializeField] private GameCompositeRoot _gameCopmositeRoot;
+    
+    [Header("Bus Parts")]
+    [SerializeField] private Transform _rightWall;
+    [SerializeField] private Transform _leftWall;
+    [SerializeField] private Transform _backWall;
+    [SerializeField] private Transform _frontWall;
+    
 
     private BusMover _mover;
     private EnemyBusInputSetUp _enemyBusInputSetUp;
     private RigidbodyMoveHandler _rigidbodyMoveHandler;
+    private BusPartsExpandHandler _partsExpandedHandler;
     private BusPassengers _passengersCollector;
 
     public override void Compose()
@@ -22,17 +31,22 @@ public class EnemyBusCompositeRoot : CompositeRoot
         _entryPointTrigger.Init(_passengersCollector);
         _mover = new BusMover(_busConfig.IdleSpeed, _busConfig.GasSpeed, _rigidbodyMoveHandler);
         _enemyBusInputSetUp = new EnemyBusInputSetUp(_mover, _raycastPoint, _busConfig);
+        _partsExpandedHandler = new BusPartsExpandHandler(_rightWall, _leftWall, _backWall, _frontWall);
     }
 
     private void OnEnable()
     {
         _gameCopmositeRoot.GameLoopSetUp.MainGameCycleStarted += _enemyBusInputSetUp.Enable;
+
+        _passengersZone.GridExpandedWithValue += _partsExpandedHandler.OnExpand;
     }
 
     private void OnDisable()
     {
         _gameCopmositeRoot.GameLoopSetUp.MainGameCycleStarted -= _enemyBusInputSetUp.Enable;
         _enemyBusInputSetUp.OnDisable();
+
+        _passengersZone.GridExpandedWithValue -= _partsExpandedHandler.OnExpand;
     }
 
     private void Update()

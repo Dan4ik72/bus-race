@@ -7,15 +7,16 @@ public class BusCatcher : MonoBehaviour
     [SerializeField] private Transform _busStationStopTrigger;
 
     private float _maxDistanceToBus = 5f;
-    private float _cooldownToArrivedBus = 0.7f;
+    private float _goingToBusDelay;
 
     private Collider[] _overlapHitColliders;
 
     private BusStationPassengers _passengers;
 
-    public void Init(BusStationPassengers passengers)
+    public void Init(BusStationPassengers passengers, float goingToBusDelay)
     {
         _passengers = passengers;
+        _goingToBusDelay = goingToBusDelay;
 
         _passengers.BusStationEmpty += Disable;
     }
@@ -49,7 +50,7 @@ public class BusCatcher : MonoBehaviour
 
     private IEnumerator SetBusEmptyPointTriggerToPassengersDelayed(BusEntryPointTrigger busEntryPointTrigger)
     {
-        yield return new WaitForSecondsRealtime(_cooldownToArrivedBus);
+        yield return new WaitForSecondsRealtime(_goingToBusDelay);
 
         SetBusEmptyPointTriggerToPassengers(busEntryPointTrigger);
     }

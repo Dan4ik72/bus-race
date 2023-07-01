@@ -42,9 +42,9 @@ public class GoingToBusState : BusInteractionState
     private void MoveToBusTigger()
     {
         Vector3 direction = (_passenger.BusEntryPointTrigger.transform.position - PassengerTransform.position).normalized;
-        
+
         _moveHandler.Move(direction, _moveSpeed);
-        _moveHandler.Rotate(direction, 50);
+        _moveHandler.Rotate(direction, 100);
     }
 
     private float GetDistanceToBusTrigger()
