@@ -15,5 +15,5 @@ MonoBehaviour:
   _speedToBus: 3
   _speedInBus: 5
   _maxDistanceToBusTrigger: 10
-  _goingToBusDelay: 0.8
+  _goingToBusDelay: 0
   _busFareAmount: 30

@@ -7,6 +7,7 @@ using UnityEngine.Events;
 public class RaycastEnemyBusInput : IBusInput
 {
     private Transform _raycastPoint;
+    private BusEntryPointTrigger _entryPointTrigger;
 
     private float _raycastDistance = 2f;
 
@@ -20,11 +21,12 @@ public class RaycastEnemyBusInput : IBusInput
     public event UnityAction GasPressed;
     public event UnityAction IdlePressed;
 
-    public RaycastEnemyBusInput(Transform raycastPoint, float busStationIdleTime ,int obstacleLayerMask)
+    public RaycastEnemyBusInput(Transform raycastPoint,BusEntryPointTrigger busEntryPointTrigger, float busStationIdleTime ,int obstacleLayerMask)
     {
         _raycastPoint = raycastPoint;
         _obstacleLayer = obstacleLayerMask;
         _busStationIdleTime = busStationIdleTime;
+        _entryPointTrigger = busEntryPointTrigger;
     }
 
     public void Move()
@@ -60,7 +62,11 @@ public class RaycastEnemyBusInput : IBusInput
         
         if(Physics.Raycast(ray, out hit ,_raycastDistance, 1<<_busStationLayer))
         {
-            Coroutines.StartRoutine(StartBusStationTimer());   
+            if (hit.collider.TryGetComponent(out BusCatcher busCatcher))
+            {
+                busCatcher.OnBusArrived(_entryPointTrigger);
+                Coroutines.StartRoutine(StartBusStationTimer());
+            }
         }
     }
 

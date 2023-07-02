@@ -11,13 +11,13 @@ public class EnemyBusInputSetUp
     private Transform _raycastPoint;
     private int _obstacleLayer = 8;
 
-    public EnemyBusInputSetUp(BusMover busMover, Transform raycastPoint, BusConfig busConfig)
+    public EnemyBusInputSetUp(BusMover busMover, Transform raycastPoint, BusConfig busConfig, BusEntryPointTrigger entryPointTrigger)
     {
         _busMover = busMover;
         _raycastPoint = raycastPoint;
         _busConfig = busConfig;
 
-        _input = new RaycastEnemyBusInput(_raycastPoint, _busConfig.BusStationIdleTime, _obstacleLayer);
+        _input = new RaycastEnemyBusInput(_raycastPoint, entryPointTrigger, _busConfig.BusStationIdleTime, _obstacleLayer);
         _inputHandler = new BusInputHandler(_input, _busMover);
     }
 
