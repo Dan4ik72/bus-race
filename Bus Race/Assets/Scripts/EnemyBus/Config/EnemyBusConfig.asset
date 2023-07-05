@@ -15,4 +15,4 @@ MonoBehaviour:
   _startCapacity: 5
   _idleSpeed: 0
   _gasSpeed: 400
-  _busStationIdleTime: 1.3
+  _busStationIdleTime: 1.5

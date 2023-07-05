@@ -1,9 +1,9 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class MobileBusInput : PlayerBusInput, IPointerDownHandler, IPointerUpHandler
+public class MobileBusInput : PlayerBusInput, IBusInput, IPointerDownHandler, IPointerUpHandler
 {
-    public MobileBusInput(Transform raycastPoint, float busStationIdleTime) : base(raycastPoint, busStationIdleTime) { }
+    public MobileBusInput(Transform raycastPoint, BusEntryPointTrigger busEntryPointTrigger,float busStationIdleTime) : base(raycastPoint, busEntryPointTrigger ,busStationIdleTime) { }
     
     public void Update() => RaycastBusStation();
 

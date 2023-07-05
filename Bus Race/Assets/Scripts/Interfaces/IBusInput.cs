@@ -7,4 +7,6 @@ public interface IBusInput
 {
     public event UnityAction GasPressed;
     public event UnityAction IdlePressed;
+
+    void Update();
 }

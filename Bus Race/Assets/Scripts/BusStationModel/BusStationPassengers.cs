@@ -19,7 +19,7 @@ public class BusStationPassengers
     {
         foreach (var passenger in _passengers)
         {
-            passenger.SetBusEmptyPointTrigger(busEmptyPointTrigger);
+            passenger.SetGoingToBusTtate(busEmptyPointTrigger);
         }
 
         _passengers.Clear();

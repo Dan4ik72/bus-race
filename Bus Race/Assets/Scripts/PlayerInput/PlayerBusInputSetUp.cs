@@ -9,15 +9,16 @@ public class PlayerBusInputSetUp
     private BusInputHandler _inputHandler;
     private MobileBusInput _mobileInput;
     private DesktopBusInput _desktopInput;
+    private GameEndingInput _gameEndingInput;
 
     private IBusInput _currentInput;
 
-    public PlayerBusInputSetUp(BusMover busMover, Transform raycastPoint, BusConfig config)
+    public PlayerBusInputSetUp(BusMover busMover, BusEntryPointTrigger busEntryPointTrigger,Transform raycastPoint, BusConfig config)
     {
         _busMover = busMover;
 
-        _mobileInput = new MobileBusInput(raycastPoint, config.BusStationIdleTime);
-        _desktopInput = new DesktopBusInput(raycastPoint, config.BusStationIdleTime);
+        _mobileInput = new MobileBusInput(raycastPoint, busEntryPointTrigger, config.BusStationIdleTime);
+        _desktopInput = new DesktopBusInput(raycastPoint, busEntryPointTrigger, config.BusStationIdleTime);
 
         _currentInput = SelectInputType();
 
@@ -25,6 +26,16 @@ public class PlayerBusInputSetUp
     }
 
     public IBusInput CurrentInput => _currentInput;
+
+    public void SetGameEndingInputType()
+    {
+        _gameEndingInput = new GameEndingInput();
+
+        _currentInput = _gameEndingInput;
+
+        _inputHandler.SetNewInput(_gameEndingInput);
+        _gameEndingInput.Enter();
+    }
 
     public void Enable()
     {
@@ -38,8 +49,7 @@ public class PlayerBusInputSetUp
 
     public void Update()
     {
-        _desktopInput.Update();
-        _mobileInput.Update();
+        _currentInput.Update();
     }
 
     private IBusInput SelectInputType()

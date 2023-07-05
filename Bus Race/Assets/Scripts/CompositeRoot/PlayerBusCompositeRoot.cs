@@ -8,6 +8,7 @@ public class PlayerBusCompositeRoot : CompositeRoot
     [SerializeField] private BusPassengerZone _passengerZone;
     [SerializeField] private BusEntryPointTrigger _entryPointTrigger;
     [SerializeField] private Transform _passengerParent;
+    [SerializeField] private ModifiersCatcher _modifiersTrigger;
     [SerializeField] private GameCompositeRoot _gameCompositeRoot;
 
     [Header("Bus Parts Transform")]
@@ -38,7 +39,24 @@ public class PlayerBusCompositeRoot : CompositeRoot
         _entryPointTrigger.Init(_passegners);
         _moveHandler = new RigidbodyMoveHandler(_rigidbody);
         _mover = new BusMover(_config.IdleSpeed, _config.GasSpeed, _moveHandler);
-        _inputSetUp = new PlayerBusInputSetUp(_mover, _raycastPoint, _config);
+        _inputSetUp = new PlayerBusInputSetUp(_mover, _entryPointTrigger, _raycastPoint, _config);
+        _modifiersTrigger.Init(_entryPointTrigger, _passegners);
+    }
+
+    private void SubscribeEvents()
+    {
+        _gameCompositeRoot.GameLoopSetUp.MainGameCycleStarted += _inputSetUp.Enable;
+        _gameCompositeRoot.GameLoopSetUp.GameEndingStateStarted += _inputSetUp.SetGameEndingInputType;
+        
+        _passengerZone.GridExpandedWithValue += _partsExpandHandler.OnExpand;
+    }
+
+    private void UnsubscribeEvents()
+    {
+        _gameCompositeRoot.GameLoopSetUp.MainGameCycleStarted -= _inputSetUp.Enable;
+        _gameCompositeRoot.GameLoopSetUp.GameEndingStateStarted -= _inputSetUp.SetGameEndingInputType;
+
+        _passengerZone.GridExpandedWithValue -= _partsExpandHandler.OnExpand;
     }
 
     private void Start()
@@ -48,16 +66,12 @@ public class PlayerBusCompositeRoot : CompositeRoot
 
     private void OnEnable()
     {
-        _gameCompositeRoot.GameLoopSetUp.MainGameCycleStarted += _inputSetUp.Enable;
-
-        _passengerZone.GridExpandedWithValue += _partsExpandHandler.OnExpand;
+        SubscribeEvents();
     }
 
     private void OnDisable()
     {
-        _gameCompositeRoot.GameLoopSetUp.MainGameCycleStarted  -= _inputSetUp.Enable;
-
-        _passengerZone.GridExpandedWithValue -= _partsExpandHandler.OnExpand;
+        UnsubscribeEvents();
     }
 
     private void Update()

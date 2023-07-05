@@ -239,7 +239,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cellPrefab: {fileID: 5499880034616317657, guid: 44943f6429716d44a8e40ab7d2ca5972, type: 3}
   _cellsParent: {fileID: 8165685113167957448}
-  _gridSize: {x: 3, y: 1}
+  _gridSize: {x: 3, y: 2}
 --- !u!1 &5489696352329322122
 GameObject:
   m_ObjectHideFlags: 0

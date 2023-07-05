@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class DesktopBusInput : PlayerBusInput, IBusInput
 {
-    public DesktopBusInput(Transform raycastPoint, float busStationIdleTime) : base(raycastPoint, busStationIdleTime) { }
+    public DesktopBusInput(Transform raycastPoint, BusEntryPointTrigger busEntryPointTrigger, float busStationIdleTime) : base(raycastPoint, busEntryPointTrigger, busStationIdleTime) { }
     
     public void Update()
     {

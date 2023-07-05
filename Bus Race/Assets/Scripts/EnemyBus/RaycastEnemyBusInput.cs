@@ -1,6 +1,4 @@
 ﻿using System.Collections;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -29,7 +27,7 @@ public class RaycastEnemyBusInput : IBusInput
         _entryPointTrigger = busEntryPointTrigger;
     }
 
-    public void Move()
+    public void Update()
     {
         if(_isStayingOnBusStation == false)
         {

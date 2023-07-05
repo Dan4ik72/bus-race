@@ -11,6 +11,8 @@ public class EnemyBusInputSetUp
     private Transform _raycastPoint;
     private int _obstacleLayer = 8;
 
+    private IBusInput _currentInput;
+
     public EnemyBusInputSetUp(BusMover busMover, Transform raycastPoint, BusConfig busConfig, BusEntryPointTrigger entryPointTrigger)
     {
         _busMover = busMover;
@@ -18,14 +20,14 @@ public class EnemyBusInputSetUp
         _busConfig = busConfig;
 
         _input = new RaycastEnemyBusInput(_raycastPoint, entryPointTrigger, _busConfig.BusStationIdleTime, _obstacleLayer);
+        _currentInput = _input;
         _inputHandler = new BusInputHandler(_input, _busMover);
     }
 
     public void Enable()
-    {
+    {   
         _inputHandler.Enable();
     }
-
 
     public void OnDisable()
     {
@@ -34,7 +36,7 @@ public class EnemyBusInputSetUp
 
     public void Update()
     {
-        _input.Move();
+        _currentInput.Update();
     }
 
 }

@@ -10,6 +10,7 @@ public class EnemyBusCompositeRoot : CompositeRoot
     [SerializeField] private BusPassengerZone _passengersZone;
     [SerializeField] private BusEntryPointTrigger _entryPointTrigger;
     [SerializeField] private GameCompositeRoot _gameCopmositeRoot;
+    [SerializeField] private ModifiersCatcher _modifiersCatcher;
     
     [Header("Bus Parts")]
     [SerializeField] private Transform _rightWall;
@@ -32,21 +33,31 @@ public class EnemyBusCompositeRoot : CompositeRoot
         _mover = new BusMover(_busConfig.IdleSpeed, _busConfig.GasSpeed, _rigidbodyMoveHandler);
         _enemyBusInputSetUp = new EnemyBusInputSetUp(_mover, _raycastPoint, _busConfig, _entryPointTrigger);
         _partsExpandedHandler = new BusPartsExpandHandler(_rightWall, _leftWall, _backWall, _frontWall);
+        _modifiersCatcher.Init(_entryPointTrigger, _passengersCollector);
     }
 
-    private void OnEnable()
+    private void SubscribeEvents()
     {
         _gameCopmositeRoot.GameLoopSetUp.MainGameCycleStarted += _enemyBusInputSetUp.Enable;
 
         _passengersZone.GridExpandedWithValue += _partsExpandedHandler.OnExpand;
     }
 
-    private void OnDisable()
+    private void UnsubscribeEvents()
     {
         _gameCopmositeRoot.GameLoopSetUp.MainGameCycleStarted -= _enemyBusInputSetUp.Enable;
-        _enemyBusInputSetUp.OnDisable();
-
         _passengersZone.GridExpandedWithValue -= _partsExpandedHandler.OnExpand;
+    }
+
+    private void OnEnable()
+    {
+        SubscribeEvents();
+    }
+
+    private void OnDisable()
+    {
+        _enemyBusInputSetUp.OnDisable();
+        UnsubscribeEvents();   
     }
 
     private void Update()

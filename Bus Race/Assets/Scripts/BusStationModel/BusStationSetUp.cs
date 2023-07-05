@@ -14,8 +14,8 @@ public class BusStationSetUp : MonoBehaviour
 
     private void Awake()
     {
-        _spawner = new PassengersSpawner(_defaultPassengerTemplate);
-        _passengerSpawnZone.Init(_spawner, _passengerConfig);
+        _spawner = new PassengersSpawner(_defaultPassengerTemplate, _passengerConfig);
+        _passengerSpawnZone.Init(_spawner);
 
         _passengers = new BusStationPassengers(_passengerSpawnZone.Passengers.ToList());
 

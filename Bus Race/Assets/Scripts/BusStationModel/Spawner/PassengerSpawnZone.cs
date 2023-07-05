@@ -14,14 +14,12 @@ public class PassengerSpawnZone : MonoBehaviour
     private Grid _grid;
 
     private PassengersSpawner _spawner;
-    private PassengerConfig _passengerConfig;
 
     private List<DefaultPassengerSetUp> _passengers = new List<DefaultPassengerSetUp>();
 
-    public void Init(PassengersSpawner spawner, PassengerConfig passengerConfig)
+    public void Init(PassengersSpawner spawner)
     {
         _spawner = spawner;
-        _passengerConfig = passengerConfig;
 
         CreateGrid();
         SpawnPassengers();
@@ -39,7 +37,6 @@ public class PassengerSpawnZone : MonoBehaviour
         foreach(var spawnPlace in _grid.Cells)
         {
             DefaultPassengerSetUp createdPassenger = _spawner.SpawnDefaultPassenger(spawnPlace,_cellsParent);
-            createdPassenger.Init(_passengerConfig);
             createdPassenger.transform.rotation = Quaternion.Euler(createdPassenger.transform.rotation.x, _passengerDefaultYRotation, createdPassenger.transform.rotation.z);
             _passengers.Add(createdPassenger);
         }

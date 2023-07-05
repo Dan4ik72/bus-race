@@ -14,6 +14,6 @@ public class PassengerCompositeRoot : CompositeRoot
 
     public override void Compose()
     {
-        _spawner = new PassengersSpawner(_passengerPrefab);
+        _spawner = new PassengersSpawner(_passengerPrefab, _defaultPassengerConfig);
     }
 }

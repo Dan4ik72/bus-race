@@ -4,23 +4,36 @@ public class GameLoopSetUp
 {
     private StateMachine _stateMachine;
 
+    private GameEndingTrigger _gameEndingTrigger;
+
     private BeginGameState _beginGameState;
     private MainCycleGameState _mainCycleGameState;
     private EndingGameState _endingGameState;
 
     public event UnityAction GameBegan;
     public event UnityAction MainGameCycleStarted;
-    public event UnityAction GameEndingStarted;
+    public event UnityAction GameEndingStateStarted;
 
-    public GameLoopSetUp()
+    public GameLoopSetUp(GameEndingTrigger gameEndingTrigger)
     {
         SetStateMachineUp();
+        _gameEndingTrigger = gameEndingTrigger;
+
+        _gameEndingTrigger.BusArrived += SetEndingGameState;
     }
 
-    public void SetBegingGameState() 
+    private void SetBegingGameState() 
     {
         _stateMachine.SetState<BeginGameState>();
         GameBegan?.Invoke();
+    }
+
+    private void SetEndingGameState()
+    {
+        _stateMachine.SetState<EndingGameState>();
+        GameEndingStateStarted?.Invoke();
+
+        _gameEndingTrigger.BusArrived -= SetEndingGameState;
     }
 
     public void Update()
@@ -38,7 +51,7 @@ public class GameLoopSetUp
 
         _beginGameState.GameBegan += () => GameBegan?.Invoke();
         _mainCycleGameState.MainCycleGameStarted += () => MainGameCycleStarted?.Invoke();
-        _endingGameState.EndingGameStarted += () => GameEndingStarted?.Invoke();
+        _endingGameState.EndingGameStarted += () => GameEndingStateStarted?.Invoke();
 
         _stateMachine.AddState(_beginGameState);
         _stateMachine.AddState(_mainCycleGameState);

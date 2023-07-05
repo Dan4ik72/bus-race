@@ -2,8 +2,10 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public abstract class PlayerBusInput : IBusInput
+public abstract class PlayerBusInput
 {
+    private BusEntryPointTrigger _busEntryPointTrigger;
+
     private bool _isStayingOnBusStation = false;
 
     private Transform _raycastPoint;
@@ -14,9 +16,10 @@ public abstract class PlayerBusInput : IBusInput
     public event UnityAction GasPressed;
     public event UnityAction IdlePressed;
 
-    public PlayerBusInput(Transform raycastPoint, float busStationIdleTime)
+    public PlayerBusInput(Transform raycastPoint, BusEntryPointTrigger busEntryPointTrigger, float busStationIdleTime)
     {
         _raycastPoint = raycastPoint;
+        _busEntryPointTrigger = busEntryPointTrigger;
         _busStationIdleTime = busStationIdleTime;
     }
 
@@ -29,6 +32,9 @@ public abstract class PlayerBusInput : IBusInput
 
         if (Physics.Raycast(ray, out hit, _raycastDistance, 1 << _busStationLayer))
         {
+            if (hit.collider.TryGetComponent(out BusCatcher busCatcher))
+                busCatcher.OnBusArrived(_busEntryPointTrigger);
+
             Coroutines.StartRoutine(StartBusStationTimer());
         }
     }

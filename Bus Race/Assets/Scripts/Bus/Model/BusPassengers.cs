@@ -19,22 +19,29 @@ public class BusPassengers
         _passengerZone = passegnerZone;
 
         _passengerZone.GridExpanded += OnPassegnerZoneExpanded;
-    } 
+    }
+
+    public Transform PassengersParent => _passengersParent;
 
     public void AddPassegner(IPassengerSetUp passenger)
     {
         Transform availablePlace = _passengerZone.GetAvailablePlace();
 
         passenger.GetTransform().parent = _passengersParent;
-        passenger.TakeEmptyBusCell(availablePlace);
+        passenger.SetTakeBusCellState(availablePlace);
 
         _passengers.Add(passenger);
 
         PassegnerAdded?.Invoke();
     }
 
+    public void DoActionForEachPassenger(Action<IPassengerSetUp> action)
+    {
+        _passengers.ForEach(action);
+    }
+
     private void OnPassegnerZoneExpanded()
     {
-        _passengers.ForEach(passenger => passenger.TakeEmptyBusCell(_passengerZone.GetAvailablePlace()));
+        DoActionForEachPassenger(passenger => passenger.SetTakeBusCellState(_passengerZone.GetAvailablePlace()));
     }
 }
