@@ -12,13 +12,16 @@ public class BusUpgradeModel
 
     public void UpgradeSpeed()
     {
-        _dataStorageService.GetData().SetBusSpeed(_config.BusSpeedValueIncreaseStep);
+        var data = _dataStorageService.GetData();
+
+        data.SetBusSpeed(data.BusSpeed + _config.BusSpeedValueIncreaseStep);
         _dataStorageService.SaveData();
     }
 
     public void UpgradeFareAmount()
     {
-        _dataStorageService.GetData().SetFareAmount(_config.FareAmountIncreaseStep);
+        var data = _dataStorageService.GetData();
+
         _dataStorageService.SaveData();
     }
 }

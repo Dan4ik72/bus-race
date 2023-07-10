@@ -21,6 +21,8 @@ public class PlayerBusDataStorageService
     {
         _saveService.SaveInt(nameof(_playerBusData.FareAmount), _playerBusData.FareAmount);
         _saveService.SaveFloat(nameof(_playerBusData.BusSpeed), _playerBusData.BusSpeed);
+
+        Debug.Log(_playerBusData.BusSpeed);
     }
 
     public PlayerBusData GetData()

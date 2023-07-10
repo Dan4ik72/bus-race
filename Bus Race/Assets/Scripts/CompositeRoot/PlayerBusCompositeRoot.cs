@@ -10,6 +10,7 @@ public class PlayerBusCompositeRoot : CompositeRoot
     [SerializeField] private Transform _passengerParent;
     [SerializeField] private ModifiersCatcher _modifiersTrigger;
     [SerializeField] private GameCompositeRoot _gameCompositeRoot;
+    [SerializeField] private DataStorageCompositeRoot _dataStorageCompositeRoot;
 
     [Header("Bus Parts Transform")]
     [SerializeField] private Transform _rightWall;
@@ -38,7 +39,7 @@ public class PlayerBusCompositeRoot : CompositeRoot
         _passegners = new BusPassengers(_passengerParent, _passengerZone);
         _entryPointTrigger.Init(_passegners);
         _moveHandler = new RigidbodyMoveHandler(_rigidbody);
-        _mover = new BusMover(_config.IdleSpeed, _config.GasSpeed, _moveHandler);
+        _mover = new BusMover(_config.IdleSpeed, _dataStorageCompositeRoot.PlayerBusDataStorage.GetData().BusSpeed, _moveHandler);
         _inputSetUp = new PlayerBusInputSetUp(_mover, _entryPointTrigger, _raycastPoint, _config);
         _modifiersTrigger.Init(_entryPointTrigger, _passegners);
     }
