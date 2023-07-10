@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
-using UnityEditor.Rendering;
 using UnityEngine;
 
 public class TransformMoveHandler : IMoveHandler
