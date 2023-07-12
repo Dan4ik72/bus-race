@@ -1,4 +1,3 @@
-using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -8,6 +7,7 @@ public class UpgradeButtonView : MonoBehaviour
 {
     [SerializeField] private Button _upgradeButton;
     [SerializeField] private TMP_Text _upgradeValue;
+    [SerializeField] private TMP_Text _price;
 
     public event UnityAction UpgradeButtonClicked;
 
@@ -17,13 +17,24 @@ public class UpgradeButtonView : MonoBehaviour
         _upgradeButton.onClick.AddListener(OnButtonClick);
     }
 
-    public void ChangeUpgradeValue(int value)
+    public void DisableButton()
+    {
+        _upgradeButton.interactable = false;
+    }
+
+    public void ChangeUpgradeValue(int value, int price)
     {
         _upgradeValue.text = value.ToString();
+        _price.text = price.ToString();
     }
 
     private void OnButtonClick()
-    {
+    {   
         UpgradeButtonClicked?.Invoke();
+    }
+
+    private void OnDestroy()
+    {
+        _upgradeButton.onClick.RemoveListener(OnButtonClick);
     }
 }

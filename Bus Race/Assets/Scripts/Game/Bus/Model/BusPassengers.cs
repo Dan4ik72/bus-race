@@ -10,15 +10,17 @@ public class BusPassengers
 
     private Transform _passengersParent;
     private BusPassengerZone _passengerZone;
+    private BusFarePaymentService _busFarePaymentService;
 
     public event UnityAction PassegnerAdded;
 
-    public BusPassengers(Transform passengersParent, BusPassengerZone passegnerZone)
+    public BusPassengers(Transform passengersParent, BusPassengerZone passegnerZone, BusFarePaymentService busFarePaymentService)
     {
         _passengersParent = passengersParent;
         _passengerZone = passegnerZone;
 
         _passengerZone.GridExpanded += OnPassegnerZoneExpanded;
+        _busFarePaymentService = busFarePaymentService;
     }
 
     public Transform PassengersParent => _passengersParent;
@@ -31,6 +33,8 @@ public class BusPassengers
         passenger.SetTakeBusCellState(availablePlace);
 
         _passengers.Add(passenger);
+
+        _busFarePaymentService.PayFare();
 
         PassegnerAdded?.Invoke();
     }

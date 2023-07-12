@@ -1,5 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class UpgradeBusTabSetUp : MonoBehaviour
 {
@@ -14,15 +13,21 @@ public class UpgradeBusTabSetUp : MonoBehaviour
     private BusUpgradeModel _upgradeModel;
     private BusUpgradePresenter _upgradePresenter;
 
+    private ButtonPresenter _returnButtonPresenter;
+
     private void Awake()
     {
-        _upgradeModel = new BusUpgradeModel(_dataStorageCompositeRoot.PlayerBusDataStorage, _upgradeConfig);
+        InitUpgradeButtons();
+    }
+
+    private void InitUpgradeButtons()
+    {
+        _upgradeModel = new BusUpgradeModel(_dataStorageCompositeRoot.PlayerBusDataStorage, _dataStorageCompositeRoot.PlayerMoneyDataStorage, _upgradeConfig);
         _upgradePresenter = new BusUpgradePresenter(_upgradeBusFareAmountButtonView, _upgradeBusSpeedButtonView, _upgradeModel);
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         _upgradePresenter.Disable();
     }
 }
-

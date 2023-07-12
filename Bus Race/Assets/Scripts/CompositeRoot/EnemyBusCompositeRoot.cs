@@ -11,6 +11,7 @@ public class EnemyBusCompositeRoot : CompositeRoot
     [SerializeField] private BusEntryPointTrigger _entryPointTrigger;
     [SerializeField] private GameCompositeRoot _gameCopmositeRoot;
     [SerializeField] private ModifiersCatcher _modifiersCatcher;
+    [SerializeField] private DataStorageCompositeRoot _dataStorageCompositeRoot;
     
     [Header("Bus Parts")]
     [SerializeField] private Transform _rightWall;
@@ -23,11 +24,13 @@ public class EnemyBusCompositeRoot : CompositeRoot
     private RigidbodyMoveHandler _rigidbodyMoveHandler;
     private BusPartsExpandHandler _partsExpandedHandler;
     private BusPassengers _passengersCollector;
+    private BusFarePaymentService _busFarePaymentService;
 
     public override void Compose()
     {
+        _busFarePaymentService = new BusFarePaymentService(_dataStorageCompositeRoot.PlayerMoneyDataStorage, _dataStorageCompositeRoot.PlayerBusDataStorage.GetData());
         _rigidbodyMoveHandler = new RigidbodyMoveHandler(_rigidbody);
-        _passengersCollector = new BusPassengers(_passengersParent, _passengersZone);
+        _passengersCollector = new BusPassengers(_passengersParent, _passengersZone, _busFarePaymentService);
         _entryPointTrigger.Init(_passengersCollector);
         _mover = new BusMover(_busConfig.GasSpeed, _rigidbodyMoveHandler);
         _enemyBusInputSetUp = new EnemyBusInputSetUp(_mover, _raycastPoint, _busConfig, _entryPointTrigger);

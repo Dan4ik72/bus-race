@@ -24,6 +24,7 @@ public class PlayerBusCompositeRoot : CompositeRoot
     private RigidbodyMoveHandler _moveHandler;
     private BusPassengers _passegners;
     private BusPartsExpandHandler _partsExpandHandler;
+    private BusFarePaymentService _busFarePaymentService;
 
     public BusMover Mover => _mover;
     public Bus Bus => _bus;
@@ -32,11 +33,13 @@ public class PlayerBusCompositeRoot : CompositeRoot
     public BusEntryPointTrigger EntryPointTrigger => _entryPointTrigger;
     public RigidbodyMoveHandler MoveHandler => _moveHandler;
     public BusPassengers Passengers => _passegners;
+    public BusFarePaymentService BusFarePaymentService => _busFarePaymentService;
 
     public override void Compose()
     {
+        _busFarePaymentService = new BusFarePaymentService(_dataStorageCompositeRoot.PlayerMoneyDataStorage, _dataStorageCompositeRoot.PlayerBusDataStorage.GetData());
         _partsExpandHandler = new BusPartsExpandHandler(_rightWall, _leftWall, _backWall, _frontWall);
-        _passegners = new BusPassengers(_passengerParent, _passengerZone);
+        _passegners = new BusPassengers(_passengerParent, _passengerZone, _busFarePaymentService);
         _entryPointTrigger.Init(_passegners);
         _moveHandler = new RigidbodyMoveHandler(_rigidbody);
         _mover = new BusMover(_dataStorageCompositeRoot.PlayerBusDataStorage.GetData().BusSpeed, _moveHandler);
@@ -48,6 +51,7 @@ public class PlayerBusCompositeRoot : CompositeRoot
     {
         _gameCompositeRoot.GameLoopSetUp.MainGameCycleStarted += _inputSetUp.Enable;
         _gameCompositeRoot.GameLoopSetUp.GameEndingStateStarted += _inputSetUp.SetGameEndingInputType;
+        _gameCompositeRoot.GameLoopSetUp.GameEndingStateStarted += _busFarePaymentService.OnGameFinished;
         
         _passengerZone.GridExpandedWithValue += _partsExpandHandler.OnExpand;
     }
@@ -56,6 +60,7 @@ public class PlayerBusCompositeRoot : CompositeRoot
     {
         _gameCompositeRoot.GameLoopSetUp.MainGameCycleStarted -= _inputSetUp.Enable;
         _gameCompositeRoot.GameLoopSetUp.GameEndingStateStarted -= _inputSetUp.SetGameEndingInputType;
+        _gameCompositeRoot.GameLoopSetUp.GameEndingStateStarted -= _busFarePaymentService.OnGameFinished;
 
         _passengerZone.GridExpandedWithValue -= _partsExpandHandler.OnExpand;
     }

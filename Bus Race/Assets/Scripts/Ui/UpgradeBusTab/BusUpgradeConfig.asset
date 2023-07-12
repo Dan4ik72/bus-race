@@ -13,4 +13,9 @@ MonoBehaviour:
   m_Name: BusUpgradeConfig
   m_EditorClassIdentifier: 
   _fareAmountIncreaseStep: 5
+  _fareAmountIncreasePriceMultiplier: 10
+  _maxFareAmount: 50
   _busSpeedValueIncreaseStep: 10
+  _busSpeedIncreasePriceMultiplier: 2
+  _maxBusSpeed: 600
+  _upgradePriceStep: 0

@@ -1308,6 +1308,7 @@ MonoBehaviour:
   _passengerParent: {fileID: 461305801}
   _modifiersTrigger: {fileID: 1041905441}
   _gameCompositeRoot: {fileID: 1127384031}
+  _dataStorageCompositeRoot: {fileID: 1127384032}
   _rightWall: {fileID: 1613928177}
   _leftWall: {fileID: 1464107067}
   _frontWall: {fileID: 275717785}
@@ -1365,6 +1366,7 @@ MonoBehaviour:
   _entryPointTrigger: {fileID: 2018195816}
   _gameCopmositeRoot: {fileID: 1127384031}
   _modifiersCatcher: {fileID: 2060025131}
+  _dataStorageCompositeRoot: {fileID: 1127384032}
   _rightWall: {fileID: 1396280237}
   _leftWall: {fileID: 2111976963}
   _backWall: {fileID: 1065874928}
