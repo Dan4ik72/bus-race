@@ -11,6 +11,8 @@ public class PlayerBusDataStorageService
 
     public PlayerBusDataStorageService(ISaveService saveService, BusConfig budConfig)
     {
+        PlayerPrefs.DeleteAll();
+
         _saveService = saveService;
         _busConfig = budConfig;
 
