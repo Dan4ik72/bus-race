@@ -26,6 +26,8 @@ public class EnemyBusCompositeRoot : CompositeRoot
     private BusPassengers _passengersCollector;
     private BusFarePaymentService _busFarePaymentService;
 
+    public BusPassengers BusPassenger => _passengersCollector;
+
     public override void Compose()
     {
         _busFarePaymentService = new BusFarePaymentService(_dataStorageCompositeRoot.PlayerMoneyDataStorage, _dataStorageCompositeRoot.PlayerBusDataStorage.GetData());
