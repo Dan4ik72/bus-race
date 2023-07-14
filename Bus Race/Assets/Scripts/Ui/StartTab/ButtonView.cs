@@ -16,7 +16,7 @@ public class ButtonView : MonoBehaviour
         _button.onClick.AddListener(OnButtonClick);
     }
 
-    private void Destroy()
+    private void OnDestroy()
     {
         _button.onClick?.RemoveListener(OnButtonClick);
     }

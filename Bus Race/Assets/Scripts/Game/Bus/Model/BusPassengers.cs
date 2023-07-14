@@ -24,6 +24,7 @@ public class BusPassengers
     }
 
     public Transform PassengersParent => _passengersParent;
+    public int Count => _passengers.Count;
 
     public void AddPassegner(IPassengerSetUp passenger)
     {

@@ -9,7 +9,7 @@ public class GameEndingTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out ModifiersCatcher bus))
+        if (other.TryGetComponent(out ModifiersCatcher bus) && bus.IsPlayerBus)
             BusArrived?.Invoke();
     }
 }

@@ -44,7 +44,7 @@ public class PlayerBusCompositeRoot : CompositeRoot
         _moveHandler = new RigidbodyMoveHandler(_rigidbody);
         _mover = new BusMover(_dataStorageCompositeRoot.PlayerBusDataStorage.GetData().BusSpeed, _moveHandler);
         _inputSetUp = new PlayerBusInputSetUp(_mover, _entryPointTrigger, _raycastPoint, _config);
-        _modifiersTrigger.Init(_entryPointTrigger, _passegners);
+        _modifiersTrigger.Init(_entryPointTrigger, _passegners, true);
     }
 
     private void SubscribeEvents()

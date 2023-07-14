@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class ButtonPresenter
 {
     private ButtonModel _model;
@@ -18,6 +20,7 @@ public class ButtonPresenter
 
     private void Init()
     {
+        Debug.Log(_view == null);
         _view.OnClick += _model.OnButtonClick;
     }
 }

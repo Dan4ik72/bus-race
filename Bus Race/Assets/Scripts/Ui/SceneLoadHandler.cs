@@ -26,6 +26,11 @@ public sealed class SceneLoadHandler : MonoBehaviour
             Destroy(gameObject);
     }
 
+    public void LoadSceneByBuildIndex(int buildIndex)
+    {
+        SceneManager.LoadScene(buildIndex);
+    }
+
     public void LoadGameScene()
     {
         SceneManager.LoadScene(_gameSceneBuildIndex);     

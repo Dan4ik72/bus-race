@@ -37,7 +37,7 @@ public class EnemyBusCompositeRoot : CompositeRoot
         _mover = new BusMover(_busConfig.GasSpeed, _rigidbodyMoveHandler);
         _enemyBusInputSetUp = new EnemyBusInputSetUp(_mover, _raycastPoint, _busConfig, _entryPointTrigger);
         _partsExpandedHandler = new BusPartsExpandHandler(_rightWall, _leftWall, _backWall, _frontWall);
-        _modifiersCatcher.Init(_entryPointTrigger, _passengersCollector);
+        _modifiersCatcher.Init(_entryPointTrigger, _passengersCollector, false);
     }
 
     private void SubscribeEvents()

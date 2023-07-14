@@ -6,7 +6,9 @@ using UnityEngine.UI;
 public class StartTabSetUp : MonoBehaviour
 {
     [SerializeField] private ButtonView _playButtonView;
-    
+
+    [SerializeField] private int _gameSceneBuildIndex = 2;
+
     private ButtonModel _playButtonModel;
 
     private ButtonPresenter _playButtonPresenter;
@@ -20,9 +22,8 @@ public class StartTabSetUp : MonoBehaviour
 
     private void InitStartButton()
     {
-        _playButtonModel = new LoadSceneButtonModel();
+        _playButtonModel = new LoadSceneButtonModel(_gameSceneBuildIndex);
         _playButtonPresenter = new ButtonPresenter(_playButtonModel, _playButtonView);
-
     }
 
     private void OnDestroy()

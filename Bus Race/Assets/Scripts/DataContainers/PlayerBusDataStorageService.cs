@@ -10,7 +10,7 @@ public class PlayerBusDataStorageService
     private ISaveService _saveService;
 
     public PlayerBusDataStorageService(ISaveService saveService, BusConfig budConfig)
-    { 
+    {
         _saveService = saveService;
         _busConfig = budConfig;
 
