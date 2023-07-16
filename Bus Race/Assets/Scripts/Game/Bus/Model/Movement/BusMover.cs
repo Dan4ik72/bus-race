@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BusMover
@@ -6,23 +7,36 @@ public class BusMover
 
     private float _idleSpeed = 0;
     private float _gasSpeed;
+    private float _maxGasSpeed;
 
     private IMoveHandler _moveHandler;
 
     private Vector3 _direction = new Vector3(1, 0, 0);
 
-    public BusMover(float gasSpeed, IMoveHandler moveHandler)
+    public BusMover(float gasSpeed,float maxSpeed ,IMoveHandler moveHandler)
     {
         _gasSpeed = gasSpeed;
+        _maxGasSpeed = maxSpeed;
         _moveHandler = moveHandler;
     }
 
-    public void SetGasSpeed()
+    public float GasSpeed => _gasSpeed;
+    public float CurrentSpeed => _currentSpeed;
+
+    public void SetGasSpeed(float gasSpeed)
+    {
+        if(gasSpeed < 0)
+            throw new System.ArgumentOutOfRangeException(nameof(gasSpeed));
+
+        _gasSpeed = Mathf.Clamp(gasSpeed, 0, _maxGasSpeed);
+    }
+
+    public void SetGasState()
     {
         _currentSpeed = _gasSpeed;
     }
 
-    public void SetIdleSpeed()
+    public void SetIdleState()
     {
         _currentSpeed = _idleSpeed;
     }

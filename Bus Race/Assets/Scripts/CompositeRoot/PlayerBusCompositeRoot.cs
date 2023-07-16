@@ -42,9 +42,9 @@ public class PlayerBusCompositeRoot : CompositeRoot
         _passegners = new BusPassengers(_passengerParent, _passengerZone, _busFarePaymentService);
         _entryPointTrigger.Init(_passegners);
         _moveHandler = new RigidbodyMoveHandler(_rigidbody);
-        _mover = new BusMover(_dataStorageCompositeRoot.PlayerBusDataStorage.GetData().BusSpeed, _moveHandler);
+        _mover = new BusMover(_dataStorageCompositeRoot.PlayerBusDataStorage.GetData().BusSpeed, _config.MaxGasSpeed, _moveHandler);
         _inputSetUp = new PlayerBusInputSetUp(_mover, _entryPointTrigger, _raycastPoint, _config);
-        _modifiersTrigger.Init(_entryPointTrigger, _passegners, true);
+        _modifiersTrigger.Init(_entryPointTrigger, _passegners, _mover, true);
     }
 
     private void SubscribeEvents()
@@ -67,7 +67,7 @@ public class PlayerBusCompositeRoot : CompositeRoot
 
     private void Start()
     {
-        _mover.SetIdleSpeed();
+        _mover.SetIdleState();
     }
 
     private void OnEnable()

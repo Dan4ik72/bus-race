@@ -40,11 +40,11 @@ public class BusInputHandler
 
     private void OnGas()
     {
-        _busMover.SetGasSpeed();
+        _busMover.SetGasState();
     }
 
     private void OnIdle()
     {
-        _busMover.SetIdleSpeed();
+        _busMover.SetIdleState();
     }
 }

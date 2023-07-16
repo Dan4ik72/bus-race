@@ -6,7 +6,7 @@ using UnityEngine;
 public class ObjectMover : MonoBehaviour
 {
     [SerializeField] private float targetZ = 10f;
-    [SerializeField] private float speed = 5f;
+    [SerializeField] private float speed = 13f;
 
     private float startingZ;
     private bool movingToTarget = true;
