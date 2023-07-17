@@ -1,6 +1,8 @@
+using UnityEngine;
+
 public class SpeedDownModifier : Modifier
 {
-    private float _speedDownValue = 10f;
+    [SerializeField] private float _speedDownValue = 10f;
 
     protected override void Apply(ModifiersCatcher trigger)
     {

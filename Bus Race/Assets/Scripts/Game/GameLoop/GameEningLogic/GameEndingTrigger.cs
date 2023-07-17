@@ -5,11 +5,13 @@ using UnityEngine.Events;
 
 public class GameEndingTrigger : MonoBehaviour
 {
-    public event UnityAction BusArrived;
+    private GameLoopSetUp _gameLoop;
+
+    public void Init(GameLoopSetUp gameLoopSetUp) => _gameLoop = gameLoopSetUp;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out ModifiersCatcher bus) && bus.IsPlayerBus)
-            BusArrived?.Invoke();
+            _gameLoop.SetEndingGameState();
     }
 }

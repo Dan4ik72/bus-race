@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2961f13dca0ff8f4abbadff217281ee2, type: 3}
   m_Name: EnemyBusConfig
   m_EditorClassIdentifier: 
+  _fareAmount: 5
   _startCapacity: 5
   _idleSpeed: 0
-  _gasSpeed: 400
+  _gasSpeed: 450
+  _maxGasSpeed: 700
   _busStationIdleTime: 1.5

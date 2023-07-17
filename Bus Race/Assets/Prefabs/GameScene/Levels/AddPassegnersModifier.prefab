@@ -33,7 +33,7 @@ Transform:
   m_Children:
   - {fileID: 8646126819482396539}
   m_Father: {fileID: 0}
-  m_RootOrder: 24
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &5210562020412489429
 BoxCollider:
@@ -68,8 +68,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d0d671dc9482de41a4b4853db99e030, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetZ: -7
-  speed: 5
+  targetZ: -10
+  speed: 13
+  _isRotateWhenMoveBack: 0
 --- !u!114 &7155477163953032821
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,7 +157,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ba3c86bef743b1b4b8737dc9d19ead32, type: 3}
+  m_Sprite: {fileID: 21300000, guid: bf2175caf1fa89944bae6cbd7e32522d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

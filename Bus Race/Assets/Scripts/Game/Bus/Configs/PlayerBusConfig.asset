@@ -16,4 +16,5 @@ MonoBehaviour:
   _startCapacity: 5
   _idleSpeed: 0
   _gasSpeed: 480
+  _maxGasSpeed: 700
   _busStationIdleTime: 1.3

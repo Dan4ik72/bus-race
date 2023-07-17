@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class BusMover
@@ -13,7 +12,7 @@ public class BusMover
 
     private Vector3 _direction = new Vector3(1, 0, 0);
 
-    public BusMover(float gasSpeed,float maxSpeed ,IMoveHandler moveHandler)
+    public BusMover(float gasSpeed, float maxSpeed, IMoveHandler moveHandler)
     {
         _gasSpeed = gasSpeed;
         _maxGasSpeed = maxSpeed;
@@ -29,6 +28,8 @@ public class BusMover
             throw new System.ArgumentOutOfRangeException(nameof(gasSpeed));
 
         _gasSpeed = Mathf.Clamp(gasSpeed, 0, _maxGasSpeed);
+
+        SetGasState();
     }
 
     public void SetGasState()

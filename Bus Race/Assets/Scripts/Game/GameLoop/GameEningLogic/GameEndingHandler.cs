@@ -25,5 +25,15 @@ public class GameEndingHandler
 
         PlayerLost?.Invoke();
     }
+
+    public void SetPlayerLose()
+    {
+        PlayerLost?.Invoke();
+    }
+
+    public void SetPlayerWon()
+    {
+        PlayerWon?.Invoke();
+    }
 }
 

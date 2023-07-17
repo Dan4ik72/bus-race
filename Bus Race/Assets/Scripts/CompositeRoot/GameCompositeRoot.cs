@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class GameCompositeRoot : CompositeRoot
 {
-    [SerializeField] private GameEndingTrigger _cum;
+    [SerializeField] private Level _test;
 
     [Header("CompositeRoots")]
     [SerializeField] private PassengerCompositeRoot _passengerCompositeRoot;
@@ -28,9 +28,11 @@ public class GameCompositeRoot : CompositeRoot
         //Instantiate(currentLevel).Init(_passengerCompositeRoot.Spawner);
 
         _gameEndingHandler = new GameEndingHandler(_playerBusCompositeRoot.Passengers, _enemyBusCompositeRoot.BusPassenger);
-        _gameLoopSetUp = new GameLoopSetUp(/*currentLevel.GameEndingTrigger*/_cum);
+        _gameLoopSetUp = new GameLoopSetUp();
 
         _gameLoopSetUp.GameEndingStateStarted += _gameEndingHandler.OnGameEnded;
+
+        _test.Init(_passengerCompositeRoot.Spawner, _gameLoopSetUp);
     }
 
 

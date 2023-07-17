@@ -5,8 +5,6 @@ public class GameLoopSetUp
 {
     private StateMachine _stateMachine;
 
-    private GameEndingTrigger _gameEndingTrigger;
-
     private BeginGameState _beginGameState;
     private MainCycleGameState _mainCycleGameState;
     private EndingGameState _endingGameState;
@@ -15,12 +13,9 @@ public class GameLoopSetUp
     public event UnityAction MainGameCycleStarted;
     public event UnityAction GameEndingStateStarted;
 
-    public GameLoopSetUp(GameEndingTrigger gameEndingTrigger)
+    public GameLoopSetUp()
     {
         SetStateMachineUp();
-        _gameEndingTrigger = gameEndingTrigger;
-
-        _gameEndingTrigger.BusArrived += SetEndingGameState;
     }
 
     private void SetBegingGameState() 
@@ -29,12 +24,15 @@ public class GameLoopSetUp
         GameBegan?.Invoke();
     }
 
-    private void SetEndingGameState()
+    public void RestartLevel()
+    {
+        SceneLoadHandler.Instance.ReloadCurrentScene();
+    }
+
+    public void SetEndingGameState()
     {
         _stateMachine.SetState<EndingGameState>();
         GameEndingStateStarted?.Invoke();
-
-        _gameEndingTrigger.BusArrived -= SetEndingGameState;
     }
 
     public void Update()
