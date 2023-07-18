@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class GameCompositeRoot : CompositeRoot
 {
-    [SerializeField] private Level _test;
-
     [Header("CompositeRoots")]
     [SerializeField] private PassengerCompositeRoot _passengerCompositeRoot;
     [SerializeField] private PlayerBusCompositeRoot _playerBusCompositeRoot;
@@ -24,15 +22,15 @@ public class GameCompositeRoot : CompositeRoot
 
     public override void Compose()
     {
+        _dataStorageCompositeRoot.LevelsDataStorageService.LevelsData.SetCurrentLevelIndex(5);
+
         Level currentLevel = _dataStorageCompositeRoot.LevelsDataStorageService.LevelsData.GetCurrentLevel().Level;
-        //Instantiate(currentLevel).Init(_passengerCompositeRoot.Spawner);
+        Instantiate(currentLevel).Init(_passengerCompositeRoot.Spawner, _gameLoopSetUp);
 
         _gameEndingHandler = new GameEndingHandler(_playerBusCompositeRoot.Passengers, _enemyBusCompositeRoot.BusPassenger);
         _gameLoopSetUp = new GameLoopSetUp();
 
         _gameLoopSetUp.GameEndingStateStarted += _gameEndingHandler.OnGameEnded;
-
-        _test.Init(_passengerCompositeRoot.Spawner, _gameLoopSetUp);
     }
 
 
