@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using Unity.VisualScripting;
-using UnityEngine;
 
 public class LevelsData
 {
@@ -16,6 +13,8 @@ public class LevelsData
         foreach(var level in levelsData)
             _levels.Add(level, false);
     }
+
+    public int GetLevelsCount() => _levels.Count;
 
     public bool CheckLevelLocked(int levelIndex)
     {

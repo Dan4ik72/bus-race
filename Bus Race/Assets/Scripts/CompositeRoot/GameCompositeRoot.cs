@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using TMPro;
-using TMPro.EditorUtilities;
+﻿using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameCompositeRoot : CompositeRoot
@@ -11,36 +9,38 @@ public class GameCompositeRoot : CompositeRoot
     [SerializeField] private EnemyBusCompositeRoot _enemyBusCompositeRoot;
     [SerializeField] private DataStorageCompositeRoot _dataStorageCompositeRoot;
 
-    [SerializeField] private List<LevelData> _levelsData;
-
     private GameLoopSetUp _gameLoopSetUp;
     private GameEndingHandler _gameEndingHandler;
 
     public GameLoopSetUp GameLoopSetUp => _gameLoopSetUp;
     public GameEndingHandler GameEndingHandler => _gameEndingHandler;
-    public List<LevelData> LevelsData => _levelsData;
 
     public override void Compose()
     {
-        _dataStorageCompositeRoot.LevelsDataStorageService.LevelsData.SetCurrentLevelIndex(5);
+        _gameEndingHandler = new GameEndingHandler(_playerBusCompositeRoot.Passengers, _enemyBusCompositeRoot.BusPassenger);
+        _gameLoopSetUp = new GameLoopSetUp();
 
         Level currentLevel = _dataStorageCompositeRoot.LevelsDataStorageService.LevelsData.GetCurrentLevel().Level;
         Instantiate(currentLevel).Init(_passengerCompositeRoot.Spawner, _gameLoopSetUp);
 
-        _gameEndingHandler = new GameEndingHandler(_playerBusCompositeRoot.Passengers, _enemyBusCompositeRoot.BusPassenger);
-        _gameLoopSetUp = new GameLoopSetUp();
-
-        _gameLoopSetUp.GameEndingStateStarted += _gameEndingHandler.OnGameEnded;
     }
-
 
     private void Update()
     {
         _gameLoopSetUp.Update();
     }
 
+    private void OnEnable()
+    {
+        _gameLoopSetUp.GameEndingStateStarted += _gameEndingHandler.OnGameEnded;
+        _gameLoopSetUp.GameEndingStateStarted += _dataStorageCompositeRoot.LevelsDataStorageService.LevelSelectHandler.IncrementCurrentLevel;
+    }
+
     private void OnDisable()
     {
         _gameLoopSetUp.GameEndingStateStarted -= _gameEndingHandler.OnGameEnded;
+        _gameLoopSetUp.GameEndingStateStarted -= _dataStorageCompositeRoot.LevelsDataStorageService.LevelSelectHandler.IncrementCurrentLevel;
+
+        _dataStorageCompositeRoot.LevelsDataStorageService.SaveData();
     }
 }

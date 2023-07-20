@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.35752022, g: 0.69739085, b: 0.72364134, a: 1}
+  m_IndirectSpecularColor: {r: 0.35568142, g: 0.69719803, b: 0.72354263, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1147,14 +1147,14 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0.8301887, g: 0.8301887, b: 0.8301887, a: 1}
+  m_Color: {r: 0.8207547, g: 0.8207547, b: 0.8207547, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -2462,18 +2462,6 @@ MonoBehaviour:
   _playerBusCompositeRoot: {fileID: 1127384027}
   _enemyBusCompositeRoot: {fileID: 1127384030}
   _dataStorageCompositeRoot: {fileID: 1127384032}
-  _levelsData:
-  - {fileID: 11400000, guid: 970363a09677c5f43b7c50a819848b90, type: 2}
-  - {fileID: 11400000, guid: 249af64f3cb92f644bfb89f4b67fb3d3, type: 2}
-  - {fileID: 11400000, guid: 58b593d99a25aab4bb9b2844121b2e23, type: 2}
-  - {fileID: 11400000, guid: a303c9a37fbd98045be3c5e161dc14dc, type: 2}
-  - {fileID: 11400000, guid: da36ecdb5d3b9d140a70a24ef4f08719, type: 2}
-  - {fileID: 11400000, guid: 38a8eb36ee8b04b47af3a1255456d393, type: 2}
-  - {fileID: 11400000, guid: a4bf4813aee079e478e1655a790ba432, type: 2}
-  - {fileID: 11400000, guid: 4ce8c93308dbc5d49b1f76e8c0b9f5f8, type: 2}
-  - {fileID: 11400000, guid: cdde75a00f5e0c147acb2ce884bdb0a8, type: 2}
-  - {fileID: 11400000, guid: 9ca4a726718b71342b177bac2f5bb85b, type: 2}
-  - {fileID: 11400000, guid: 104916a078ab65d4cb8b56e0b0e282d4, type: 2}
 --- !u!114 &1127384032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2486,8 +2474,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8c0e5ca9ff5e224c969d9df160b6515, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameCompositeRoot: {fileID: 1127384031}
   _busConfig: {fileID: 11400000, guid: bded2a366963a6f4794eaeaa0396d856, type: 2}
+  _levelsData:
+  - {fileID: 11400000, guid: 970363a09677c5f43b7c50a819848b90, type: 2}
+  - {fileID: 11400000, guid: 249af64f3cb92f644bfb89f4b67fb3d3, type: 2}
+  - {fileID: 11400000, guid: 58b593d99a25aab4bb9b2844121b2e23, type: 2}
+  - {fileID: 11400000, guid: a303c9a37fbd98045be3c5e161dc14dc, type: 2}
+  - {fileID: 11400000, guid: da36ecdb5d3b9d140a70a24ef4f08719, type: 2}
+  - {fileID: 11400000, guid: 38a8eb36ee8b04b47af3a1255456d393, type: 2}
+  - {fileID: 11400000, guid: a4bf4813aee079e478e1655a790ba432, type: 2}
+  - {fileID: 11400000, guid: 4ce8c93308dbc5d49b1f76e8c0b9f5f8, type: 2}
+  - {fileID: 11400000, guid: cdde75a00f5e0c147acb2ce884bdb0a8, type: 2}
+  - {fileID: 11400000, guid: 9ca4a726718b71342b177bac2f5bb85b, type: 2}
+  - {fileID: 11400000, guid: 104916a078ab65d4cb8b56e0b0e282d4, type: 2}
 --- !u!114 &1127384033
 MonoBehaviour:
   m_ObjectHideFlags: 0

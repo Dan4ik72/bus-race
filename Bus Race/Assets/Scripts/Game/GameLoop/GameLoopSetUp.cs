@@ -32,7 +32,6 @@ public class GameLoopSetUp
     public void SetEndingGameState()
     {
         _stateMachine.SetState<EndingGameState>();
-        GameEndingStateStarted?.Invoke();
     }
 
     public void Update()

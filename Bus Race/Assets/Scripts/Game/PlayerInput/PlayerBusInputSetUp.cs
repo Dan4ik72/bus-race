@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using YG;
 
 public class PlayerBusInputSetUp
 {
@@ -20,7 +21,9 @@ public class PlayerBusInputSetUp
         _mobileInput = new MobileBusInput(raycastPoint, busEntryPointTrigger, config.BusStationIdleTime);
         _desktopInput = new DesktopBusInput(raycastPoint, busEntryPointTrigger, config.BusStationIdleTime);
 
-        _currentInput = SelectInputType();
+        //_currentInput = SelectInputType();
+
+        _currentInput = _mobileInput;
 
         _inputHandler = new BusInputHandler(_currentInput, _busMover);
     }
@@ -54,8 +57,12 @@ public class PlayerBusInputSetUp
 
     private IBusInput SelectInputType()
     {
-        //after import YandexSDK,it have to be replaced with the sdk's method
-        InputType inputType = InputType.Desktop;
+        InputType inputType;
+
+        if(YandexGame.EnvironmentData.isDesktop)
+            inputType = InputType.Desktop;
+        else
+            inputType = InputType.Mobile;
 
         switch (inputType)
         {

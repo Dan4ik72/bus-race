@@ -10,17 +10,21 @@ public class LevelsDataStorageService
 
     private LevelsData _levelsData;
 
+    private LevelSelectHandler _levelSelectHandler;
+
     public LevelsDataStorageService(ISaveService saveService, List<LevelData> levels)
     {
         _saveService = saveService; 
         _levels = levels;
 
         _levelsData = new LevelsData(levels);
-
         UploadData();
+
+        _levelSelectHandler = new LevelSelectHandler(_levelsData, _saveService);
     }
 
     public LevelsData LevelsData => _levelsData;
+    public LevelSelectHandler LevelSelectHandler => _levelSelectHandler;
 
     public void SaveData()
     {
@@ -37,7 +41,7 @@ public class LevelsDataStorageService
 
         _levelsData.TryGetLevelDataByIndex(_levelsData.GetCurrentLevelIndex(), out LevelData levelData);
 
-        _saveService.SaveInt($"{levelData.name}_currentLevel", _levelsData.GetCurrentLevelIndex());
+        _saveService.SaveInt($"CurrentLevel", _levelsData.GetCurrentLevelIndex());
     }
 
     private void UploadData()
@@ -51,11 +55,11 @@ public class LevelsDataStorageService
                 _levelsData.SetLevelLocked(i, false);
             else
                 _levelsData.SetLevelLocked(i, Convert.ToBoolean(_saveService.LoadInt($"{levelData.name}_isLocked")));
-
-            if (_saveService.CheckKeyOnExist($"{levelData.name}_currentLevel") == false)
-                _levelsData.SetCurrentLevelIndex(0);
-            else
-                _levelsData.SetCurrentLevelIndex(_saveService.LoadInt($"{levelData.name}_currentLevel"));
         }
+
+        if (_saveService.CheckKeyOnExist($"CurrentLevel") == false)
+            _levelsData.SetCurrentLevelIndex(0);
+        else
+            _levelsData.SetCurrentLevelIndex(_saveService.LoadInt($"CurrentLevel"));
     }
 }
