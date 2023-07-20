@@ -9,10 +9,13 @@ public class MobileBusInput : PlayerBusInput, IBusInput
     {
         RaycastBusStation();
 
-        if (Input.GetMouseButtonDown(0))
-            SetGasPressed();
-        else
-            SetGasUnpressed();
+        if (IsStayingOnBusStation)
+            return;
+
+        if (Input.GetMouseButton(0))
+            OnGasPressed();
+        if (Input.GetMouseButtonUp(0))
+            OnIdlePressed();
     }
 
     private void SetGasPressed()

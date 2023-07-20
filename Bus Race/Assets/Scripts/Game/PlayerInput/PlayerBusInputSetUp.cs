@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using YG;
 
@@ -21,9 +19,7 @@ public class PlayerBusInputSetUp
         _mobileInput = new MobileBusInput(raycastPoint, busEntryPointTrigger, config.BusStationIdleTime);
         _desktopInput = new DesktopBusInput(raycastPoint, busEntryPointTrigger, config.BusStationIdleTime);
 
-        //_currentInput = SelectInputType();
-
-        _currentInput = _mobileInput;
+        _currentInput = SelectInputType();
 
         _inputHandler = new BusInputHandler(_currentInput, _busMover);
     }
@@ -59,7 +55,7 @@ public class PlayerBusInputSetUp
     {
         InputType inputType;
 
-        if(YandexGame.EnvironmentData.isDesktop)
+        if (YandexGame.EnvironmentData.isDesktop)
             inputType = InputType.Desktop;
         else
             inputType = InputType.Mobile;
