@@ -94,6 +94,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _skinHandler: {fileID: 1045766350958741238}
+  _meshRenderer: {fileID: 5677768044721675811}
 --- !u!136 &3996493222479257849
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -207,6 +208,11 @@ PrefabInstance:
 --- !u!4 &5677768044716494639 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5560732405537916267, guid: a7a1b8156ac4d734189510481a1f4e8b, type: 3}
+  m_PrefabInstance: {fileID: 279446779159857732}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &5677768044721675811 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 5560732405548995687, guid: a7a1b8156ac4d734189510481a1f4e8b, type: 3}
   m_PrefabInstance: {fileID: 279446779159857732}
   m_PrefabAsset: {fileID: 0}
 --- !u!95 &5677768044725854439 stripped

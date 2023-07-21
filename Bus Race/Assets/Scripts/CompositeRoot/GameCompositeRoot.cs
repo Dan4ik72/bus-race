@@ -33,7 +33,7 @@ public class GameCompositeRoot : CompositeRoot
     private void OnEnable()
     {
         _gameLoopSetUp.GameEndingStateStarted += _gameEndingHandler.OnGameEnded;
-        _gameLoopSetUp.GameEndingStateStarted += _dataStorageCompositeRoot.LevelsDataStorageService.LevelSelectHandler.IncrementCurrentLevel;
+        _gameEndingHandler.PlayerWon += _dataStorageCompositeRoot.LevelsDataStorageService.LevelSelectHandler.IncrementCurrentLevel;
     }
 
     private void OnDisable()

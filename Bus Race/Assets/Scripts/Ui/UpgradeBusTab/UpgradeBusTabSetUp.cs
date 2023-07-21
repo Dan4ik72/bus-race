@@ -7,7 +7,6 @@ public class UpgradeBusTabSetUp : MonoBehaviour
 
     [SerializeField] private BusUpgradeConfig _upgradeConfig;
 
-    //temporary code
     [SerializeField] private DataStorageCompositeRoot _dataStorageCompositeRoot;
 
     private BusUpgradeModel _upgradeModel;

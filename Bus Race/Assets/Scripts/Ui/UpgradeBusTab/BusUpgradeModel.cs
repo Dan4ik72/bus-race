@@ -25,7 +25,7 @@ public class BusUpgradeModel
     public void OnValuesUpdated()
     {   
         FareAmountUpdated?.Invoke(_busDataStorageService.GetData().FareAmount, _busDataStorageService.GetData().FareAmount * _config.FareAmountIncreasePriceMultiplier);
-        BusSpeedValueUpdated?.Invoke((int)_busDataStorageService.GetData().BusSpeed, (int)_busDataStorageService.GetData().BusSpeed * _config.BusSpeedPriceIncreaseMultiplier);
+        BusSpeedValueUpdated?.Invoke((int)_busDataStorageService.GetData().BusSpeed / 7, (int)_busDataStorageService.GetData().BusSpeed * _config.BusSpeedPriceIncreaseMultiplier);
 
         CheckFareAmountMaxValue(_busDataStorageService.GetData());
         CheckBusSpeedMaxValue(_busDataStorageService.GetData());
@@ -44,7 +44,7 @@ public class BusUpgradeModel
         data.SetBusSpeed(data.BusSpeed + _config.BusSpeedValueIncreaseStep);
         _busDataStorageService.SaveData();
 
-        BusSpeedValueUpdated?.Invoke((int)data.BusSpeed, (int)data.BusSpeed * _config.BusSpeedPriceIncreaseMultiplier);
+        BusSpeedValueUpdated?.Invoke((int)data.BusSpeed / 7, (int)data.BusSpeed * _config.BusSpeedPriceIncreaseMultiplier);
     }
 
     public void UpgradeFareAmount()

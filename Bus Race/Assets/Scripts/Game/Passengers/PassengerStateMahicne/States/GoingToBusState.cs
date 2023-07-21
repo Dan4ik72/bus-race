@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -36,7 +34,10 @@ public class GoingToBusState : BusInteractionState
             StateMachine.SetState<WaitingForBusState>();
 
         if (GetDistanceToBusTrigger() <= _minDistanceToBusTrigger)
+        {
+            _passenger.MeshRenderer.material = _passenger.BusEntryPointTrigger.BusMaterial;
             _passenger.BusEntryPointTrigger.EnterBus(_passenger);
+        }
     }
 
     private void MoveToBusTigger()

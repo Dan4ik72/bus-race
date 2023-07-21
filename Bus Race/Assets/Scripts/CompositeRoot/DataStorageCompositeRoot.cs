@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
 public class DataStorageCompositeRoot : CompositeRoot
 {
@@ -28,8 +29,5 @@ public class DataStorageCompositeRoot : CompositeRoot
         _playerMoneyDataStorage = new PlayerMoneyDataStorageService(_saveService);
 
         _levelsDataStorageService = new LevelsDataStorageService(_saveService, _levelsData);
-
-        //_levelsDataStorageService.LevelsData.SetCurrentLevelIndex(10);
-        //_levelsDataStorageService.SaveData();
     }
 }

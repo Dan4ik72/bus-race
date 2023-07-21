@@ -12,9 +12,13 @@ public class GameFinishPanelSetUp : MonoBehaviour
     [SerializeField] private TMP_Text _playerScore;
     [SerializeField] private TMP_Text _playerReward;
     [SerializeField] private ButtonView _continueButtonView;
+    [SerializeField] private ButtonView _restartButtonView;
 
     private LoadSceneButtonModel _continueButtonModel;
     private ButtonPresenter _continueButtonPresenter;
+
+    private LoadSceneButtonModel _restartButtonModel;
+    private ButtonPresenter _restartButtonPresenter;
 
     private BusPassengers _playerBusPassengers;
     private BusPassengers _enemyBusPassengers;
@@ -48,6 +52,8 @@ public class GameFinishPanelSetUp : MonoBehaviour
 
     public void EnableLostPanel()
     {
+        SetUpRestartButton();
+
         _loseBackground.gameObject.SetActive(true);
         _generalElementsHolder.gameObject.SetActive(true);
 
@@ -58,6 +64,12 @@ public class GameFinishPanelSetUp : MonoBehaviour
     {
         _continueButtonModel = new LoadSceneButtonModel(_mainMenuBuildIndex);
         _continueButtonPresenter = new ButtonPresenter(_continueButtonModel, _continueButtonView);
+    }
+
+    private void SetUpRestartButton()
+    {
+        _restartButtonModel = new LoadSceneButtonModel();
+        _restartButtonPresenter = new ButtonPresenter(_restartButtonModel, _restartButtonView);
     }
 
     public void Disable()

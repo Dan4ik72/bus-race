@@ -4,6 +4,8 @@ public class DefaultPassengerSetUp : MonoBehaviour, IPassengerSetUp
 {
     [SerializeField] private PassengerSkinHandler _skinHandler;
 
+    [SerializeField] private SkinnedMeshRenderer _meshRenderer;
+
     private PassengerConfig _defaultPassengerConfig;
 
     private PassengerAnimationsPresenter _animationPresenter;
@@ -18,7 +20,6 @@ public class DefaultPassengerSetUp : MonoBehaviour, IPassengerSetUp
     private GoingToBusState _goingToBusState;
     private TakeEmptyBusCellState _takeEmptyBusCellState;
     private RidingOnBusState _ridingOnBusState;
-    private GoingToFinishPointState _goingToFinishPointState;
 
     private bool _isInBus = false;
 
@@ -32,6 +33,7 @@ public class DefaultPassengerSetUp : MonoBehaviour, IPassengerSetUp
     public BusEntryPointTrigger BusEntryPointTrigger => _busEntryPointTrigger;
     public Transform FinishPoint => _finishPoint;
     public bool IsInBus => _isInBus;
+    public SkinnedMeshRenderer MeshRenderer => _meshRenderer;
 
     private void Update() => _stateMachine.Update();
 
@@ -50,12 +52,6 @@ public class DefaultPassengerSetUp : MonoBehaviour, IPassengerSetUp
     {
         _busEntryPointTrigger = busEntryPointTrigger;
         _stateMachine.SetState<GoingToBusState>();
-    }
-
-    public void SetGoingToFinishPointState(Transform finishPoint)
-    {
-        _finishPoint = finishPoint;
-        _stateMachine.SetState<GoingToFinishPointState>();
     }
 
     private void SetUpServcies()
@@ -78,13 +74,11 @@ public class DefaultPassengerSetUp : MonoBehaviour, IPassengerSetUp
         _goingToBusState = new GoingToBusState(_stateMachine, this, _moveHandler, _defaultPassengerConfig.SpeedToBus, _defaultPassengerConfig.MaxDistanceToBusTrigger);
         _ridingOnBusState = new RidingOnBusState(_stateMachine, transform, _moveHandler);
         _takeEmptyBusCellState = new TakeEmptyBusCellState(_stateMachine, transform, _moveHandler, _defaultPassengerConfig.SpeedInBus, this);
-        _goingToFinishPointState = new GoingToFinishPointState(_stateMachine, this, _moveHandler, _defaultPassengerConfig.SpeedToBus);
 
         _stateMachine.AddState(_waitingForBusState);
         _stateMachine.AddState(_goingToBusState);
         _stateMachine.AddState(_takeEmptyBusCellState);
         _stateMachine.AddState(_ridingOnBusState);
-        _stateMachine.AddState(_goingToFinishPointState);
 
         _stateMachine.SetState<WaitingForBusState>();
     }
