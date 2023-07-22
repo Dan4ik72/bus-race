@@ -12,10 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 876f399cfad798840a559d531f8759a9, type: 3}
   m_Name: BusUpgradeConfig
   m_EditorClassIdentifier: 
-  _fareAmountIncreaseStep: 5
-  _fareAmountIncreasePriceMultiplier: 10
-  _maxFareAmount: 50
+  _fareAmountIncreaseStep: 2
+  _fareAmountIncreasePriceMultiplier: 15
+  _maxFareAmount: 35
   _busSpeedValueIncreaseStep: 10
   _busSpeedIncreasePriceMultiplier: 2
   _maxBusSpeed: 600
-  _upgradePriceStep: 0

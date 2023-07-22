@@ -1,5 +1,6 @@
 using UnityEngine.Events;
 using UnityEngine;
+using Unity.VisualScripting;
 
 public class BusUpgradeModel
 {   
@@ -38,11 +39,12 @@ public class BusUpgradeModel
         if (CheckBusSpeedMaxValue(data) == false)
             return;
 
-        if (_playerMoneyDataStorageService.GetData().TrySpendMoney(data.FareAmount * _config.FareAmountIncreasePriceMultiplier) == false)
+        if (_playerMoneyDataStorageService.GetData().TrySpendMoney((int)data.BusSpeed * _config.BusSpeedPriceIncreaseMultiplier) == false)
             return;
 
         data.SetBusSpeed(data.BusSpeed + _config.BusSpeedValueIncreaseStep);
         _busDataStorageService.SaveData();
+        _playerMoneyDataStorageService.SaveData();
 
         BusSpeedValueUpdated?.Invoke((int)data.BusSpeed / 7, (int)data.BusSpeed * _config.BusSpeedPriceIncreaseMultiplier);
     }
@@ -59,6 +61,7 @@ public class BusUpgradeModel
 
         data.SetFareAmount(data.FareAmount + _config.FareAmountIncreaseStep);
         _busDataStorageService.SaveData();
+        _playerMoneyDataStorageService.SaveData();
 
         FareAmountUpdated?.Invoke(data.FareAmount, data.FareAmount * _config.FareAmountIncreasePriceMultiplier);
     }

@@ -1,28 +1,26 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using Unity.VisualScripting;
+using UnityEngine;
 using UnityEngine.Events;
 
 public class BeginGameState : State
 {
-    private float _timer = 0;
+    private WaitForSecondsRealtime _startGameDelay = new WaitForSecondsRealtime(4f);
 
     public event UnityAction GameBegan;
 
-    public BeginGameState(StateMachine stateMachine) : base(stateMachine)
-    {
-
-    }
-
+    public BeginGameState(StateMachine stateMachine) : base(stateMachine) { }
+    
     public override void Enter()
     {
         GameBegan?.Invoke();
+
+        Coroutines.StartRoutine(StartDelay());
     }
-
-    public override void Update()
+     
+    private IEnumerator StartDelay()
     {
-        _timer += Time.deltaTime;
-
-        if (_timer < 2)
-            return;
+        yield return _startGameDelay;
 
         StateMachine.SetState<MainCycleGameState>();
     }

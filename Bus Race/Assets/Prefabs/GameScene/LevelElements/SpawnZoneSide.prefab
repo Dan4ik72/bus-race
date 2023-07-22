@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cellPrefab: {fileID: 5499880034616317657, guid: 44943f6429716d44a8e40ab7d2ca5972, type: 3}
   _cellsParent: {fileID: 7433564233602681816}
-  _gridSize: {x: 3, y: 2}
+  _gridSize: {x: 2, y: 2}
 --- !u!1 &297405770413606003
 GameObject:
   m_ObjectHideFlags: 0
@@ -790,7 +790,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cellPrefab: {fileID: 5499880034616317657, guid: 44943f6429716d44a8e40ab7d2ca5972, type: 3}
   _cellsParent: {fileID: 8165685113167957448}
-  _gridSize: {x: 3, y: 2}
+  _gridSize: {x: 2, y: 2}
 --- !u!1 &7296456938999489619
 GameObject:
   m_ObjectHideFlags: 0

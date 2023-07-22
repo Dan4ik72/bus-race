@@ -278,7 +278,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cellPrefab: {fileID: 5499880034616317657, guid: 44943f6429716d44a8e40ab7d2ca5972, type: 3}
   _cellsParent: {fileID: 8165685113167957448}
-  _gridSize: {x: 3, y: 2}
+  _gridSize: {x: 2, y: 2}
 --- !u!1 &7296456938999489619
 GameObject:
   m_ObjectHideFlags: 0
@@ -397,7 +397,7 @@ Transform:
   - {fileID: 780000334871059844}
   - {fileID: 2299460416426977973}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1090961448286531221
 MonoBehaviour:

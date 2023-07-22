@@ -5,6 +5,8 @@ using UnityEngine.Events;
 
 public class DesktopBusInput : PlayerBusInput, IBusInput
 {
+    private bool _isPressingGas = false;
+
     public DesktopBusInput(Transform raycastPoint, BusEntryPointTrigger busEntryPointTrigger, float busStationIdleTime) : base(raycastPoint, busEntryPointTrigger, busStationIdleTime) { }
     
     public void Update()

@@ -8,12 +8,12 @@ public class GameCompositeRoot : CompositeRoot
     [SerializeField] private PlayerBusCompositeRoot _playerBusCompositeRoot;
     [SerializeField] private EnemyBusCompositeRoot _enemyBusCompositeRoot;
     [SerializeField] private DataStorageCompositeRoot _dataStorageCompositeRoot;
-
     private GameLoopSetUp _gameLoopSetUp;
     private GameEndingHandler _gameEndingHandler;
 
     public GameLoopSetUp GameLoopSetUp => _gameLoopSetUp;
     public GameEndingHandler GameEndingHandler => _gameEndingHandler;
+    
 
     public override void Compose()
     {
@@ -22,7 +22,11 @@ public class GameCompositeRoot : CompositeRoot
 
         Level currentLevel = _dataStorageCompositeRoot.LevelsDataStorageService.LevelsData.GetCurrentLevel().Level;
         Instantiate(currentLevel).Init(_passengerCompositeRoot.Spawner, _gameLoopSetUp);
+    }
 
+    private void Start()
+    {
+        _gameLoopSetUp.SetBegingGameState(); 
     }
 
     private void Update()

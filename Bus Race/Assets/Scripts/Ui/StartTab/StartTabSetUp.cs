@@ -10,6 +10,8 @@ public class StartTabSetUp : MonoBehaviour
     [SerializeField] private ButtonView _playButtonView;
     [SerializeField] private UITextView _playerMoneyView;
 
+    [SerializeField] private ButtonView _rewardedButtonView;
+
     [SerializeField] private int _gameSceneBuildIndex = 2;
 
     private ButtonModel _playButtonModel;
@@ -18,12 +20,14 @@ public class StartTabSetUp : MonoBehaviour
     private PlayerMoneyPresenter _playerMoneyPresenter;
     private PlayerMoneyViewModel _playerMoneyViewModel;
 
-    public ButtonModel PlayButtoonModel => _playButtonModel;
+    private ButtonPresenter _rewardedButtonPresetner;
+    private RewardedButtonModel _rewardedButtonModel;
 
     public void Start()
     {
         InitStartButton();
         InitPlayerMoneyMVP();
+        InitRewardedButton();
     }
 
     private void InitStartButton()
@@ -38,9 +42,16 @@ public class StartTabSetUp : MonoBehaviour
         _playerMoneyPresenter = new PlayerMoneyPresenter(_playerMoneyView, _playerMoneyViewModel);
     }
 
+    private void InitRewardedButton()
+    {
+        _rewardedButtonModel = new RewardedButtonModel(_dataCompositeRoot.PlayerMoneyDataStorage.GetData());
+        _rewardedButtonPresetner = new ButtonPresenter(_rewardedButtonModel, _rewardedButtonView);
+    }
+
     private void OnDestroy()
     {
         _playButtonPresenter.Disable();
         _playerMoneyPresenter.Disable();
+        _rewardedButtonPresetner.Disable();
     }
 }

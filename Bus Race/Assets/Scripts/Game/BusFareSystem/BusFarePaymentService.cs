@@ -26,7 +26,7 @@ public class BusFarePaymentService
 
     public void OnGameFinished()
     {
-        _playerMoneyDataStorageService.GetData().SetPlayerMoney(_currentFareAmount);
+        _playerMoneyDataStorageService.GetData().AddMoney(_currentFareAmount);
         _playerMoneyDataStorageService.SaveData();
     }
 }

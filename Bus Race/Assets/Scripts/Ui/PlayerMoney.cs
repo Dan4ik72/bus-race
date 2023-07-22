@@ -14,6 +14,18 @@ public class PlayerMoney
             throw new System.ArgumentOutOfRangeException(nameof(value));
 
         _value = value;
+
+        ValueChanged?.Invoke(value);
+    }
+
+    public void AddMoney(int value) 
+    {
+        if(value < 0)
+            throw new System.AccessViolationException(nameof(value));
+
+        _value += value;
+
+        ValueChanged?.Invoke(value);
     }
 
     public bool TrySpendMoney(int price)

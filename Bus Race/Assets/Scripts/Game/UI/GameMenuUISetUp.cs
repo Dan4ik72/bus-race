@@ -24,13 +24,13 @@
     
     private void InitMainMenuButtonMVP()
     {
-        _loadMainMenuSceneButtonModel = new LoadSceneButtonModel(_mainMenuSceneIndex);
+        _loadMainMenuSceneButtonModel = new LoadSceneButtonModel(_mainMenuSceneIndex, true);
         _mainMenuButtonPresenter = new ButtonPresenter(_loadMainMenuSceneButtonModel, _mainMenuButtonView);
     }
 
     private void InitReloadLevelMVP()
     {
-        _reloadLevelButtonButtonModel = new LoadSceneButtonModel(-1);
+        _reloadLevelButtonButtonModel = new LoadSceneButtonModel(-1, true);
         _reloadLevelButtonPresenter = new ButtonPresenter(_reloadLevelButtonButtonModel, _restartButtonView);
     }
 

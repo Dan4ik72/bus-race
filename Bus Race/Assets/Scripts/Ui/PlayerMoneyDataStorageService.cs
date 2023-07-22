@@ -26,7 +26,7 @@ public class PlayerMoneyDataStorageService
     {
         if(_saveService.CheckKeyOnExist(nameof(_playerMoney.PlayerMoneyValue)) == false)
         {
-            _playerMoney.SetPlayerMoney(1000000);
+            _playerMoney.SetPlayerMoney(0);
             return;
         }
 

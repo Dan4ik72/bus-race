@@ -11,8 +11,6 @@ public class BusUpgradeConfig : ScriptableObject
     [SerializeField] private int _busSpeedIncreasePriceMultiplier;
     [SerializeField] private float _maxBusSpeed;
 
-    [SerializeField] private int _upgradePriceStep;
-
     public int FareAmountIncreaseStep => _fareAmountIncreaseStep;
     public int FareAmountIncreasePriceMultiplier => _fareAmountIncreasePriceMultiplier;
     public int MaxFareAmount => _maxFareAmount;

@@ -18,7 +18,7 @@ public class GameLoopSetUp
         SetStateMachineUp();
     }
 
-    private void SetBegingGameState() 
+    public void SetBegingGameState() 
     {
         _stateMachine.SetState<BeginGameState>();
         GameBegan?.Invoke();
@@ -54,7 +54,5 @@ public class GameLoopSetUp
         _stateMachine.AddState(_beginGameState);
         _stateMachine.AddState(_mainCycleGameState);
         _stateMachine.AddState(_endingGameState);
-
-        SetBegingGameState();
     }
 }
