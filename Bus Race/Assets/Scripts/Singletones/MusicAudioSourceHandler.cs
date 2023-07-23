@@ -16,16 +16,21 @@ public class MusicAudioSourceHandler : MonoBehaviour
         CheckInstance();
 
         _audioSource = GetComponent<AudioSource>();
+
+        if (_isSoundEnable)
+            PlayMusic();        
     }
 
     public void PlayMusic()
     {
         _audioSource.Play();
+        _isSoundEnable = true;
     }
 
     public void Stop()
     {
         _audioSource.Stop();
+        _isSoundEnable = false;
     }
 
     private void CheckInstance()

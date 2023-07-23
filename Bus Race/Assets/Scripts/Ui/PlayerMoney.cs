@@ -25,7 +25,7 @@ public class PlayerMoney
 
         _value += value;
 
-        ValueChanged?.Invoke(value);
+        ValueChanged?.Invoke(_value);
     }
 
     public bool TrySpendMoney(int price)

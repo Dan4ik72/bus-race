@@ -24,8 +24,8 @@ MonoBehaviour:
   AdWhenLoadingScene: 1
   showFirstAd: 1
   adDisplayCalls: 0
-  fullscreenAdInterval: 30
-  durationOfAdSimulation: 30
+  fullscreenAdInterval: 5
+  durationOfAdSimulation: 1
   LocalizationEnable: 0
   callingLanguageCheck: 1
   translateMethod: 0
@@ -119,7 +119,7 @@ MonoBehaviour:
     de: 
     hi: 
   debug: 1
-  archivingBuild: 0
+  archivingBuild: 1
   bakcgroundImage: 2
   pixelRatioEnable: 0
   pixelRatioValue: 1

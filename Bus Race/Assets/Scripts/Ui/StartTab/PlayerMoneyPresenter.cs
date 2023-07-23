@@ -27,7 +27,7 @@ public class PlayerMoneyPresenter
 
     private void ChangePlayerMoney()
     {
-        _view.ChangeText(_model.PlayerMoney.ToString());
+        _view.ChangeText(_model.PlayerMoney.ToString() + "$");
     }
 }
 

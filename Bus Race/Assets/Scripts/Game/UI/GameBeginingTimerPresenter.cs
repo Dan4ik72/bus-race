@@ -14,12 +14,18 @@
     private void Init()
     {
         _model.ValueChanged += ChangeViewText;
+        _model.TimerStarted += EnableTextView;
         _model.TimerEnded += DisableViewText;
     }
 
     private void ChangeViewText(int newValue)
     {
-        _view.ChangeText(newValue.ToString()+"!");
+        _view.ChangeText(newValue.ToString());
+    }
+
+    private void EnableTextView()
+    {
+        _view.gameObject.SetActive(true);
     }
 
     private void DisableViewText()

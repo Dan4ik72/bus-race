@@ -26,6 +26,12 @@ public class BusUpgradePresenter
 
         _busUpgradeModel.BusSpeedValueUpdated -= _busSpeedUpgradeButtonView.ChangeUpgradeValue;
         _busUpgradeModel.FareAmountUpdated -= _fareAmountUpgradeButtonView.ChangeUpgradeValue;
+
+        _busUpgradeModel.DisableAbilityToUpgradeBusSpeed += _busSpeedUpgradeButtonView.DisableButton;
+        _busUpgradeModel.DisabledAbilityToUpgradeFareAmount += _fareAmountUpgradeButtonView.DisableButton;
+
+        _busUpgradeModel.EnableAbilityToUpgradeBusSpeed -= _busSpeedUpgradeButtonView.EnableButton;
+        _busUpgradeModel.EnableAbilityToUpgradeFareAmount -= _fareAmountUpgradeButtonView.EnableButton;
     }
 
     private void Init()
@@ -38,6 +44,12 @@ public class BusUpgradePresenter
         
         _busUpgradeModel.FareAmountReachedMaxValue += _fareAmountUpgradeButtonView.DisableButton;
         _busUpgradeModel.BusSpeedReachedMaxValue += _busSpeedUpgradeButtonView.DisableButton;
+
+        _busUpgradeModel.DisableAbilityToUpgradeBusSpeed += _busSpeedUpgradeButtonView.DisableButton;
+        _busUpgradeModel.DisabledAbilityToUpgradeFareAmount += _fareAmountUpgradeButtonView.DisableButton;
+
+        _busUpgradeModel.EnableAbilityToUpgradeBusSpeed += _busSpeedUpgradeButtonView.EnableButton;
+        _busUpgradeModel.EnableAbilityToUpgradeFareAmount += _fareAmountUpgradeButtonView.EnableButton;
 
         _busUpgradeModel.OnValuesUpdated();
     }

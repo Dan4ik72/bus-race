@@ -38,7 +38,7 @@ public class PlayerBusCompositeRoot : CompositeRoot
     public override void Compose()
     {
         _busFarePaymentService = new BusFarePaymentService(_dataStorageCompositeRoot.PlayerMoneyDataStorage, _dataStorageCompositeRoot.PlayerBusDataStorage.GetData());
-        _partsExpandHandler = new BusPartsExpandHandler(_rightWall, _leftWall, _backWall, _frontWall);
+        _partsExpandHandler = new BusPartsExpandHandler(_rightWall, _leftWall, _backWall, _frontWall, _modifiersTrigger.transform);
         _passegners = new BusPassengers(_passengerParent, _passengerZone, _busFarePaymentService);
         _entryPointTrigger.Init(_passegners);
         _moveHandler = new RigidbodyMoveHandler(_rigidbody);

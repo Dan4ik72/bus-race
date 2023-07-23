@@ -44,7 +44,7 @@ public class StartTabSetUp : MonoBehaviour
 
     private void InitRewardedButton()
     {
-        _rewardedButtonModel = new RewardedButtonModel(_dataCompositeRoot.PlayerMoneyDataStorage.GetData());
+        _rewardedButtonModel = new RewardedButtonModel(_dataCompositeRoot.PlayerMoneyDataStorage);
         _rewardedButtonPresetner = new ButtonPresenter(_rewardedButtonModel, _rewardedButtonView);
     }
 

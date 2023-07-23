@@ -22,6 +22,11 @@ public class UpgradeButtonView : MonoBehaviour
         _upgradeButton.interactable = false;
     }
 
+    public void EnableButton()
+    {
+        _upgradeButton.interactable = true;
+    }
+
     public void ChangeUpgradeValue(int value, int price)
     {
         _upgradeValue.text = value.ToString();

@@ -39,7 +39,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _DepthDensity: 0.396
+    - _DepthDensity: 0.08
     - _DistanceDensity: 0.012
     - _EdgeFoamDepth: 0.1
     - _FancyShadows: 0

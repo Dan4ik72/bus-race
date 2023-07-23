@@ -1,14 +1,15 @@
 ﻿public class RewardedButtonModel : ButtonModel
 {
-    private PlayerMoney _playerMoney;
+    private PlayerMoneyDataStorageService _playerMoneyDataStorageService;
     private YandexGameAdsHandler _adsHandler;
 
     private int _rewardAmount = 150;
 
-    public RewardedButtonModel(PlayerMoney playerMoney)
+    public RewardedButtonModel(PlayerMoneyDataStorageService playerMoneyDataStorageService)
     {
         _adsHandler = new YandexGameAdsHandler();
-        _playerMoney = playerMoney;
+
+        _playerMoneyDataStorageService = playerMoneyDataStorageService;
     }
 
     public override void OnButtonClick()
@@ -20,7 +21,8 @@
 
     private void OnRewardedComplete()
     {
-        _playerMoney.AddMoney(_rewardAmount);
+        _playerMoneyDataStorageService.GetData().AddMoney(_rewardAmount);
+        _playerMoneyDataStorageService.SaveData();
 
         _adsHandler.RewardedShown -= OnRewardedComplete;
     }

@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class GameFinishObstacle : MonoBehaviour
 {
-    private GameLoopSetUp _gameLoopSetUp;
+    private GameEndingHandler _gameEndingHandler;
 
-    public void Init(GameLoopSetUp gameLoopSetUp)
+    public void Init(GameEndingHandler gameEndingHandler)
     {
-        _gameLoopSetUp = gameLoopSetUp;
+        _gameEndingHandler = gameEndingHandler;
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out ModifiersCatcher bus) && bus.IsPlayerBus)
-            _gameLoopSetUp.RestartLevel();
+            _gameEndingHandler.SetPlayerLose();
     }
 }

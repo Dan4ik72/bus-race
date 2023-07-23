@@ -7,6 +7,7 @@ public class GameBeginingTimerModel
 {
     private GameLoopSetUp _gameLoopSetUp;
 
+    public event UnityAction TimerStarted;
     public event UnityAction<int> ValueChanged;
     public event UnityAction TimerEnded;
 
@@ -19,6 +20,7 @@ public class GameBeginingTimerModel
 
     private void OnGameStarted()
     {
+        TimerStarted?.Invoke();
         Coroutines.StartRoutine(Timer());
     }
 

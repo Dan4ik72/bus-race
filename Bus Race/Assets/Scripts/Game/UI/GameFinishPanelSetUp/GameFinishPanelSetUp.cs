@@ -62,13 +62,13 @@ public class GameFinishPanelSetUp : MonoBehaviour
 
     private void SetUpContinueButton()
     {
-        _continueButtonModel = new LoadSceneButtonModel(_mainMenuBuildIndex, true);
+        _continueButtonModel = new LoadSceneButtonModel(_mainMenuBuildIndex);
         _continueButtonPresenter = new ButtonPresenter(_continueButtonModel, _continueButtonView);
     }
 
     private void SetUpRestartButton()
     {
-        _restartButtonModel = new LoadSceneButtonModel(isLoadWithAdShow: true);
+        _restartButtonModel = new LoadSceneButtonModel();
         _restartButtonPresenter = new ButtonPresenter(_restartButtonModel, _restartButtonView);
     }
 

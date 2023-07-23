@@ -1,6 +1,6 @@
-using UnityEngine.Events;
+using System.Data;
 using UnityEngine;
-using Unity.VisualScripting;
+using UnityEngine.Events;
 
 public class BusUpgradeModel
 {   
@@ -15,12 +15,21 @@ public class BusUpgradeModel
 
     public event UnityAction FareAmountReachedMaxValue;
     public event UnityAction BusSpeedReachedMaxValue;
-    
+
+    public event UnityAction DisabledAbilityToUpgradeFareAmount;
+    public event UnityAction DisableAbilityToUpgradeBusSpeed;
+
+    public event UnityAction EnableAbilityToUpgradeFareAmount;
+    public event UnityAction EnableAbilityToUpgradeBusSpeed;
+
     public BusUpgradeModel(PlayerBusDataStorageService dataStorageService, PlayerMoneyDataStorageService playerMoneyDataStorageService, BusUpgradeConfig config)
     {
         _busDataStorageService = dataStorageService;
         _playerMoneyDataStorageService = playerMoneyDataStorageService;
         _config = config;
+
+        _playerMoneyDataStorageService.GetData().ValueChanged += CheckAvailableToBuyUpgradeFareAmount;
+        _playerMoneyDataStorageService.GetData().ValueChanged += CheckAvailableToBuyUpgradeSpeed;
     }
 
     public void OnValuesUpdated()
@@ -30,6 +39,9 @@ public class BusUpgradeModel
 
         CheckFareAmountMaxValue(_busDataStorageService.GetData());
         CheckBusSpeedMaxValue(_busDataStorageService.GetData());
+
+        CheckAvailableToBuyUpgradeFareAmount(_playerMoneyDataStorageService.GetData().PlayerMoneyValue);
+        CheckAvailableToBuyUpgradeSpeed(_playerMoneyDataStorageService.GetData().PlayerMoneyValue);
     }
 
     public void UpgradeSpeed()
@@ -47,6 +59,8 @@ public class BusUpgradeModel
         _playerMoneyDataStorageService.SaveData();
 
         BusSpeedValueUpdated?.Invoke((int)data.BusSpeed / 7, (int)data.BusSpeed * _config.BusSpeedPriceIncreaseMultiplier);
+
+        CheckAvailableToBuyUpgradeSpeed(_playerMoneyDataStorageService.GetData().PlayerMoneyValue);
     }
 
     public void UpgradeFareAmount()
@@ -64,6 +78,8 @@ public class BusUpgradeModel
         _playerMoneyDataStorageService.SaveData();
 
         FareAmountUpdated?.Invoke(data.FareAmount, data.FareAmount * _config.FareAmountIncreasePriceMultiplier);
+
+        CheckAvailableToBuyUpgradeFareAmount(_playerMoneyDataStorageService.GetData().PlayerMoneyValue);
     }
 
     private bool CheckBusSpeedMaxValue(PlayerBusData data)
@@ -86,5 +102,21 @@ public class BusUpgradeModel
         }
 
         return true;
+    }
+
+    private void CheckAvailableToBuyUpgradeFareAmount(int newValue)
+    {
+        if (newValue < _busDataStorageService.GetData().FareAmount * _config.FareAmountIncreasePriceMultiplier)
+            DisabledAbilityToUpgradeFareAmount?.Invoke();
+        else
+            EnableAbilityToUpgradeFareAmount?.Invoke();
+    }
+
+    private void CheckAvailableToBuyUpgradeSpeed(int newValue)
+    {
+        if (newValue < (int)_busDataStorageService.GetData().BusSpeed * _config.BusSpeedPriceIncreaseMultiplier)
+            DisableAbilityToUpgradeBusSpeed?.Invoke();
+        else
+            EnableAbilityToUpgradeBusSpeed?.Invoke();
     }
 }

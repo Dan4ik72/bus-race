@@ -11,11 +11,13 @@ public class Level : MonoBehaviour
 
     private PassengersSpawner _spawner;
     private GameLoopSetUp _gameLoopSetUp;
+    private GameEndingHandler _gameEndingHandler;
 
-    public void Init(PassengersSpawner spawner, GameLoopSetUp gameLoopSetUp)
+    public void Init(PassengersSpawner spawner, GameLoopSetUp gameLoopSetUp, GameEndingHandler gameEndingHandler)
     {
         _spawner = spawner;
         _gameLoopSetUp = gameLoopSetUp;
+        _gameEndingHandler = gameEndingHandler;
 
         _gameEndingTrigger = GetComponentInChildren<GameEndingTrigger>();
         _modifiers = GetComponentsInChildren<Modifier>().ToList();
@@ -36,7 +38,7 @@ public class Level : MonoBehaviour
     private void InitObstacles()
     {
         foreach (var obstacle in _obstacles)
-            obstacle.Init(_gameLoopSetUp);
+            obstacle.Init(_gameEndingHandler);
     }
 
     private void InitModifiers()
