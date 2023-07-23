@@ -29,5 +29,7 @@ public class DataStorageCompositeRoot : CompositeRoot
         _playerMoneyDataStorage = new PlayerMoneyDataStorageService(_saveService);
 
         _levelsDataStorageService = new LevelsDataStorageService(_saveService, _levelsData);
+
+        _levelsDataStorageService.LevelsData.SetCurrentLevelIndex(7);
     }
 }
